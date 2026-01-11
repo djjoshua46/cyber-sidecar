@@ -1,0 +1,10 @@
+FROM python:3.11-slim
+
+WORKDIR /app
+COPY fake_backend /app/fake_backend
+COPY requirements.txt /app/requirements.txt
+
+RUN pip install --no-cache-dir -r /app/requirements.txt
+
+EXPOSE 8099
+CMD ["python", "-m", "uvicorn", "fake_backend.fake_backend:app", "--host", "0.0.0.0", "--port", "8099"]

@@ -1,0 +1,90 @@
+version: 1
+
+providers:
+  aws:
+    host_suffixes:
+      - amazonaws.com
+
+    # Query API style (IAM/STS/Org/etc): Action=Something
+    query_api_services:
+      - iam
+      - sts
+      - organizations
+      - cloudtrail
+      - kms
+      - billing
+      - ce
+      - support
+
+    # Map AWS "Action" to families. (We only need coarse families for v1.)
+    action_map:
+      # ---- Identity / session ----
+      - match: "^GetCallerIdentity$"
+        service: "sts"
+        plane: "identity"
+        family: "enumeration"
+        sensitivity: "low"
+      - match: "^AssumeRole(|WithSAML|WithWebIdentity)$"
+        service: "sts"
+        plane: "identity"
+        family: "credential_mgmt"
+        sensitivity: "critical"
+      - match: "^GetSessionToken$|^GetFederationToken$"
+        service: "sts"
+        plane: "identity"
+        family: "credential_mgmt"
+        sensitivity: "high"
+
+      # ---- IAM persistence / priv-esc ----
+      - match: "^CreateAccessKey$|^UpdateAccessKey$|^DeleteAccessKey$"
+        service: "iam"
+        plane: "control"
+        family: "persistence"
+        sensitivity: "critical"
+      - match: "^CreateUser$|^DeleteUser$|^CreateLoginProfile$|^UpdateLoginProfile$"
+        service: "iam"
+        plane: "control"
+        family: "persistence"
+        sensitivity: "critical"
+      - match: "^Attach(User|Group|Role)Policy$|^Put(Role|User|Group)Policy$"
+        service: "iam"
+        plane: "control"
+        family: "privilege_escalation"
+        sensitivity: "critical"
+      - match: "^UpdateAssumeRolePolicy$|^CreateRole$|^DeleteRole$"
+        service: "iam"
+        plane: "control"
+        family: "privilege_escalation"
+        sensitivity: "critical"
+      - match: "^AddUserToGroup$|^RemoveUserFromGroup$"
+        service: "iam"
+        plane: "control"
+        family: "privilege_escalation"
+        sensitivity: "high"
+
+      # ---- Logging / defense evasion ----
+      - match: "^StopLogging$|^DeleteTrail$|^UpdateTrail$|^PutEventSelectors$"
+        service: "cloudtrail"
+        plane: "control"
+        family: "logging_change"
+        sensitivity: "critical"
+
+      # ---- KMS / key abuse ----
+      - match: "^DisableKey$|^ScheduleKeyDeletion$|^PutKeyPolicy$|^UpdateKeyDescription$"
+        service: "kms"
+        plane: "control"
+        family: "key_mgmt"
+        sensitivity: "critical"
+
+    # S3 is mostly REST-style; we classify via host/path heuristics
+    s3:
+      host_patterns:
+        - "s3"
+      plane: "data"
+      families:
+        list:
+          sensitivity: "med"
+        read:
+          sensitivity: "high"
+        write:
+          sensitivity: "med"

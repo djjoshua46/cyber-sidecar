@@ -1,0 +1,16 @@
+{
+  "tenant_id": "org-1",
+  "header_map": {
+    "tenant_id": ["X-Org-Id", "Org-Id", "OrgId", "Tenant-Id", "TenantId"],
+    "user_id": ["X-User-Id", "User-Id", "UserId", "X-UID"],
+    "session_id": ["X-Session-Id", "Session-Id", "SessionId", "X-SID"],
+    "device_id": ["X-Device-Id", "Device-Id", "DeviceId", "X-Device"],
+    "client_ip": ["X-Client-Ip", "X-Real-IP", "X-Forwarded-For"],
+    "user_agent": ["User-Agent"]
+  },
+
+  "upstream_allowlist": [
+    "http://fake_backend:8099",
+    "http://host.docker.internal:8099"
+  ]
+}

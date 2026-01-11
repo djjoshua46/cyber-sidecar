@@ -1,0 +1,2342 @@
+#4,
+Run 1:
+(base) PS C:\Cybersecurity\cyber-sidecar> $env:SIDECAR_BASE="http://127.0.0.1:8085"
+>> $env:SCENARIOS="normal_users"
+>> k6 run .\k6.v5.js
+>>  
+
+         /\      Grafana   /‾‾/  
+    /\  /  \     |\  __   /  /   
+   /  \/    \    | |/ /  /   ‾‾\ 
+  /          \   |   (  |  (‾)  |
+ / __________ \  |_|\_\  \_____/ 
+
+     execution: local
+        script: .\k6.v5.js
+        output: -
+
+     scenarios: (100.00%) 1 scenario, 8 max VUs, 1m0s max duration (incl. graceful stop):
+              * normal_users: 8 looping VUs for 30s (exec: normalUsers, gracefulStop: 30s)
+
+INFO[0000] DEBUG normal_users keys=reason_detail,status_code_effective,status_code_outer,status_code,risk_score,risk_level,timings,decision_action,status_code_inner,headers,body,deception_used,deception_reason,reason_codes eff=200 http=200  source=console
+INFO[0000] DEBUG normal_users keys=reason_detail,risk_score,risk_level,decision_action,status_code_effective,status_code_outer,status_code_inner,status_code,headers,body,deception_used,deception_reason,timings,reason_codes eff=200 http=200  source=console                                                                                           
+INFO[0000] DEBUG normal_users json={                                                                                                                                         
+  "status_code": 200,                                                                                                                                                        
+  "risk_score": 10.601167297363281,                                                                                                                                          
+  "risk_level": "low",
+  "timings": {
+    "upstream_ms": 362.54,
+    "total_ms": 379.19
+  },
+  "decision_action": "allow",
+  "status_code_inner": 200,
+  "headers": {
+    "date": "Fri, 02 Jan 2026 06:19:20 GMT",
+    "server": "uvicorn",
+    "content-length": "48",
+    "content-type": "text/csv; charset=utf-8",
+    "X-Export-Id": "29a91731-6eb5-4446-b58b-3a3d18636602",
+    "X-Trace-Sig": "0e1596ab95c09c8168ad1eb4956d57967efb1e98052350ca6805547582427f41",
+    "X-Beacon-Url": "http://127.0.0.1:8000/proxy/beacon/t/d19a2d35-9222-4eaf-af26-a38fc992380d",
+    "X-Risk-Level": "low",
+    "X-Trace-Id": "d19a2d35-9222-4eaf-af26-a38fc992380d"
+  },
+  "body": "# trace_id=d19a2d35-9222-4eaf-af26-a38fc992380d trace_sig=0e1596ab95c09c8168ad1eb4956d57967efb1e98052350ca6805547582427f41 export_id=29a91731-6eb5-4446-b58b-3a3d18636602 tenant_id=org-1 beacon=http://127.0.0.1:8000/proxy/beacon/t/d19a2d35-9222-4eaf-af26-a38fc992380d\nid,name,_trace_id,_trace_sig,_beacon\n1,User1,d19a2d35-9222-4eaf-af26-a38fc992380d,0e1596ab95c09c8168ad1eb4956d57967efb1e98052350ca6805547582427f41,http://127.0.0.1:8000/proxy/beacon/t/d19a2d35-9222-4eaf-af26-a38fc992380d\n2,User2,d19a2d35-9222-4eaf-af26-a38fc992380d,0e1596ab95c09c8168ad1eb4956d57967efb1e98052350ca6805547582427f41,http://127.0.0.1:8000/proxy/beacon/t/d19a2d35-9222-4eaf-af26-a38fc992380d\n3,User3,d19a2d35-9222-4eaf-af26-a38fc992380d,0e1596ab95c09c8168ad1eb4956d57967efb1e98052350ca6805547582427f41,http://127.0.0.1:8000/proxy/beacon/t/d19a2d35-9222-4eaf-af26-a38fc992380d\n4,User4,d19a2d35-9222-4eaf-af26-a38fc992380d,0e1596ab95c09c8168ad1eb4956d57967efb1e98052350ca6805547582427f41,http://127.0.0.1:8000/proxy/beacon/t/d19a2d35-9222-4eaf-af26-a38fc992380d\n5,User5,d19a2d35-9222-4eaf-af26-a38fc992380d,0e1596ab95c09c8168ad1eb4956d57967efb1e98052350ca6805547582427f41,http://127.0.0.1:8000/proxy/beacon/t/d19a2d35-9222-4eaf-af26-a38fc992380d\n",
+  "deception_used": false,
+  "deception_reason": null,
+  "reason_codes": [
+    "decision_allow"
+  ],
+  "reason_detail": {
+    "risk_level": "low",
+    "behavior_level": "low",
+    "behavior_score": 35,
+    "tone_reason": null,
+    "action_raw": "allow",
+    "next_action": null,
+    "decision_action": "allow",
+    "risk_score": 10.601167297363281,
+    "error": null,
+    "effective_status": 200
+  },
+  "status_code_effective": 200,
+  "status_code_outer": 200
+}  source=console
+INFO[0000] DEBUG normal_users json={                                                                                                                                         
+  "status_code": 200,                                                                                                                                                        
+  "headers": {                                                                                                                                                               
+    "server": "uvicorn",
+    "content-length": "48",
+    "content-type": "text/csv; charset=utf-8",
+    "X-Export-Id": "9011a68e-2e6e-4db0-8c23-855966a2c7f5",
+    "X-Trace-Sig": "b41a461ae733c55fda85f13d14d2b77f8fde5f330c4e3a2730bbadfd5c2f5638",
+    "X-Beacon-Url": "http://127.0.0.1:8000/proxy/beacon/t/0b7a1c9f-c4e2-41ec-af8f-1c67b35677cb",
+    "X-Risk-Level": "low",
+    "date": "Fri, 02 Jan 2026 06:19:20 GMT",
+    "X-Trace-Id": "0b7a1c9f-c4e2-41ec-af8f-1c67b35677cb"
+  },
+  "body": "# trace_id=0b7a1c9f-c4e2-41ec-af8f-1c67b35677cb trace_sig=b41a461ae733c55fda85f13d14d2b77f8fde5f330c4e3a2730bbadfd5c2f5638 export_id=9011a68e-2e6e-4db0-8c23-855966a2c7f5 tenant_id=org-1 beacon=http://127.0.0.1:8000/proxy/beacon/t/0b7a1c9f-c4e2-41ec-af8f-1c67b35677cb\nid,name,_trace_id,_trace_sig,_beacon\n1,User1,0b7a1c9f-c4e2-41ec-af8f-1c67b35677cb,b41a461ae733c55fda85f13d14d2b77f8fde5f330c4e3a2730bbadfd5c2f5638,http://127.0.0.1:8000/proxy/beacon/t/0b7a1c9f-c4e2-41ec-af8f-1c67b35677cb\n2,User2,0b7a1c9f-c4e2-41ec-af8f-1c67b35677cb,b41a461ae733c55fda85f13d14d2b77f8fde5f330c4e3a2730bbadfd5c2f5638,http://127.0.0.1:8000/proxy/beacon/t/0b7a1c9f-c4e2-41ec-af8f-1c67b35677cb\n3,User3,0b7a1c9f-c4e2-41ec-af8f-1c67b35677cb,b41a461ae733c55fda85f13d14d2b77f8fde5f330c4e3a2730bbadfd5c2f5638,http://127.0.0.1:8000/proxy/beacon/t/0b7a1c9f-c4e2-41ec-af8f-1c67b35677cb\n4,User4,0b7a1c9f-c4e2-41ec-af8f-1c67b35677cb,b41a461ae733c55fda85f13d14d2b77f8fde5f330c4e3a2730bbadfd5c2f5638,http://127.0.0.1:8000/proxy/beacon/t/0b7a1c9f-c4e2-41ec-af8f-1c67b35677cb\n5,User5,0b7a1c9f-c4e2-41ec-af8f-1c67b35677cb,b41a461ae733c55fda85f13d14d2b77f8fde5f330c4e3a2730bbadfd5c2f5638,http://127.0.0.1:8000/proxy/beacon/t/0b7a1c9f-c4e2-41ec-af8f-1c67b35677cb\n",
+  "deception_used": false,
+  "deception_reason": null,
+  "timings": {
+    "upstream_ms": 334.13,
+    "total_ms": 415.42
+  },
+  "reason_codes": [
+    "decision_allow"
+  ],
+  "reason_detail": {
+    "risk_score": 10.601167297363281,
+    "tone_reason": null,
+    "behavior_level": "low",
+    "behavior_score": 35,
+    "action_raw": "allow",
+    "error": null,
+    "next_action": null,
+    "decision_action": "allow",
+    "effective_status": 200,
+    "risk_level": "low"
+  },
+  "risk_score": 10.601167297363281,
+  "risk_level": "low",
+  "decision_action": "allow",
+  "status_code_effective": 200,
+  "status_code_outer": 200,
+  "status_code_inner": 200
+}  source=console
+INFO[0001] DEBUG normal_users keys=status_code,risk_score,risk_level,deception_used,timings,decision_action,reason_codes,status_code_effective,headers,body,deception_reason,reason_detail,status_code_outer,status_code_inner eff=200 http=200  source=console
+INFO[0001] DEBUG normal_users json={                                                                                                                                         
+  "status_code_outer": 200,                                                                                                                                                  
+  "status_code_inner": 200,                                                                                                                                                  
+  "status_code": 200,
+  "risk_score": 10.601167297363281,
+  "risk_level": "low",
+  "deception_used": false,
+  "timings": {
+    "upstream_ms": 451.16,
+    "total_ms": 470.07
+  },
+  "decision_action": "allow",
+  "reason_codes": [
+    "decision_allow"
+  ],
+  "status_code_effective": 200,
+  "headers": {
+    "date": "Fri, 02 Jan 2026 06:19:20 GMT",
+    "server": "uvicorn",
+    "content-length": "48",
+    "content-type": "text/csv; charset=utf-8",
+    "X-Trace-Id": "5685ace0-766a-4f63-a4f4-58a40e0fc753",
+    "X-Beacon-Url": "http://127.0.0.1:8000/proxy/beacon/t/5685ace0-766a-4f63-a4f4-58a40e0fc753",
+    "X-Risk-Level": "low",
+    "X-Export-Id": "3c9ebe43-df63-4842-b92d-bae8b58294a8",
+    "X-Trace-Sig": "84ea18005223ebdb210d1720a920dad0ed8552e21b3166d0bea9a332b0ece612"
+  },
+  "body": "# trace_id=5685ace0-766a-4f63-a4f4-58a40e0fc753 trace_sig=84ea18005223ebdb210d1720a920dad0ed8552e21b3166d0bea9a332b0ece612 export_id=3c9ebe43-df63-4842-b92d-bae8b58294a8 tenant_id=org-3 beacon=http://127.0.0.1:8000/proxy/beacon/t/5685ace0-766a-4f63-a4f4-58a40e0fc753\nid,name,_trace_id,_trace_sig,_beacon\n1,User1,5685ace0-766a-4f63-a4f4-58a40e0fc753,84ea18005223ebdb210d1720a920dad0ed8552e21b3166d0bea9a332b0ece612,http://127.0.0.1:8000/proxy/beacon/t/5685ace0-766a-4f63-a4f4-58a40e0fc753\n2,User2,5685ace0-766a-4f63-a4f4-58a40e0fc753,84ea18005223ebdb210d1720a920dad0ed8552e21b3166d0bea9a332b0ece612,http://127.0.0.1:8000/proxy/beacon/t/5685ace0-766a-4f63-a4f4-58a40e0fc753\n3,User3,5685ace0-766a-4f63-a4f4-58a40e0fc753,84ea18005223ebdb210d1720a920dad0ed8552e21b3166d0bea9a332b0ece612,http://127.0.0.1:8000/proxy/beacon/t/5685ace0-766a-4f63-a4f4-58a40e0fc753\n4,User4,5685ace0-766a-4f63-a4f4-58a40e0fc753,84ea18005223ebdb210d1720a920dad0ed8552e21b3166d0bea9a332b0ece612,http://127.0.0.1:8000/proxy/beacon/t/5685ace0-766a-4f63-a4f4-58a40e0fc753\n5,User5,5685ace0-766a-4f63-a4f4-58a40e0fc753,84ea18005223ebdb210d1720a920dad0ed8552e21b3166d0bea9a332b0ece612,http://127.0.0.1:8000/proxy/beacon/t/5685ace0-766a-4f63-a4f4-58a40e0fc753\n",
+  "deception_reason": null,
+  "reason_detail": {
+    "behavior_level": "low",
+    "behavior_score": 35,
+    "action_raw": "allow",
+    "error": null,
+    "next_action": null,
+    "decision_action": "allow",
+    "tone_reason": null,
+    "effective_status": 200,
+    "risk_level": "low",
+    "risk_score": 10.601167297363281
+  }
+}  source=console
+INFO[0001] DEBUG normal_users keys=body,risk_score,deception_used,deception_reason,timings,reason_detail,status_code_outer,status_code,headers,risk_level,decision_action,reason_codes,status_code_effective,status_code_inner eff=200 http=200  source=console
+INFO[0001] DEBUG normal_users keys=status_code_outer,status_code,risk_score,timings,decision_action,reason_detail,status_code_inner,headers,body,risk_level,deception_used,deception_reason,reason_codes,status_code_effective eff=200 http=200  source=console                                                                                           
+INFO[0001] DEBUG normal_users json={                                                                                                                                         
+  "risk_level": "low",                                                                                                                                                       
+  "decision_action": "allow",                                                                                                                                                
+  "reason_codes": [
+    "decision_allow"
+  ],
+  "status_code_effective": 200,
+  "status_code_inner": 200,
+  "body": "# trace_id=855b8009-f3eb-4d3a-bee7-5d98b5897aed trace_sig=f0f99ef900a76f37427d3a7d4da06737e67af067420af0e51c45610ad6cb0148 export_id=68010970-c54b-464f-9f7a-3140be172bc8 tenant_id=org-2 beacon=http://127.0.0.1:8000/proxy/beacon/t/855b8009-f3eb-4d3a-bee7-5d98b5897aed\nid,name,_trace_id,_trace_sig,_beacon\n1,User1,855b8009-f3eb-4d3a-bee7-5d98b5897aed,f0f99ef900a76f37427d3a7d4da06737e67af067420af0e51c45610ad6cb0148,http://127.0.0.1:8000/proxy/beacon/t/855b8009-f3eb-4d3a-bee7-5d98b5897aed\n2,User2,855b8009-f3eb-4d3a-bee7-5d98b5897aed,f0f99ef900a76f37427d3a7d4da06737e67af067420af0e51c45610ad6cb0148,http://127.0.0.1:8000/proxy/beacon/t/855b8009-f3eb-4d3a-bee7-5d98b5897aed\n3,User3,855b8009-f3eb-4d3a-bee7-5d98b5897aed,f0f99ef900a76f37427d3a7d4da06737e67af067420af0e51c45610ad6cb0148,http://127.0.0.1:8000/proxy/beacon/t/855b8009-f3eb-4d3a-bee7-5d98b5897aed\n4,User4,855b8009-f3eb-4d3a-bee7-5d98b5897aed,f0f99ef900a76f37427d3a7d4da06737e67af067420af0e51c45610ad6cb0148,http://127.0.0.1:8000/proxy/beacon/t/855b8009-f3eb-4d3a-bee7-5d98b5897aed\n5,User5,855b8009-f3eb-4d3a-bee7-5d98b5897aed,f0f99ef900a76f37427d3a7d4da06737e67af067420af0e51c45610ad6cb0148,http://127.0.0.1:8000/proxy/beacon/t/855b8009-f3eb-4d3a-bee7-5d98b5897aed\n",
+  "risk_score": 10.601167297363281,
+  "deception_used": false,
+  "deception_reason": null,
+  "timings": {
+    "upstream_ms": 243.41,
+    "total_ms": 267.31
+  },
+  "reason_detail": {
+    "behavior_score": 35,
+    "tone_reason": null,
+    "risk_level": "low",
+    "risk_score": 10.601167297363281,
+    "behavior_level": "low",
+    "action_raw": "allow",
+    "error": null,
+    "next_action": null,
+    "decision_action": "allow",
+    "effective_status": 200
+  },
+  "status_code_outer": 200,
+  "status_code": 200,
+  "headers": {
+    "X-Export-Id": "68010970-c54b-464f-9f7a-3140be172bc8",
+    "X-Trace-Id": "855b8009-f3eb-4d3a-bee7-5d98b5897aed",
+    "X-Trace-Sig": "f0f99ef900a76f37427d3a7d4da06737e67af067420af0e51c45610ad6cb0148",
+    "date": "Fri, 02 Jan 2026 06:19:21 GMT",
+    "server": "uvicorn",
+    "content-length": "48",
+    "content-type": "text/csv; charset=utf-8",
+    "X-Beacon-Url": "http://127.0.0.1:8000/proxy/beacon/t/855b8009-f3eb-4d3a-bee7-5d98b5897aed",
+    "X-Risk-Level": "low"
+  }
+}  source=console
+INFO[0001] DEBUG normal_users json={                                                                                                                                         
+  "reason_detail": {                                                                                                                                                         
+    "risk_level": "low",                                                                                                                                                     
+    "risk_score": 10.601167297363281,
+    "behavior_score": 35,
+    "tone_reason": null,
+    "action_raw": "allow",
+    "error": null,
+    "next_action": null,
+    "decision_action": "allow",
+    "behavior_level": "low",
+    "effective_status": 200
+  },
+  "status_code_inner": 200,
+  "headers": {
+    "content-length": "48",
+    "X-Export-Id": "bcd7845b-89fd-4748-be66-666df046798c",
+    "X-Trace-Id": "b3b9ae03-a308-4f0b-bd79-deb0419c298b",
+    "X-Trace-Sig": "84ee606a0b6bb8233e4e2747ea6ea176f53e24fa562cf85b54b06cdd61231914",
+    "X-Risk-Level": "low",
+    "date": "Fri, 02 Jan 2026 06:19:21 GMT",
+    "server": "uvicorn",
+    "content-type": "text/csv; charset=utf-8",
+    "X-Beacon-Url": "http://127.0.0.1:8000/proxy/beacon/t/b3b9ae03-a308-4f0b-bd79-deb0419c298b"
+  },
+  "body": "# trace_id=b3b9ae03-a308-4f0b-bd79-deb0419c298b trace_sig=84ee606a0b6bb8233e4e2747ea6ea176f53e24fa562cf85b54b06cdd61231914 export_id=bcd7845b-89fd-4748-be66-666df046798c tenant_id=org-3 beacon=http://127.0.0.1:8000/proxy/beacon/t/b3b9ae03-a308-4f0b-bd79-deb0419c298b\nid,name,_trace_id,_trace_sig,_beacon\n1,User1,b3b9ae03-a308-4f0b-bd79-deb0419c298b,84ee606a0b6bb8233e4e2747ea6ea176f53e24fa562cf85b54b06cdd61231914,http://127.0.0.1:8000/proxy/beacon/t/b3b9ae03-a308-4f0b-bd79-deb0419c298b\n2,User2,b3b9ae03-a308-4f0b-bd79-deb0419c298b,84ee606a0b6bb8233e4e2747ea6ea176f53e24fa562cf85b54b06cdd61231914,http://127.0.0.1:8000/proxy/beacon/t/b3b9ae03-a308-4f0b-bd79-deb0419c298b\n3,User3,b3b9ae03-a308-4f0b-bd79-deb0419c298b,84ee606a0b6bb8233e4e2747ea6ea176f53e24fa562cf85b54b06cdd61231914,http://127.0.0.1:8000/proxy/beacon/t/b3b9ae03-a308-4f0b-bd79-deb0419c298b\n4,User4,b3b9ae03-a308-4f0b-bd79-deb0419c298b,84ee606a0b6bb8233e4e2747ea6ea176f53e24fa562cf85b54b06cdd61231914,http://127.0.0.1:8000/proxy/beacon/t/b3b9ae03-a308-4f0b-bd79-deb0419c298b\n5,User5,b3b9ae03-a308-4f0b-bd79-deb0419c298b,84ee606a0b6bb8233e4e2747ea6ea176f53e24fa562cf85b54b06cdd61231914,http://127.0.0.1:8000/proxy/beacon/t/b3b9ae03-a308-4f0b-bd79-deb0419c298b\n",
+  "risk_level": "low",
+  "deception_used": false,
+  "deception_reason": null,
+  "reason_codes": [
+    "decision_allow"
+  ],
+  "status_code_effective": 200,
+  "status_code_outer": 200,
+  "status_code": 200,
+  "risk_score": 10.601167297363281,
+  "timings": {
+    "upstream_ms": 519.74,
+    "total_ms": 535.87
+  },
+  "decision_action": "allow"
+}  source=console
+INFO[0001] DEBUG normal_users keys=reason_detail,headers,timings,decision_action,status_code_effective,status_code_outer,status_code_inner,status_code,body,risk_score,risk_level,deception_used,deception_reason,reason_codes eff=200 http=200  source=console
+INFO[0001] DEBUG normal_users json={                                                                                                                                         
+  "status_code": 200,                                                                                                                                                        
+  "body": "# trace_id=977b61eb-0c62-439e-980f-6e13cbfeffd3 trace_sig=7492f27c995c92f9845c4ee1c6e8fc062af3983b752532d7d84c2cbf9e035682 export_id=aae0968b-d887-446a-b978-e8ef7e4edb4a tenant_id=org-2 beacon=http://127.0.0.1:8000/proxy/beacon/t/977b61eb-0c62-439e-980f-6e13cbfeffd3\nid,name,_trace_id,_trace_sig,_beacon\n1,User1,977b61eb-0c62-439e-980f-6e13cbfeffd3,7492f27c995c92f9845c4ee1c6e8fc062af3983b752532d7d84c2cbf9e035682,http://127.0.0.1:8000/proxy/beacon/t/977b61eb-0c62-439e-980f-6e13cbfeffd3\n2,User2,977b61eb-0c62-439e-980f-6e13cbfeffd3,7492f27c995c92f9845c4ee1c6e8fc062af3983b752532d7d84c2cbf9e035682,http://127.0.0.1:8000/proxy/beacon/t/977b61eb-0c62-439e-980f-6e13cbfeffd3\n3,User3,977b61eb-0c62-439e-980f-6e13cbfeffd3,7492f27c995c92f9845c4ee1c6e8fc062af3983b752532d7d84c2cbf9e035682,http://127.0.0.1:8000/proxy/beacon/t/977b61eb-0c62-439e-980f-6e13cbfeffd3\n4,User4,977b61eb-0c62-439e-980f-6e13cbfeffd3,7492f27c995c92f9845c4ee1c6e8fc062af3983b752532d7d84c2cbf9e035682,http://127.0.0.1:8000/proxy/beacon/t/977b61eb-0c62-439e-980f-6e13cbfeffd3\n5,User5,977b61eb-0c62-439e-980f-6e13cbfeffd3,7492f27c995c92f9845c4ee1c6e8fc062af3983b752532d7d84c2cbf9e035682,http://127.0.0.1:8000/proxy/beacon/t/977b61eb-0c62-439e-980f-6e13cbfeffd3\n",
+  "risk_score": 10.601167297363281,
+  "risk_level": "low",
+  "deception_used": false,
+  "deception_reason": null,
+  "reason_codes": [
+    "decision_allow"
+  ],
+  "reason_detail": {
+    "next_action": null,
+    "effective_status": 200,
+    "risk_score": 10.601167297363281,
+    "tone_reason": null,
+    "error": null,
+    "decision_action": "allow",
+    "risk_level": "low",
+    "behavior_level": "low",
+    "behavior_score": 35,
+    "action_raw": "allow"
+  },
+  "headers": {
+    "X-Trace-Id": "977b61eb-0c62-439e-980f-6e13cbfeffd3",
+    "X-Risk-Level": "low",
+    "date": "Fri, 02 Jan 2026 06:19:21 GMT",
+    "content-length": "48",
+    "X-Export-Id": "aae0968b-d887-446a-b978-e8ef7e4edb4a",
+    "X-Trace-Sig": "7492f27c995c92f9845c4ee1c6e8fc062af3983b752532d7d84c2cbf9e035682",
+    "X-Beacon-Url": "http://127.0.0.1:8000/proxy/beacon/t/977b61eb-0c62-439e-980f-6e13cbfeffd3",
+    "server": "uvicorn",
+    "content-type": "text/csv; charset=utf-8"
+  },
+  "timings": {
+    "upstream_ms": 649.75,
+    "total_ms": 667.88
+  },
+  "decision_action": "allow",
+  "status_code_effective": 200,
+  "status_code_outer": 200,
+  "status_code_inner": 200
+}  source=console
+INFO[0001] DEBUG normal_users keys=risk_level,decision_action,reason_codes,status_code_effective,status_code_outer,body,deception_used,deception_reason,timings,reason_detail,status_code_inner,status_code,headers,risk_score eff=200 http=200  source=console
+INFO[0001] DEBUG normal_users json={                                                                                                                                         
+  "status_code_inner": 200,                                                                                                                                                  
+  "status_code": 200,                                                                                                                                                        
+  "headers": {
+    "date": "Fri, 02 Jan 2026 06:19:21 GMT",
+    "content-length": "48",
+    "content-type": "text/csv; charset=utf-8",
+    "X-Trace-Id": "562527a7-9586-4855-a0e5-5df91e4b1136",
+    "X-Beacon-Url": "http://127.0.0.1:8000/proxy/beacon/t/562527a7-9586-4855-a0e5-5df91e4b1136",
+    "X-Risk-Level": "low",
+    "server": "uvicorn",
+    "X-Export-Id": "f22152ed-1bd2-44b3-ab46-698919272b05",
+    "X-Trace-Sig": "97483ad929afc38596a802763191f73fd7b93a773ab2c5fecf1bf47e1e6cdf03"
+  },
+  "risk_score": 10.601167297363281,
+  "risk_level": "low",
+  "decision_action": "allow",
+  "reason_codes": [
+    "decision_allow"
+  ],
+  "status_code_effective": 200,
+  "status_code_outer": 200,
+  "body": "# trace_id=562527a7-9586-4855-a0e5-5df91e4b1136 trace_sig=97483ad929afc38596a802763191f73fd7b93a773ab2c5fecf1bf47e1e6cdf03 export_id=f22152ed-1bd2-44b3-ab46-698919272b05 tenant_id=org-2 beacon=http://127.0.0.1:8000/proxy/beacon/t/562527a7-9586-4855-a0e5-5df91e4b1136\nid,name,_trace_id,_trace_sig,_beacon\n1,User1,562527a7-9586-4855-a0e5-5df91e4b1136,97483ad929afc38596a802763191f73fd7b93a773ab2c5fecf1bf47e1e6cdf03,http://127.0.0.1:8000/proxy/beacon/t/562527a7-9586-4855-a0e5-5df91e4b1136\n2,User2,562527a7-9586-4855-a0e5-5df91e4b1136,97483ad929afc38596a802763191f73fd7b93a773ab2c5fecf1bf47e1e6cdf03,http://127.0.0.1:8000/proxy/beacon/t/562527a7-9586-4855-a0e5-5df91e4b1136\n3,User3,562527a7-9586-4855-a0e5-5df91e4b1136,97483ad929afc38596a802763191f73fd7b93a773ab2c5fecf1bf47e1e6cdf03,http://127.0.0.1:8000/proxy/beacon/t/562527a7-9586-4855-a0e5-5df91e4b1136\n4,User4,562527a7-9586-4855-a0e5-5df91e4b1136,97483ad929afc38596a802763191f73fd7b93a773ab2c5fecf1bf47e1e6cdf03,http://127.0.0.1:8000/proxy/beacon/t/562527a7-9586-4855-a0e5-5df91e4b1136\n5,User5,562527a7-9586-4855-a0e5-5df91e4b1136,97483ad929afc38596a802763191f73fd7b93a773ab2c5fecf1bf47e1e6cdf03,http://127.0.0.1:8000/proxy/beacon/t/562527a7-9586-4855-a0e5-5df91e4b1136\n",
+  "deception_used": false,
+  "deception_reason": null,
+  "timings": {
+    "upstream_ms": 302.99,
+    "total_ms": 318.15
+  },
+  "reason_detail": {
+    "risk_score": 10.601167297363281,
+    "behavior_score": 35,
+    "action_raw": "allow",
+    "error": null,
+    "next_action": null,
+    "decision_action": "allow",
+    "behavior_level": "low",
+    "tone_reason": null,
+    "effective_status": 200,
+    "risk_level": "low"
+  }
+}  source=console
+INFO[0001] DEBUG normal_users keys=reason_detail,status_code_outer,risk_score,deception_used,deception_reason,timings,decision_action,status_code_effective,status_code_inner,status_code,headers,body,risk_level,reason_codes eff=200 http=200  source=console
+INFO[0001] DEBUG normal_users json={                                                                                                                                         
+  "status_code_effective": 200,                                                                                                                                              
+  "status_code_inner": 200,                                                                                                                                                  
+  "status_code": 200,
+  "headers": {
+    "content-length": "48",
+    "X-Export-Id": "6b8f6cb2-853a-4db1-b102-6b8894caa1e0",
+    "X-Trace-Id": "e8f75e1e-d59e-4c0e-a7e5-7e9f5f91a579",
+    "X-Beacon-Url": "http://127.0.0.1:8000/proxy/beacon/t/e8f75e1e-d59e-4c0e-a7e5-7e9f5f91a579",
+    "X-Risk-Level": "low",
+    "date": "Fri, 02 Jan 2026 06:19:21 GMT",
+    "server": "uvicorn",
+    "content-type": "text/csv; charset=utf-8",
+    "X-Trace-Sig": "545b528126df65dc3aa6cbddcb6c53bddf811be4f67c5754e94e12d635476ddf"
+  },
+  "body": "# trace_id=e8f75e1e-d59e-4c0e-a7e5-7e9f5f91a579 trace_sig=545b528126df65dc3aa6cbddcb6c53bddf811be4f67c5754e94e12d635476ddf export_id=6b8f6cb2-853a-4db1-b102-6b8894caa1e0 tenant_id=org-3 beacon=http://127.0.0.1:8000/proxy/beacon/t/e8f75e1e-d59e-4c0e-a7e5-7e9f5f91a579\nid,name,_trace_id,_trace_sig,_beacon\n1,User1,e8f75e1e-d59e-4c0e-a7e5-7e9f5f91a579,545b528126df65dc3aa6cbddcb6c53bddf811be4f67c5754e94e12d635476ddf,http://127.0.0.1:8000/proxy/beacon/t/e8f75e1e-d59e-4c0e-a7e5-7e9f5f91a579\n2,User2,e8f75e1e-d59e-4c0e-a7e5-7e9f5f91a579,545b528126df65dc3aa6cbddcb6c53bddf811be4f67c5754e94e12d635476ddf,http://127.0.0.1:8000/proxy/beacon/t/e8f75e1e-d59e-4c0e-a7e5-7e9f5f91a579\n3,User3,e8f75e1e-d59e-4c0e-a7e5-7e9f5f91a579,545b528126df65dc3aa6cbddcb6c53bddf811be4f67c5754e94e12d635476ddf,http://127.0.0.1:8000/proxy/beacon/t/e8f75e1e-d59e-4c0e-a7e5-7e9f5f91a579\n4,User4,e8f75e1e-d59e-4c0e-a7e5-7e9f5f91a579,545b528126df65dc3aa6cbddcb6c53bddf811be4f67c5754e94e12d635476ddf,http://127.0.0.1:8000/proxy/beacon/t/e8f75e1e-d59e-4c0e-a7e5-7e9f5f91a579\n5,User5,e8f75e1e-d59e-4c0e-a7e5-7e9f5f91a579,545b528126df65dc3aa6cbddcb6c53bddf811be4f67c5754e94e12d635476ddf,http://127.0.0.1:8000/proxy/beacon/t/e8f75e1e-d59e-4c0e-a7e5-7e9f5f91a579\n",
+  "risk_level": "low",
+  "reason_codes": [
+    "decision_allow"
+  ],
+  "reason_detail": {
+    "error": null,
+    "decision_action": "allow",
+    "effective_status": 200,
+    "risk_level": "low",
+    "risk_score": 10.601167297363281,
+    "behavior_level": "low",
+    "tone_reason": null,
+    "action_raw": "allow",
+    "next_action": null,
+    "behavior_score": 35
+  },
+  "status_code_outer": 200,
+  "risk_score": 10.601167297363281,
+  "deception_used": false,
+  "deception_reason": null,
+  "timings": {
+    "upstream_ms": 712.11,
+    "total_ms": 804.68
+  },
+  "decision_action": "allow"
+}  source=console
+INFO[0001] DEBUG normal_users keys=body,risk_score,risk_level,deception_used,deception_reason,decision_action,reason_codes,reason_detail,status_code,headers,timings,status_code_effective,status_code_outer,status_code_inner eff=200 http=200  source=console
+INFO[0001] DEBUG normal_users json={                                                                                                                                         
+  "risk_level": "low",                                                                                                                                                       
+  "deception_used": false,                                                                                                                                                   
+  "deception_reason": null,
+  "decision_action": "allow",
+  "reason_codes": [
+    "decision_allow"
+  ],
+  "reason_detail": {
+    "next_action": null,
+    "decision_action": "allow",
+    "risk_level": "low",
+    "tone_reason": null,
+    "error": null,
+    "effective_status": 200,
+    "risk_score": 10.601167297363281,
+    "behavior_level": "low",
+    "behavior_score": 35,
+    "action_raw": "allow"
+  },
+  "status_code": 200,
+  "headers": {
+    "date": "Fri, 02 Jan 2026 06:19:21 GMT",
+    "server": "uvicorn",
+    "content-length": "48",
+    "content-type": "text/csv; charset=utf-8",
+    "X-Trace-Id": "143c978d-5db6-4d06-a90b-1e7e47f68cf4",
+    "X-Beacon-Url": "http://127.0.0.1:8000/proxy/beacon/t/143c978d-5db6-4d06-a90b-1e7e47f68cf4",
+    "X-Risk-Level": "low",
+    "X-Export-Id": "05578029-c24b-48ea-8217-4d4647ab5182",
+    "X-Trace-Sig": "db671d5bbfc1cff1a9f337cca349c3ccac391b7b65da547e37e71df70f415e57"
+  },
+  "timings": {
+    "upstream_ms": 256.02,
+    "total_ms": 268.52
+  },
+  "status_code_effective": 200,
+  "status_code_outer": 200,
+  "status_code_inner": 200,
+  "body": "# trace_id=143c978d-5db6-4d06-a90b-1e7e47f68cf4 trace_sig=db671d5bbfc1cff1a9f337cca349c3ccac391b7b65da547e37e71df70f415e57 export_id=05578029-c24b-48ea-8217-4d4647ab5182 tenant_id=org-1 beacon=http://127.0.0.1:8000/proxy/beacon/t/143c978d-5db6-4d06-a90b-1e7e47f68cf4\nid,name,_trace_id,_trace_sig,_beacon\n1,User1,143c978d-5db6-4d06-a90b-1e7e47f68cf4,db671d5bbfc1cff1a9f337cca349c3ccac391b7b65da547e37e71df70f415e57,http://127.0.0.1:8000/proxy/beacon/t/143c978d-5db6-4d06-a90b-1e7e47f68cf4\n2,User2,143c978d-5db6-4d06-a90b-1e7e47f68cf4,db671d5bbfc1cff1a9f337cca349c3ccac391b7b65da547e37e71df70f415e57,http://127.0.0.1:8000/proxy/beacon/t/143c978d-5db6-4d06-a90b-1e7e47f68cf4\n3,User3,143c978d-5db6-4d06-a90b-1e7e47f68cf4,db671d5bbfc1cff1a9f337cca349c3ccac391b7b65da547e37e71df70f415e57,http://127.0.0.1:8000/proxy/beacon/t/143c978d-5db6-4d06-a90b-1e7e47f68cf4\n4,User4,143c978d-5db6-4d06-a90b-1e7e47f68cf4,db671d5bbfc1cff1a9f337cca349c3ccac391b7b65da547e37e71df70f415e57,http://127.0.0.1:8000/proxy/beacon/t/143c978d-5db6-4d06-a90b-1e7e47f68cf4\n5,User5,143c978d-5db6-4d06-a90b-1e7e47f68cf4,db671d5bbfc1cff1a9f337cca349c3ccac391b7b65da547e37e71df70f415e57,http://127.0.0.1:8000/proxy/beacon/t/143c978d-5db6-4d06-a90b-1e7e47f68cf4\n",
+  "risk_score": 10.601167297363281
+}  source=console
+INFO[0001] DEBUG normal_users keys=deception_used,deception_reason,timings,reason_codes,status_code_inner,status_code,headers,risk_score,risk_level,decision_action,reason_detail,status_code_effective,status_code_outer,body eff=200 http=200  source=console
+INFO[0001] DEBUG normal_users json={                                                                                                                                         
+  "reason_codes": [                                                                                                                                                          
+    "decision_allow"                                                                                                                                                         
+  ],
+  "status_code_inner": 200,
+  "status_code": 200,
+  "headers": {
+    "X-Export-Id": "9cd6e0b6-09e5-4f01-995a-74df9519d566",
+    "X-Trace-Id": "89ec8c32-d67c-4e8f-8971-8eba0bcfc3cd",
+    "X-Trace-Sig": "d0f43bfa94ae4867afcc22c4b64ac973d7b4de50197821428ee6344a4b5da800",
+    "X-Beacon-Url": "http://127.0.0.1:8000/proxy/beacon/t/89ec8c32-d67c-4e8f-8971-8eba0bcfc3cd",
+    "server": "uvicorn",
+    "content-type": "text/csv; charset=utf-8",
+    "X-Risk-Level": "low",
+    "date": "Fri, 02 Jan 2026 06:19:22 GMT",
+    "content-length": "48"
+  },
+  "risk_score": 10.601167297363281,
+  "risk_level": "low",
+  "decision_action": "allow",
+  "reason_detail": {
+    "behavior_score": 35,
+    "tone_reason": null,
+    "action_raw": "allow",
+    "next_action": null,
+    "decision_action": "allow",
+    "risk_level": "low",
+    "behavior_level": "low",
+    "error": null,
+    "effective_status": 200,
+    "risk_score": 10.601167297363281
+  },
+  "status_code_effective": 200,
+  "status_code_outer": 200,
+  "body": "# trace_id=89ec8c32-d67c-4e8f-8971-8eba0bcfc3cd trace_sig=d0f43bfa94ae4867afcc22c4b64ac973d7b4de50197821428ee6344a4b5da800 export_id=9cd6e0b6-09e5-4f01-995a-74df9519d566 tenant_id=org-3 beacon=http://127.0.0.1:8000/proxy/beacon/t/89ec8c32-d67c-4e8f-8971-8eba0bcfc3cd\nid,name,_trace_id,_trace_sig,_beacon\n1,User1,89ec8c32-d67c-4e8f-8971-8eba0bcfc3cd,d0f43bfa94ae4867afcc22c4b64ac973d7b4de50197821428ee6344a4b5da800,http://127.0.0.1:8000/proxy/beacon/t/89ec8c32-d67c-4e8f-8971-8eba0bcfc3cd\n2,User2,89ec8c32-d67c-4e8f-8971-8eba0bcfc3cd,d0f43bfa94ae4867afcc22c4b64ac973d7b4de50197821428ee6344a4b5da800,http://127.0.0.1:8000/proxy/beacon/t/89ec8c32-d67c-4e8f-8971-8eba0bcfc3cd\n3,User3,89ec8c32-d67c-4e8f-8971-8eba0bcfc3cd,d0f43bfa94ae4867afcc22c4b64ac973d7b4de50197821428ee6344a4b5da800,http://127.0.0.1:8000/proxy/beacon/t/89ec8c32-d67c-4e8f-8971-8eba0bcfc3cd\n4,User4,89ec8c32-d67c-4e8f-8971-8eba0bcfc3cd,d0f43bfa94ae4867afcc22c4b64ac973d7b4de50197821428ee6344a4b5da800,http://127.0.0.1:8000/proxy/beacon/t/89ec8c32-d67c-4e8f-8971-8eba0bcfc3cd\n5,User5,89ec8c32-d67c-4e8f-8971-8eba0bcfc3cd,d0f43bfa94ae4867afcc22c4b64ac973d7b4de50197821428ee6344a4b5da800,http://127.0.0.1:8000/proxy/beacon/t/89ec8c32-d67c-4e8f-8971-8eba0bcfc3cd\n",
+  "deception_used": false,
+  "deception_reason": null,
+  "timings": {
+    "upstream_ms": 94.48,
+    "total_ms": 108.33
+  }
+}  source=console
+INFO[0002] DEBUG normal_users keys=body,deception_reason,reason_detail,status_code_effective,status_code_outer,status_code_inner,status_code,headers,risk_score,risk_level,deception_used,timings,decision_action,reason_codes eff=200 http=200  source=console
+INFO[0002] DEBUG normal_users json={                                                                                                                                         
+  "risk_level": "low",                                                                                                                                                       
+  "deception_used": false,                                                                                                                                                   
+  "timings": {
+    "upstream_ms": 162.95,
+    "total_ms": 174.72
+  },
+  "decision_action": "allow",
+  "reason_codes": [
+    "decision_allow"
+  ],
+  "body": "# trace_id=88efd76e-6a48-4f13-9a36-749bcd2d311e trace_sig=b4092f6816d307f83b38f8e88ee420b34a09fa71682aa1de577e7b4ada44697f export_id=de75fa7b-c6c7-4d3c-8042-ad2634bc9e4d tenant_id=org-2 beacon=http://127.0.0.1:8000/proxy/beacon/t/88efd76e-6a48-4f13-9a36-749bcd2d311e\nid,name,_trace_id,_trace_sig,_beacon\n1,User1,88efd76e-6a48-4f13-9a36-749bcd2d311e,b4092f6816d307f83b38f8e88ee420b34a09fa71682aa1de577e7b4ada44697f,http://127.0.0.1:8000/proxy/beacon/t/88efd76e-6a48-4f13-9a36-749bcd2d311e\n2,User2,88efd76e-6a48-4f13-9a36-749bcd2d311e,b4092f6816d307f83b38f8e88ee420b34a09fa71682aa1de577e7b4ada44697f,http://127.0.0.1:8000/proxy/beacon/t/88efd76e-6a48-4f13-9a36-749bcd2d311e\n3,User3,88efd76e-6a48-4f13-9a36-749bcd2d311e,b4092f6816d307f83b38f8e88ee420b34a09fa71682aa1de577e7b4ada44697f,http://127.0.0.1:8000/proxy/beacon/t/88efd76e-6a48-4f13-9a36-749bcd2d311e\n4,User4,88efd76e-6a48-4f13-9a36-749bcd2d311e,b4092f6816d307f83b38f8e88ee420b34a09fa71682aa1de577e7b4ada44697f,http://127.0.0.1:8000/proxy/beacon/t/88efd76e-6a48-4f13-9a36-749bcd2d311e\n5,User5,88efd76e-6a48-4f13-9a36-749bcd2d311e,b4092f6816d307f83b38f8e88ee420b34a09fa71682aa1de577e7b4ada44697f,http://127.0.0.1:8000/proxy/beacon/t/88efd76e-6a48-4f13-9a36-749bcd2d311e\n",
+  "deception_reason": null,
+  "reason_detail": {
+    "error": null,
+    "decision_action": "allow",
+    "effective_status": 200,
+    "risk_level": "low",
+    "behavior_score": 35,
+    "tone_reason": null,
+    "action_raw": "allow",
+    "next_action": null,
+    "risk_score": 10.601167297363281,
+    "behavior_level": "low"
+  },
+  "status_code_effective": 200,
+  "status_code_outer": 200,
+  "status_code_inner": 200,
+  "status_code": 200,
+  "headers": {
+    "date": "Fri, 02 Jan 2026 06:19:22 GMT",
+    "server": "uvicorn",
+    "content-length": "48",
+    "X-Trace-Id": "88efd76e-6a48-4f13-9a36-749bcd2d311e",
+    "X-Trace-Sig": "b4092f6816d307f83b38f8e88ee420b34a09fa71682aa1de577e7b4ada44697f",
+    "content-type": "text/csv; charset=utf-8",
+    "X-Export-Id": "de75fa7b-c6c7-4d3c-8042-ad2634bc9e4d",
+    "X-Beacon-Url": "http://127.0.0.1:8000/proxy/beacon/t/88efd76e-6a48-4f13-9a36-749bcd2d311e",
+    "X-Risk-Level": "low"
+  },
+  "risk_score": 10.601167297363281
+}  source=console
+INFO[0002] DEBUG normal_users keys=body,timings,reason_codes,reason_detail,status_code_outer,status_code_inner,status_code,headers,risk_score,risk_level,deception_used,deception_reason,decision_action,status_code_effective eff=200 http=200  source=console
+INFO[0002] DEBUG normal_users json={                                                                                                                                         
+  "body": "# trace_id=d28d24d8-1c08-44ff-9a8e-eb36a5e234c3 trace_sig=81a9689ef47136e60e7b794fb87c1e1f81e961680ed05b882a3a6ed846e503e9 export_id=01670902-5b0d-4bae-a329-223e95d9d9c4 tenant_id=org-2 beacon=http://127.0.0.1:8000/proxy/beacon/t/d28d24d8-1c08-44ff-9a8e-eb36a5e234c3\nid,name,_trace_id,_trace_sig,_beacon\n1,User1,d28d24d8-1c08-44ff-9a8e-eb36a5e234c3,81a9689ef47136e60e7b794fb87c1e1f81e961680ed05b882a3a6ed846e503e9,http://127.0.0.1:8000/proxy/beacon/t/d28d24d8-1c08-44ff-9a8e-eb36a5e234c3\n2,User2,d28d24d8-1c08-44ff-9a8e-eb36a5e234c3,81a9689ef47136e60e7b794fb87c1e1f81e961680ed05b882a3a6ed846e503e9,http://127.0.0.1:8000/proxy/beacon/t/d28d24d8-1c08-44ff-9a8e-eb36a5e234c3\n3,User3,d28d24d8-1c08-44ff-9a8e-eb36a5e234c3,81a9689ef47136e60e7b794fb87c1e1f81e961680ed05b882a3a6ed846e503e9,http://127.0.0.1:8000/proxy/beacon/t/d28d24d8-1c08-44ff-9a8e-eb36a5e234c3\n4,User4,d28d24d8-1c08-44ff-9a8e-eb36a5e234c3,81a9689ef47136e60e7b794fb87c1e1f81e961680ed05b882a3a6ed846e503e9,http://127.0.0.1:8000/proxy/beacon/t/d28d24d8-1c08-44ff-9a8e-eb36a5e234c3\n5,User5,d28d24d8-1c08-44ff-9a8e-eb36a5e234c3,81a9689ef47136e60e7b794fb87c1e1f81e961680ed05b882a3a6ed846e503e9,http://127.0.0.1:8000/proxy/beacon/t/d28d24d8-1c08-44ff-9a8e-eb36a5e234c3\n",
+  "timings": {
+    "upstream_ms": 97.75,
+    "total_ms": 128.06
+  },
+  "reason_codes": [
+    "decision_allow"
+  ],
+  "reason_detail": {
+    "action_raw": "allow",
+    "error": null,
+    "next_action": null,
+    "risk_score": 10.601167297363281,
+    "behavior_level": "low",
+    "behavior_score": 35,
+    "tone_reason": null,
+    "decision_action": "allow",
+    "effective_status": 200,
+    "risk_level": "low"
+  },
+  "status_code_outer": 200,
+  "status_code_inner": 200,
+  "status_code": 200,
+  "headers": {
+    "X-Risk-Level": "low",
+    "date": "Fri, 02 Jan 2026 06:19:22 GMT",
+    "server": "uvicorn",
+    "content-length": "48",
+    "content-type": "text/csv; charset=utf-8",
+    "X-Trace-Id": "d28d24d8-1c08-44ff-9a8e-eb36a5e234c3",
+    "X-Trace-Sig": "81a9689ef47136e60e7b794fb87c1e1f81e961680ed05b882a3a6ed846e503e9",
+    "X-Export-Id": "01670902-5b0d-4bae-a329-223e95d9d9c4",
+    "X-Beacon-Url": "http://127.0.0.1:8000/proxy/beacon/t/d28d24d8-1c08-44ff-9a8e-eb36a5e234c3"
+  },
+  "risk_score": 10.601167297363281,
+  "risk_level": "low",
+  "deception_used": false,
+  "deception_reason": null,
+  "decision_action": "allow",
+  "status_code_effective": 200
+}  source=console
+INFO[0002] DEBUG normal_users keys=status_code,headers,body,risk_level,decision_action,reason_detail,status_code_effective,status_code_outer,risk_score,deception_used,deception_reason,timings,reason_codes,status_code_inner eff=200 http=200  source=console
+INFO[0002] DEBUG normal_users json={                                                                                                                                         
+  "deception_used": false,                                                                                                                                                   
+  "deception_reason": null,                                                                                                                                                  
+  "timings": {
+    "upstream_ms": 219.76,
+    "total_ms": 248.01
+  },
+  "reason_codes": [
+    "decision_allow"
+  ],
+  "status_code_inner": 200,
+  "status_code": 200,
+  "headers": {
+    "X-Export-Id": "a9458094-4cb9-4a14-9042-9ec36f0d77bf",
+    "X-Trace-Id": "7d449b99-a627-4bd0-8215-f8fc00075645",
+    "X-Trace-Sig": "8d165b4d5fe75cd9ecde8348196f1ac57dd76f943fc8efad0b4b7c0f6a86be2e",
+    "X-Beacon-Url": "http://127.0.0.1:8000/proxy/beacon/t/7d449b99-a627-4bd0-8215-f8fc00075645",
+    "X-Risk-Level": "low",
+    "date": "Fri, 02 Jan 2026 06:19:22 GMT",
+    "server": "uvicorn",
+    "content-length": "48",
+    "content-type": "text/csv; charset=utf-8"
+  },
+  "body": "# trace_id=7d449b99-a627-4bd0-8215-f8fc00075645 trace_sig=8d165b4d5fe75cd9ecde8348196f1ac57dd76f943fc8efad0b4b7c0f6a86be2e export_id=a9458094-4cb9-4a14-9042-9ec36f0d77bf tenant_id=org-2 beacon=http://127.0.0.1:8000/proxy/beacon/t/7d449b99-a627-4bd0-8215-f8fc00075645\nid,name,_trace_id,_trace_sig,_beacon\n1,User1,7d449b99-a627-4bd0-8215-f8fc00075645,8d165b4d5fe75cd9ecde8348196f1ac57dd76f943fc8efad0b4b7c0f6a86be2e,http://127.0.0.1:8000/proxy/beacon/t/7d449b99-a627-4bd0-8215-f8fc00075645\n2,User2,7d449b99-a627-4bd0-8215-f8fc00075645,8d165b4d5fe75cd9ecde8348196f1ac57dd76f943fc8efad0b4b7c0f6a86be2e,http://127.0.0.1:8000/proxy/beacon/t/7d449b99-a627-4bd0-8215-f8fc00075645\n3,User3,7d449b99-a627-4bd0-8215-f8fc00075645,8d165b4d5fe75cd9ecde8348196f1ac57dd76f943fc8efad0b4b7c0f6a86be2e,http://127.0.0.1:8000/proxy/beacon/t/7d449b99-a627-4bd0-8215-f8fc00075645\n4,User4,7d449b99-a627-4bd0-8215-f8fc00075645,8d165b4d5fe75cd9ecde8348196f1ac57dd76f943fc8efad0b4b7c0f6a86be2e,http://127.0.0.1:8000/proxy/beacon/t/7d449b99-a627-4bd0-8215-f8fc00075645\n5,User5,7d449b99-a627-4bd0-8215-f8fc00075645,8d165b4d5fe75cd9ecde8348196f1ac57dd76f943fc8efad0b4b7c0f6a86be2e,http://127.0.0.1:8000/proxy/beacon/t/7d449b99-a627-4bd0-8215-f8fc00075645\n",
+  "risk_level": "low",
+  "decision_action": "allow",
+  "reason_detail": {
+    "tone_reason": null,
+    "action_raw": "allow",
+    "decision_action": "allow",
+    "effective_status": 200,
+    "risk_level": "low",
+    "risk_score": 10.601167297363281,
+    "behavior_level": "low",
+    "error": null,
+    "next_action": null,
+    "behavior_score": 35
+  },
+  "status_code_effective": 200,
+  "status_code_outer": 200,
+  "risk_score": 10.601167297363281
+}  source=console
+INFO[0002] DEBUG normal_users keys=risk_score,deception_used,timings,decision_action,reason_detail,status_code_outer,status_code,body,risk_level,deception_reason,reason_codes,status_code_effective,status_code_inner,headers eff=200 http=200  source=console
+INFO[0002] DEBUG normal_users json={                                                                                                                                         
+  "reason_detail": {                                                                                                                                                         
+    "error": null,                                                                                                                                                           
+    "effective_status": 200,
+    "risk_level": "low",
+    "risk_score": 10.601167297363281,
+    "next_action": null,
+    "decision_action": "allow",
+    "behavior_level": "low",
+    "behavior_score": 35,
+    "tone_reason": null,
+    "action_raw": "allow"
+  },
+  "status_code_outer": 200,
+  "status_code": 200,
+  "body": "# trace_id=e33de61e-9306-41e8-9af1-9bf1ff2a0363 trace_sig=8fc712ceb83ba2d68a593f1d71bc5d836267a9e017c5390c0c553cb3334ab6ef export_id=d3cc2d90-aa6d-441b-922c-6700e1380950 tenant_id=org-3 beacon=http://127.0.0.1:8000/proxy/beacon/t/e33de61e-9306-41e8-9af1-9bf1ff2a0363\nid,name,_trace_id,_trace_sig,_beacon\n1,User1,e33de61e-9306-41e8-9af1-9bf1ff2a0363,8fc712ceb83ba2d68a593f1d71bc5d836267a9e017c5390c0c553cb3334ab6ef,http://127.0.0.1:8000/proxy/beacon/t/e33de61e-9306-41e8-9af1-9bf1ff2a0363\n2,User2,e33de61e-9306-41e8-9af1-9bf1ff2a0363,8fc712ceb83ba2d68a593f1d71bc5d836267a9e017c5390c0c553cb3334ab6ef,http://127.0.0.1:8000/proxy/beacon/t/e33de61e-9306-41e8-9af1-9bf1ff2a0363\n3,User3,e33de61e-9306-41e8-9af1-9bf1ff2a0363,8fc712ceb83ba2d68a593f1d71bc5d836267a9e017c5390c0c553cb3334ab6ef,http://127.0.0.1:8000/proxy/beacon/t/e33de61e-9306-41e8-9af1-9bf1ff2a0363\n4,User4,e33de61e-9306-41e8-9af1-9bf1ff2a0363,8fc712ceb83ba2d68a593f1d71bc5d836267a9e017c5390c0c553cb3334ab6ef,http://127.0.0.1:8000/proxy/beacon/t/e33de61e-9306-41e8-9af1-9bf1ff2a0363\n5,User5,e33de61e-9306-41e8-9af1-9bf1ff2a0363,8fc712ceb83ba2d68a593f1d71bc5d836267a9e017c5390c0c553cb3334ab6ef,http://127.0.0.1:8000/proxy/beacon/t/e33de61e-9306-41e8-9af1-9bf1ff2a0363\n",
+  "risk_level": "low",
+  "deception_reason": null,
+  "reason_codes": [
+    "decision_allow"
+  ],
+  "status_code_effective": 200,
+  "status_code_inner": 200,
+  "headers": {
+    "content-length": "48",
+    "content-type": "text/csv; charset=utf-8",
+    "X-Export-Id": "d3cc2d90-aa6d-441b-922c-6700e1380950",
+    "X-Trace-Id": "e33de61e-9306-41e8-9af1-9bf1ff2a0363",
+    "X-Trace-Sig": "8fc712ceb83ba2d68a593f1d71bc5d836267a9e017c5390c0c553cb3334ab6ef",
+    "date": "Fri, 02 Jan 2026 06:19:22 GMT",
+    "X-Beacon-Url": "http://127.0.0.1:8000/proxy/beacon/t/e33de61e-9306-41e8-9af1-9bf1ff2a0363",
+    "X-Risk-Level": "low",
+    "server": "uvicorn"
+  },
+  "risk_score": 10.601167297363281,
+  "deception_used": false,
+  "timings": {
+    "upstream_ms": 260.77,
+    "total_ms": 282.86
+  },
+  "decision_action": "allow"
+}  source=console
+INFO[0002] DEBUG normal_users keys=reason_codes,status_code_effective,status_code,risk_score,risk_level,deception_reason,decision_action,reason_detail,status_code_outer,status_code_inner,headers,body,deception_used,timings eff=200 http=200  source=console
+INFO[0002] DEBUG normal_users json={                                                                                                                                         
+  "status_code": 200,                                                                                                                                                        
+  "risk_score": 10.601167297363281,                                                                                                                                          
+  "risk_level": "low",
+  "deception_reason": null,
+  "decision_action": "allow",
+  "reason_detail": {
+    "error": null,
+    "decision_action": "allow",
+    "risk_level": "low",
+    "behavior_level": "low",
+    "behavior_score": 35,
+    "tone_reason": null,
+    "next_action": null,
+    "effective_status": 200,
+    "risk_score": 10.601167297363281,
+    "action_raw": "allow"
+  },
+  "status_code_outer": 200,
+  "status_code_inner": 200,
+  "headers": {
+    "date": "Fri, 02 Jan 2026 06:19:22 GMT",
+    "content-type": "text/csv; charset=utf-8",
+    "X-Trace-Id": "7a3399ad-279c-4da1-a000-e4691f6b2f35",
+    "server": "uvicorn",
+    "content-length": "48",
+    "X-Export-Id": "ec612035-3d7c-427f-943a-c82265969cca",
+    "X-Trace-Sig": "9b4555f25512c8d4b9d4b4218627b7c05c966212eeb781ff7f1d9715c5325395",
+    "X-Beacon-Url": "http://127.0.0.1:8000/proxy/beacon/t/7a3399ad-279c-4da1-a000-e4691f6b2f35",
+    "X-Risk-Level": "low"
+  },
+  "body": "# trace_id=7a3399ad-279c-4da1-a000-e4691f6b2f35 trace_sig=9b4555f25512c8d4b9d4b4218627b7c05c966212eeb781ff7f1d9715c5325395 export_id=ec612035-3d7c-427f-943a-c82265969cca tenant_id=org-2 beacon=http://127.0.0.1:8000/proxy/beacon/t/7a3399ad-279c-4da1-a000-e4691f6b2f35\nid,name,_trace_id,_trace_sig,_beacon\n1,User1,7a3399ad-279c-4da1-a000-e4691f6b2f35,9b4555f25512c8d4b9d4b4218627b7c05c966212eeb781ff7f1d9715c5325395,http://127.0.0.1:8000/proxy/beacon/t/7a3399ad-279c-4da1-a000-e4691f6b2f35\n2,User2,7a3399ad-279c-4da1-a000-e4691f6b2f35,9b4555f25512c8d4b9d4b4218627b7c05c966212eeb781ff7f1d9715c5325395,http://127.0.0.1:8000/proxy/beacon/t/7a3399ad-279c-4da1-a000-e4691f6b2f35\n3,User3,7a3399ad-279c-4da1-a000-e4691f6b2f35,9b4555f25512c8d4b9d4b4218627b7c05c966212eeb781ff7f1d9715c5325395,http://127.0.0.1:8000/proxy/beacon/t/7a3399ad-279c-4da1-a000-e4691f6b2f35\n4,User4,7a3399ad-279c-4da1-a000-e4691f6b2f35,9b4555f25512c8d4b9d4b4218627b7c05c966212eeb781ff7f1d9715c5325395,http://127.0.0.1:8000/proxy/beacon/t/7a3399ad-279c-4da1-a000-e4691f6b2f35\n5,User5,7a3399ad-279c-4da1-a000-e4691f6b2f35,9b4555f25512c8d4b9d4b4218627b7c05c966212eeb781ff7f1d9715c5325395,http://127.0.0.1:8000/proxy/beacon/t/7a3399ad-279c-4da1-a000-e4691f6b2f35\n",
+  "deception_used": false,
+  "timings": {
+    "upstream_ms": 228.14,
+    "total_ms": 249.1
+  },
+  "reason_codes": [
+    "decision_allow"
+  ],
+  "status_code_effective": 200
+}  source=console
+INFO[0002] DEBUG normal_users keys=reason_codes,status_code_outer,status_code,risk_score,risk_level,deception_reason,timings,reason_detail,status_code_effective,status_code_inner,headers,body,deception_used,decision_action eff=200 http=200  source=console
+INFO[0002] DEBUG normal_users json={                                                                                                                                         
+  "decision_action": "allow",                                                                                                                                                
+  "reason_codes": [                                                                                                                                                          
+    "decision_allow"
+  ],
+  "status_code_outer": 200,
+  "status_code": 200,
+  "risk_score": 10.601167297363281,
+  "risk_level": "low",
+  "deception_reason": null,
+  "timings": {
+    "upstream_ms": 126.49,
+    "total_ms": 150.24
+  },
+  "reason_detail": {
+    "error": null,
+    "next_action": null,
+    "decision_action": "allow",
+    "effective_status": 200,
+    "risk_level": "low",
+    "risk_score": 10.601167297363281,
+    "behavior_level": "low",
+    "behavior_score": 35,
+    "tone_reason": null,
+    "action_raw": "allow"
+  },
+  "status_code_effective": 200,
+  "status_code_inner": 200,
+  "headers": {
+    "X-Risk-Level": "low",
+    "date": "Fri, 02 Jan 2026 06:19:22 GMT",
+    "server": "uvicorn",
+    "content-length": "48",
+    "X-Export-Id": "535308f2-96a7-4a5f-8d29-832ef109e414",
+    "X-Beacon-Url": "http://127.0.0.1:8000/proxy/beacon/t/83a93848-796f-48d6-b145-65704eacd58e",
+    "content-type": "text/csv; charset=utf-8",
+    "X-Trace-Id": "83a93848-796f-48d6-b145-65704eacd58e",
+    "X-Trace-Sig": "f64e004b00b2384fe349222792b6acc5c94e19e7853fea9c7bb80069da82f63e"
+  },
+  "body": "# trace_id=83a93848-796f-48d6-b145-65704eacd58e trace_sig=f64e004b00b2384fe349222792b6acc5c94e19e7853fea9c7bb80069da82f63e export_id=535308f2-96a7-4a5f-8d29-832ef109e414 tenant_id=org-3 beacon=http://127.0.0.1:8000/proxy/beacon/t/83a93848-796f-48d6-b145-65704eacd58e\nid,name,_trace_id,_trace_sig,_beacon\n1,User1,83a93848-796f-48d6-b145-65704eacd58e,f64e004b00b2384fe349222792b6acc5c94e19e7853fea9c7bb80069da82f63e,http://127.0.0.1:8000/proxy/beacon/t/83a93848-796f-48d6-b145-65704eacd58e\n2,User2,83a93848-796f-48d6-b145-65704eacd58e,f64e004b00b2384fe349222792b6acc5c94e19e7853fea9c7bb80069da82f63e,http://127.0.0.1:8000/proxy/beacon/t/83a93848-796f-48d6-b145-65704eacd58e\n3,User3,83a93848-796f-48d6-b145-65704eacd58e,f64e004b00b2384fe349222792b6acc5c94e19e7853fea9c7bb80069da82f63e,http://127.0.0.1:8000/proxy/beacon/t/83a93848-796f-48d6-b145-65704eacd58e\n4,User4,83a93848-796f-48d6-b145-65704eacd58e,f64e004b00b2384fe349222792b6acc5c94e19e7853fea9c7bb80069da82f63e,http://127.0.0.1:8000/proxy/beacon/t/83a93848-796f-48d6-b145-65704eacd58e\n5,User5,83a93848-796f-48d6-b145-65704eacd58e,f64e004b00b2384fe349222792b6acc5c94e19e7853fea9c7bb80069da82f63e,http://127.0.0.1:8000/proxy/beacon/t/83a93848-796f-48d6-b145-65704eacd58e\n",
+  "deception_used": false
+}  source=console
+
+
+  █ THRESHOLDS
+
+    http_req_duration{scenario:huge_with_stepup}
+    ✓ 'p(95)<3000' p(95)=0s
+
+    http_req_duration{scenario:huge_without_stepup}
+    ✓ 'p(95)<3000' p(95)=0s
+
+    http_req_duration{scenario:normal_users}
+    ✓ 'p(95)<1500' p(95)=829.08ms
+
+
+  █ TOTAL RESULTS
+
+    checks_total.......: 500     16.245897/s
+    checks_succeeded...: 100.00% 500 out of 500
+    checks_failed......: 0.00%   0 out of 500
+
+    ✓ normal: allowed (effective 200)
+    ✓ normal: csv-ish
+
+    HTTP
+    http_req_duration....................: avg=414.74ms min=44.85ms  med=366.42ms max=1.55s p(90)=648.93ms p(95)=829.08ms
+      { expected_response:true }.........: avg=414.74ms min=44.85ms  med=366.42ms max=1.55s p(90)=648.93ms p(95)=829.08ms
+      { scenario:huge_with_stepup }......: avg=0s       min=0s       med=0s       max=0s    p(90)=0s       p(95)=0s
+      { scenario:huge_without_stepup }...: avg=0s       min=0s       med=0s       max=0s    p(90)=0s       p(95)=0s
+      { scenario:normal_users }..........: avg=414.74ms min=44.85ms  med=366.42ms max=1.55s p(90)=648.93ms p(95)=829.08ms
+    http_req_failed......................: 0.00%  0 out of 465
+    http_reqs............................: 465    15.108685/s
+
+    EXECUTION
+    iteration_duration...................: avg=974.4ms  min=447.86ms med=918.42ms max=2.55s p(90)=1.42s    p(95)=1.65s
+    iterations...........................: 250    8.122949/s
+    vus..................................: 8      min=8        max=8
+    vus_max..............................: 8      min=8        max=8
+
+    NETWORK
+    data_received........................: 719 kB 23 kB/s
+    data_sent............................: 201 kB 6.5 kB/s
+
+
+
+                                                                                                                                                                             
+running (0m30.8s), 0/8 VUs, 250 complete and 0 interrupted iterations                                                                                                        
+normal_users ✓ [======================================] 8 VUs  30s  
+
+Run 2:
+(base) PS C:\Cybersecurity\cyber-sidecar> $env:SIDECAR_BASE="http://127.0.0.1:8085"
+>> $env:SCENARIOS="missing_tone_probe"
+>> k6 run .\k6.v5.js
+>>
+
+         /\      Grafana   /‾‾/  
+    /\  /  \     |\  __   /  /   
+   /  \/    \    | |/ /  /   ‾‾\ 
+  /          \   |   (  |  (‾)  |
+ / __________ \  |_|\_\  \_____/ 
+
+     execution: local
+        script: .\k6.v5.js
+        output: -
+
+     scenarios: (100.00%) 1 scenario, 1 max VUs, 40s max duration (incl. graceful stop):
+              * missing_tone_probe: 1 looping VUs for 10s (exec: missingToneProbe, gracefulStop: 30s)
+
+INFO[0000] DEBUG missingToneProbe http=401 eff=401 ct=application/json  source=console
+INFO[0000] DEBUG missingToneProbe body_len=493           source=console
+INFO[0000] DEBUG missingToneProbe body_head={"error":"tone_required","next_action":"retry_with_tone","tone":"NODL60fUynci6Bkv_RbCjnGkJLugJ1FGXzkdjYxtM2U","decision_action":"reauth","reason_codes":["tone_required","policy_reauth"],"reason_detail  source=console
+INFO[0000] DEBUG missingToneProbe json={"status_code_effective":401,"status_code_outer":401,"error":"tone_required","next_action":"retry_with_tone","tone":"NODL60fUynci6Bkv_RbCjnGkJLugJ1FGXzkdjYxtM2U","decision_action":"reauth","reason_codes":["tone_required","policy_reauth"],"reason_detail":{"error":"tone_required","next_action":"retry_with_tone","risk_score":0,"behavior_score":0,"action_raw":"reauth_biometric","decision_action":"reauth","effective_status":401,"risk_level":"low","behavior_level":"low","tone_reason":null}}  source=console
+
+
+  █ THRESHOLDS
+
+    http_req_duration{scenario:huge_with_stepup}
+    ✓ 'p(95)<3000' p(95)=0s
+
+    http_req_duration{scenario:huge_without_stepup}
+    ✓ 'p(95)<3000' p(95)=0s
+
+    http_req_duration{scenario:normal_users}
+    ✓ 'p(95)<1500' p(95)=0s
+
+
+  █ TOTAL RESULTS
+
+    checks_total.......: 88      8.656236/s
+    checks_succeeded...: 100.00% 88 out of 88
+    checks_failed......: 0.00%   0 out of 88
+
+    ✓ missing tone: effective handshake (409/401 retry_with_tone) OR forced step-up
+    ✓ missing tone: has next_action (retry_with_tone or reauth*)
+
+    HTTP
+    http_req_duration....................: avg=30.07ms  min=16.89ms med=28.63ms  max=57.49ms  p(90)=37.76ms  p(95)=43.12ms
+      { expected_response:true }.........: avg=30.07ms  min=16.89ms med=28.63ms  max=57.49ms  p(90)=37.76ms  p(95)=43.12ms
+      { scenario:huge_with_stepup }......: avg=0s       min=0s      med=0s       max=0s       p(90)=0s       p(95)=0s
+      { scenario:huge_without_stepup }...: avg=0s       min=0s      med=0s       max=0s       p(90)=0s       p(95)=0s
+      { scenario:normal_users }..........: avg=0s       min=0s      med=0s       max=0s       p(90)=0s       p(95)=0s
+    http_req_failed......................: 0.00% 0 out of 44
+    http_reqs............................: 44    4.328118/s
+
+    EXECUTION
+    iteration_duration...................: avg=231.02ms min=218.1ms med=229.31ms max=258.93ms p(90)=238.63ms p(95)=244.5ms
+    iterations...........................: 44    4.328118/s
+    vus..................................: 1     min=1       max=1
+    vus_max..............................: 1     min=1       max=1
+
+    NETWORK
+    data_received........................: 28 kB 2.7 kB/s
+    data_sent............................: 18 kB 1.7 kB/s
+
+
+
+                                                                                                                                                                             
+running (10.2s), 0/1 VUs, 44 complete and 0 interrupted iterations                                                                                                           
+missing_tone_probe ✓ [======================================] 1 VUs  10s 
+
+Run 3:
+(base) PS C:\Cybersecurity\cyber-sidecar> $env:SIDECAR_BASE="http://127.0.0.1:8085"
+>> $env:SIDECAR_FORCE_ACTION="block"
+>> $env:SCENARIOS="normal_users"
+>> k6 run .\k6.v5.js
+>> Remove-Item Env:\SIDECAR_FORCE_ACTION
+>>
+
+         /\      Grafana   /‾‾/  
+    /\  /  \     |\  __   /  /   
+   /  \/    \    | |/ /  /   ‾‾\ 
+  /          \   |   (  |  (‾)  |
+ / __________ \  |_|\_\  \_____/ 
+
+     execution: local
+        script: .\k6.v5.js
+        output: -
+
+     scenarios: (100.00%) 1 scenario, 8 max VUs, 1m0s max duration (incl. graceful stop):
+              * normal_users: 8 looping VUs for 30s (exec: normalUsers, gracefulStop: 30s)
+
+INFO[0000] DEBUG normal_users keys=reason_codes,reason_detail,status_code_outer,status_code_inner,status_code,body,risk_score,deception_used,deception_reason,status_code_effective,headers,risk_level,timings,decision_action eff=200 http=200  source=console
+INFO[0000] DEBUG normal_users json={                                                                                                                                         
+  "decision_action": "allow",                                                                                                                                                
+  "reason_codes": [                                                                                                                                                          
+    "decision_allow"
+  ],
+  "reason_detail": {
+    "decision_action": "allow",
+    "effective_status": 200,
+    "risk_level": "low",
+    "risk_score": 10.601167297363281,
+    "behavior_level": "low",
+    "tone_reason": null,
+    "action_raw": "allow",
+    "next_action": null,
+    "behavior_score": 35,
+    "error": null
+  },
+  "status_code_outer": 200,
+  "status_code_inner": 200,
+  "status_code": 200,
+  "body": "# trace_id=10ebf433-07c5-44b1-9151-6715d5672c99 trace_sig=e0864108e00858a3d444c5e890ab6b78d2e336473a800cee72fe21e0131b06c9 export_id=697326b5-61b4-4db5-a22e-fcfdd552363f tenant_id=org-3 beacon=http://127.0.0.1:8000/proxy/beacon/t/10ebf433-07c5-44b1-9151-6715d5672c99\nid,name,_trace_id,_trace_sig,_beacon\n1,User1,10ebf433-07c5-44b1-9151-6715d5672c99,e0864108e00858a3d444c5e890ab6b78d2e336473a800cee72fe21e0131b06c9,http://127.0.0.1:8000/proxy/beacon/t/10ebf433-07c5-44b1-9151-6715d5672c99\n2,User2,10ebf433-07c5-44b1-9151-6715d5672c99,e0864108e00858a3d444c5e890ab6b78d2e336473a800cee72fe21e0131b06c9,http://127.0.0.1:8000/proxy/beacon/t/10ebf433-07c5-44b1-9151-6715d5672c99\n3,User3,10ebf433-07c5-44b1-9151-6715d5672c99,e0864108e00858a3d444c5e890ab6b78d2e336473a800cee72fe21e0131b06c9,http://127.0.0.1:8000/proxy/beacon/t/10ebf433-07c5-44b1-9151-6715d5672c99\n4,User4,10ebf433-07c5-44b1-9151-6715d5672c99,e0864108e00858a3d444c5e890ab6b78d2e336473a800cee72fe21e0131b06c9,http://127.0.0.1:8000/proxy/beacon/t/10ebf433-07c5-44b1-9151-6715d5672c99\n5,User5,10ebf433-07c5-44b1-9151-6715d5672c99,e0864108e00858a3d444c5e890ab6b78d2e336473a800cee72fe21e0131b06c9,http://127.0.0.1:8000/proxy/beacon/t/10ebf433-07c5-44b1-9151-6715d5672c99\n",
+  "risk_score": 10.601167297363281,
+  "deception_used": false,
+  "deception_reason": null,
+  "status_code_effective": 200,
+  "headers": {
+    "content-length": "48",
+    "content-type": "text/csv; charset=utf-8",
+    "X-Risk-Level": "low",
+    "date": "Fri, 02 Jan 2026 06:20:43 GMT",
+    "X-Export-Id": "697326b5-61b4-4db5-a22e-fcfdd552363f",
+    "X-Trace-Id": "10ebf433-07c5-44b1-9151-6715d5672c99",
+    "X-Trace-Sig": "e0864108e00858a3d444c5e890ab6b78d2e336473a800cee72fe21e0131b06c9",
+    "X-Beacon-Url": "http://127.0.0.1:8000/proxy/beacon/t/10ebf433-07c5-44b1-9151-6715d5672c99",
+    "server": "uvicorn"
+  },
+  "risk_level": "low",
+  "timings": {
+    "upstream_ms": 157.33,
+    "total_ms": 172.36
+  }
+}  source=console
+INFO[0000] DEBUG normal_users keys=status_code_effective,status_code_outer,status_code,headers,risk_score,deception_used,deception_reason,reason_codes,reason_detail,status_code_inner,body,risk_level,timings,decision_action eff=200 http=200  source=console
+INFO[0000] DEBUG normal_users json={                                                                                                                                         
+  "risk_level": "low",                                                                                                                                                       
+  "timings": {                                                                                                                                                               
+    "upstream_ms": 246.16,
+    "total_ms": 262.36
+  },
+  "decision_action": "allow",
+  "status_code_effective": 200,
+  "status_code_outer": 200,
+  "status_code": 200,
+  "headers": {
+    "content-type": "text/csv; charset=utf-8",
+    "X-Risk-Level": "low",
+    "server": "uvicorn",
+    "X-Export-Id": "cfaee7ce-28af-4d02-9169-0c0f98d0a9a2",
+    "X-Trace-Id": "b0911610-9e0f-4044-b70e-1973f010d044",
+    "X-Trace-Sig": "d7ce5f558be46620b56e6de73c1ddcaf6fe188dae08d3ffe02437106ebddc254",
+    "X-Beacon-Url": "http://127.0.0.1:8000/proxy/beacon/t/b0911610-9e0f-4044-b70e-1973f010d044",
+    "date": "Fri, 02 Jan 2026 06:20:43 GMT",
+    "content-length": "48"
+  },
+  "risk_score": 10.601167297363281,
+  "deception_used": false,
+  "deception_reason": null,
+  "reason_codes": [
+    "decision_allow"
+  ],
+  "reason_detail": {
+    "risk_score": 10.601167297363281,
+    "tone_reason": null,
+    "decision_action": "allow",
+    "behavior_level": "low",
+    "behavior_score": 35,
+    "action_raw": "allow",
+    "error": null,
+    "next_action": null,
+    "effective_status": 200,
+    "risk_level": "low"
+  },
+  "status_code_inner": 200,
+  "body": "# trace_id=b0911610-9e0f-4044-b70e-1973f010d044 trace_sig=d7ce5f558be46620b56e6de73c1ddcaf6fe188dae08d3ffe02437106ebddc254 export_id=cfaee7ce-28af-4d02-9169-0c0f98d0a9a2 tenant_id=org-1 beacon=http://127.0.0.1:8000/proxy/beacon/t/b0911610-9e0f-4044-b70e-1973f010d044\nid,name,_trace_id,_trace_sig,_beacon\n1,User1,b0911610-9e0f-4044-b70e-1973f010d044,d7ce5f558be46620b56e6de73c1ddcaf6fe188dae08d3ffe02437106ebddc254,http://127.0.0.1:8000/proxy/beacon/t/b0911610-9e0f-4044-b70e-1973f010d044\n2,User2,b0911610-9e0f-4044-b70e-1973f010d044,d7ce5f558be46620b56e6de73c1ddcaf6fe188dae08d3ffe02437106ebddc254,http://127.0.0.1:8000/proxy/beacon/t/b0911610-9e0f-4044-b70e-1973f010d044\n3,User3,b0911610-9e0f-4044-b70e-1973f010d044,d7ce5f558be46620b56e6de73c1ddcaf6fe188dae08d3ffe02437106ebddc254,http://127.0.0.1:8000/proxy/beacon/t/b0911610-9e0f-4044-b70e-1973f010d044\n4,User4,b0911610-9e0f-4044-b70e-1973f010d044,d7ce5f558be46620b56e6de73c1ddcaf6fe188dae08d3ffe02437106ebddc254,http://127.0.0.1:8000/proxy/beacon/t/b0911610-9e0f-4044-b70e-1973f010d044\n5,User5,b0911610-9e0f-4044-b70e-1973f010d044,d7ce5f558be46620b56e6de73c1ddcaf6fe188dae08d3ffe02437106ebddc254,http://127.0.0.1:8000/proxy/beacon/t/b0911610-9e0f-4044-b70e-1973f010d044\n"
+}  source=console
+INFO[0000] DEBUG normal_users keys=risk_score,risk_level,deception_reason,reason_codes,reason_detail,status_code_outer,status_code,deception_used,timings,decision_action,status_code_effective,status_code_inner,headers,body eff=200 http=200  source=console
+INFO[0000] DEBUG normal_users json={                                                                                                                                         
+  "risk_level": "low",                                                                                                                                                       
+  "deception_reason": null,                                                                                                                                                  
+  "reason_codes": [
+    "decision_allow"
+  ],
+  "reason_detail": {
+    "decision_action": "allow",
+    "effective_status": 200,
+    "risk_level": "low",
+    "risk_score": 10.601167297363281,
+    "error": null,
+    "next_action": null,
+    "behavior_level": "low",
+    "behavior_score": 35,
+    "tone_reason": null,
+    "action_raw": "allow"
+  },
+  "status_code_outer": 200,
+  "status_code": 200,
+  "deception_used": false,
+  "timings": {
+    "upstream_ms": 215.02,
+    "total_ms": 233.83
+  },
+  "decision_action": "allow",
+  "status_code_effective": 200,
+  "status_code_inner": 200,
+  "headers": {
+    "content-type": "text/csv; charset=utf-8",
+    "X-Export-Id": "71f0fa5b-2bed-4f0e-85ee-777e94480cb2",
+    "X-Beacon-Url": "http://127.0.0.1:8000/proxy/beacon/t/5ef189fd-464a-4999-be84-44dcd74bce4e",
+    "date": "Fri, 02 Jan 2026 06:20:44 GMT",
+    "X-Trace-Id": "5ef189fd-464a-4999-be84-44dcd74bce4e",
+    "X-Trace-Sig": "1ca455ba41eeec0f690bb797e8d200a42040fa980647509db7318ff39e7e0c07",
+    "X-Risk-Level": "low",
+    "server": "uvicorn",
+    "content-length": "48"
+  },
+  "body": "# trace_id=5ef189fd-464a-4999-be84-44dcd74bce4e trace_sig=1ca455ba41eeec0f690bb797e8d200a42040fa980647509db7318ff39e7e0c07 export_id=71f0fa5b-2bed-4f0e-85ee-777e94480cb2 tenant_id=org-2 beacon=http://127.0.0.1:8000/proxy/beacon/t/5ef189fd-464a-4999-be84-44dcd74bce4e\nid,name,_trace_id,_trace_sig,_beacon\n1,User1,5ef189fd-464a-4999-be84-44dcd74bce4e,1ca455ba41eeec0f690bb797e8d200a42040fa980647509db7318ff39e7e0c07,http://127.0.0.1:8000/proxy/beacon/t/5ef189fd-464a-4999-be84-44dcd74bce4e\n2,User2,5ef189fd-464a-4999-be84-44dcd74bce4e,1ca455ba41eeec0f690bb797e8d200a42040fa980647509db7318ff39e7e0c07,http://127.0.0.1:8000/proxy/beacon/t/5ef189fd-464a-4999-be84-44dcd74bce4e\n3,User3,5ef189fd-464a-4999-be84-44dcd74bce4e,1ca455ba41eeec0f690bb797e8d200a42040fa980647509db7318ff39e7e0c07,http://127.0.0.1:8000/proxy/beacon/t/5ef189fd-464a-4999-be84-44dcd74bce4e\n4,User4,5ef189fd-464a-4999-be84-44dcd74bce4e,1ca455ba41eeec0f690bb797e8d200a42040fa980647509db7318ff39e7e0c07,http://127.0.0.1:8000/proxy/beacon/t/5ef189fd-464a-4999-be84-44dcd74bce4e\n5,User5,5ef189fd-464a-4999-be84-44dcd74bce4e,1ca455ba41eeec0f690bb797e8d200a42040fa980647509db7318ff39e7e0c07,http://127.0.0.1:8000/proxy/beacon/t/5ef189fd-464a-4999-be84-44dcd74bce4e\n",
+  "risk_score": 10.601167297363281
+}  source=console
+INFO[0000] DEBUG normal_users keys=timings,decision_action,status_code_outer,status_code,risk_level,deception_reason,reason_codes,reason_detail,status_code_effective,status_code_inner,headers,body,risk_score,deception_used eff=200 http=200  source=console                                                                                           
+INFO[0000] DEBUG normal_users keys=status_code,headers,body,deception_used,decision_action,reason_codes,status_code_inner,risk_score,risk_level,deception_reason,timings,reason_detail,status_code_effective,status_code_outer eff=200 http=200  source=console                                                                                           
+INFO[0000] DEBUG normal_users json={                                                                                                                                         
+  "status_code_inner": 200,                                                                                                                                                  
+  "headers": {                                                                                                                                                               
+    "date": "Fri, 02 Jan 2026 06:20:44 GMT",
+    "server": "uvicorn",
+    "content-length": "48",
+    "X-Export-Id": "a9518be8-ba07-4229-a18b-1c0685fc6490",
+    "X-Trace-Id": "01473976-7a9d-45e8-b1ac-30ded66c107d",
+    "X-Risk-Level": "low",
+    "content-type": "text/csv; charset=utf-8",
+    "X-Trace-Sig": "cbe01c1ffb1af364002d24c678c2664a3baf993563594d39a4d11c4cdb691ca2",
+    "X-Beacon-Url": "http://127.0.0.1:8000/proxy/beacon/t/01473976-7a9d-45e8-b1ac-30ded66c107d"
+  },
+  "body": "# trace_id=01473976-7a9d-45e8-b1ac-30ded66c107d trace_sig=cbe01c1ffb1af364002d24c678c2664a3baf993563594d39a4d11c4cdb691ca2 export_id=a9518be8-ba07-4229-a18b-1c0685fc6490 tenant_id=org-1 beacon=http://127.0.0.1:8000/proxy/beacon/t/01473976-7a9d-45e8-b1ac-30ded66c107d\nid,name,_trace_id,_trace_sig,_beacon\n1,User1,01473976-7a9d-45e8-b1ac-30ded66c107d,cbe01c1ffb1af364002d24c678c2664a3baf993563594d39a4d11c4cdb691ca2,http://127.0.0.1:8000/proxy/beacon/t/01473976-7a9d-45e8-b1ac-30ded66c107d\n2,User2,01473976-7a9d-45e8-b1ac-30ded66c107d,cbe01c1ffb1af364002d24c678c2664a3baf993563594d39a4d11c4cdb691ca2,http://127.0.0.1:8000/proxy/beacon/t/01473976-7a9d-45e8-b1ac-30ded66c107d\n3,User3,01473976-7a9d-45e8-b1ac-30ded66c107d,cbe01c1ffb1af364002d24c678c2664a3baf993563594d39a4d11c4cdb691ca2,http://127.0.0.1:8000/proxy/beacon/t/01473976-7a9d-45e8-b1ac-30ded66c107d\n4,User4,01473976-7a9d-45e8-b1ac-30ded66c107d,cbe01c1ffb1af364002d24c678c2664a3baf993563594d39a4d11c4cdb691ca2,http://127.0.0.1:8000/proxy/beacon/t/01473976-7a9d-45e8-b1ac-30ded66c107d\n5,User5,01473976-7a9d-45e8-b1ac-30ded66c107d,cbe01c1ffb1af364002d24c678c2664a3baf993563594d39a4d11c4cdb691ca2,http://127.0.0.1:8000/proxy/beacon/t/01473976-7a9d-45e8-b1ac-30ded66c107d\n",
+  "risk_score": 10.601167297363281,
+  "deception_used": false,
+  "timings": {
+    "upstream_ms": 392.75,
+    "total_ms": 415.9
+  },
+  "decision_action": "allow",
+  "status_code_outer": 200,
+  "status_code": 200,
+  "risk_level": "low",
+  "deception_reason": null,
+  "reason_codes": [
+    "decision_allow"
+  ],
+  "reason_detail": {
+    "error": null,
+    "risk_level": "low",
+    "risk_score": 10.601167297363281,
+    "behavior_level": "low",
+    "behavior_score": 35,
+    "next_action": null,
+    "decision_action": "allow",
+    "effective_status": 200,
+    "tone_reason": null,
+    "action_raw": "allow"
+  },
+  "status_code_effective": 200
+}  source=console
+INFO[0000] DEBUG normal_users json={                                                                                                                                         
+  "risk_score": 10.601167297363281,                                                                                                                                          
+  "risk_level": "low",                                                                                                                                                       
+  "deception_reason": null,
+  "timings": {
+    "upstream_ms": 514.93,
+    "total_ms": 526.1
+  },
+  "reason_detail": {
+    "effective_status": 200,
+    "risk_score": 10.601167297363281,
+    "behavior_score": 35,
+    "action_raw": "allow",
+    "decision_action": "allow",
+    "risk_level": "low",
+    "behavior_level": "low",
+    "tone_reason": null,
+    "error": null,
+    "next_action": null
+  },
+  "status_code_effective": 200,
+  "status_code_outer": 200,
+  "status_code": 200,
+  "headers": {
+    "date": "Fri, 02 Jan 2026 06:20:44 GMT",
+    "content-type": "text/csv; charset=utf-8",
+    "X-Trace-Sig": "426ac3209920609109570bd8819bcd633a7a6162def9265a2b11ce45ce8708a6",
+    "X-Risk-Level": "low",
+    "server": "uvicorn",
+    "content-length": "48",
+    "X-Export-Id": "1c2f6011-1f18-4bd0-aafd-0971e3378d67",
+    "X-Trace-Id": "c296b49f-1b88-40ae-93a4-affb6ac84517",
+    "X-Beacon-Url": "http://127.0.0.1:8000/proxy/beacon/t/c296b49f-1b88-40ae-93a4-affb6ac84517"
+  },
+  "body": "# trace_id=c296b49f-1b88-40ae-93a4-affb6ac84517 trace_sig=426ac3209920609109570bd8819bcd633a7a6162def9265a2b11ce45ce8708a6 export_id=1c2f6011-1f18-4bd0-aafd-0971e3378d67 tenant_id=org-2 beacon=http://127.0.0.1:8000/proxy/beacon/t/c296b49f-1b88-40ae-93a4-affb6ac84517\nid,name,_trace_id,_trace_sig,_beacon\n1,User1,c296b49f-1b88-40ae-93a4-affb6ac84517,426ac3209920609109570bd8819bcd633a7a6162def9265a2b11ce45ce8708a6,http://127.0.0.1:8000/proxy/beacon/t/c296b49f-1b88-40ae-93a4-affb6ac84517\n2,User2,c296b49f-1b88-40ae-93a4-affb6ac84517,426ac3209920609109570bd8819bcd633a7a6162def9265a2b11ce45ce8708a6,http://127.0.0.1:8000/proxy/beacon/t/c296b49f-1b88-40ae-93a4-affb6ac84517\n3,User3,c296b49f-1b88-40ae-93a4-affb6ac84517,426ac3209920609109570bd8819bcd633a7a6162def9265a2b11ce45ce8708a6,http://127.0.0.1:8000/proxy/beacon/t/c296b49f-1b88-40ae-93a4-affb6ac84517\n4,User4,c296b49f-1b88-40ae-93a4-affb6ac84517,426ac3209920609109570bd8819bcd633a7a6162def9265a2b11ce45ce8708a6,http://127.0.0.1:8000/proxy/beacon/t/c296b49f-1b88-40ae-93a4-affb6ac84517\n5,User5,c296b49f-1b88-40ae-93a4-affb6ac84517,426ac3209920609109570bd8819bcd633a7a6162def9265a2b11ce45ce8708a6,http://127.0.0.1:8000/proxy/beacon/t/c296b49f-1b88-40ae-93a4-affb6ac84517\n",
+  "deception_used": false,
+  "decision_action": "allow",
+  "reason_codes": [
+    "decision_allow"
+  ],
+  "status_code_inner": 200
+}  source=console
+INFO[0000] DEBUG normal_users keys=status_code,headers,risk_score,risk_level,deception_used,timings,decision_action,status_code_inner,body,deception_reason,reason_codes,reason_detail,status_code_effective,status_code_outer eff=200 http=200  source=console
+INFO[0000] DEBUG normal_users json={                                                                                                                                         
+  "decision_action": "allow",                                                                                                                                                
+  "status_code_inner": 200,                                                                                                                                                  
+  "body": "# trace_id=e21d7d00-9a96-4fc4-a573-9850e9c1114b trace_sig=edf3e7925f6d9488a21e7d2981188a002713e8f383d94a785457b32e0acddcbc export_id=e29d0ac7-93b5-4466-b0cb-4a06b139ea52 tenant_id=org-2 beacon=http://127.0.0.1:8000/proxy/beacon/t/e21d7d00-9a96-4fc4-a573-9850e9c1114b\nid,name,_trace_id,_trace_sig,_beacon\n1,User1,e21d7d00-9a96-4fc4-a573-9850e9c1114b,edf3e7925f6d9488a21e7d2981188a002713e8f383d94a785457b32e0acddcbc,http://127.0.0.1:8000/proxy/beacon/t/e21d7d00-9a96-4fc4-a573-9850e9c1114b\n2,User2,e21d7d00-9a96-4fc4-a573-9850e9c1114b,edf3e7925f6d9488a21e7d2981188a002713e8f383d94a785457b32e0acddcbc,http://127.0.0.1:8000/proxy/beacon/t/e21d7d00-9a96-4fc4-a573-9850e9c1114b\n3,User3,e21d7d00-9a96-4fc4-a573-9850e9c1114b,edf3e7925f6d9488a21e7d2981188a002713e8f383d94a785457b32e0acddcbc,http://127.0.0.1:8000/proxy/beacon/t/e21d7d00-9a96-4fc4-a573-9850e9c1114b\n4,User4,e21d7d00-9a96-4fc4-a573-9850e9c1114b,edf3e7925f6d9488a21e7d2981188a002713e8f383d94a785457b32e0acddcbc,http://127.0.0.1:8000/proxy/beacon/t/e21d7d00-9a96-4fc4-a573-9850e9c1114b\n5,User5,e21d7d00-9a96-4fc4-a573-9850e9c1114b,edf3e7925f6d9488a21e7d2981188a002713e8f383d94a785457b32e0acddcbc,http://127.0.0.1:8000/proxy/beacon/t/e21d7d00-9a96-4fc4-a573-9850e9c1114b\n",
+  "deception_reason": null,
+  "reason_codes": [
+    "decision_allow"
+  ],
+  "reason_detail": {
+    "decision_action": "allow",
+    "effective_status": 200,
+    "behavior_level": "low",
+    "action_raw": "allow",
+    "error": null,
+    "next_action": null,
+    "risk_level": "low",
+    "risk_score": 10.601167297363281,
+    "behavior_score": 35,
+    "tone_reason": null
+  },
+  "status_code_effective": 200,
+  "status_code_outer": 200,
+  "status_code": 200,
+  "headers": {
+    "date": "Fri, 02 Jan 2026 06:20:44 GMT",
+    "server": "uvicorn",
+    "X-Trace-Id": "e21d7d00-9a96-4fc4-a573-9850e9c1114b",
+    "content-length": "48",
+    "content-type": "text/csv; charset=utf-8",
+    "X-Export-Id": "e29d0ac7-93b5-4466-b0cb-4a06b139ea52",
+    "X-Trace-Sig": "edf3e7925f6d9488a21e7d2981188a002713e8f383d94a785457b32e0acddcbc",
+    "X-Beacon-Url": "http://127.0.0.1:8000/proxy/beacon/t/e21d7d00-9a96-4fc4-a573-9850e9c1114b",
+    "X-Risk-Level": "low"
+  },
+  "risk_score": 10.601167297363281,
+  "risk_level": "low",
+  "deception_used": false,
+  "timings": {
+    "upstream_ms": 631.07,
+    "total_ms": 642.21
+  }
+}  source=console
+INFO[0001] DEBUG normal_users keys=deception_reason,timings,reason_codes,status_code_inner,status_code,headers,body,deception_used,decision_action,reason_detail,status_code_effective,status_code_outer,risk_score,risk_level eff=200 http=200  source=console
+INFO[0001] DEBUG normal_users json={                                                                                                                                         
+  "timings": {                                                                                                                                                               
+    "upstream_ms": 481.13,                                                                                                                                                   
+    "total_ms": 505.3
+  },
+  "reason_codes": [
+    "decision_allow"
+  ],
+  "status_code_inner": 200,
+  "status_code": 200,
+  "headers": {
+    "X-Trace-Sig": "ae9d1550ae8167dac22f8ae714b670f6743fe2d159c1649860785b716744bedd",
+    "server": "uvicorn",
+    "content-length": "48",
+    "X-Export-Id": "5e4d9ae0-3c89-466f-857e-a4dca015d361",
+    "X-Beacon-Url": "http://127.0.0.1:8000/proxy/beacon/t/d3c91a34-5791-43da-beb9-3f71247dc547",
+    "X-Risk-Level": "low",
+    "date": "Fri, 02 Jan 2026 06:20:44 GMT",
+    "content-type": "text/csv; charset=utf-8",
+    "X-Trace-Id": "d3c91a34-5791-43da-beb9-3f71247dc547"
+  },
+  "body": "# trace_id=d3c91a34-5791-43da-beb9-3f71247dc547 trace_sig=ae9d1550ae8167dac22f8ae714b670f6743fe2d159c1649860785b716744bedd export_id=5e4d9ae0-3c89-466f-857e-a4dca015d361 tenant_id=org-2 beacon=http://127.0.0.1:8000/proxy/beacon/t/d3c91a34-5791-43da-beb9-3f71247dc547\nid,name,_trace_id,_trace_sig,_beacon\n1,User1,d3c91a34-5791-43da-beb9-3f71247dc547,ae9d1550ae8167dac22f8ae714b670f6743fe2d159c1649860785b716744bedd,http://127.0.0.1:8000/proxy/beacon/t/d3c91a34-5791-43da-beb9-3f71247dc547\n2,User2,d3c91a34-5791-43da-beb9-3f71247dc547,ae9d1550ae8167dac22f8ae714b670f6743fe2d159c1649860785b716744bedd,http://127.0.0.1:8000/proxy/beacon/t/d3c91a34-5791-43da-beb9-3f71247dc547\n3,User3,d3c91a34-5791-43da-beb9-3f71247dc547,ae9d1550ae8167dac22f8ae714b670f6743fe2d159c1649860785b716744bedd,http://127.0.0.1:8000/proxy/beacon/t/d3c91a34-5791-43da-beb9-3f71247dc547\n4,User4,d3c91a34-5791-43da-beb9-3f71247dc547,ae9d1550ae8167dac22f8ae714b670f6743fe2d159c1649860785b716744bedd,http://127.0.0.1:8000/proxy/beacon/t/d3c91a34-5791-43da-beb9-3f71247dc547\n5,User5,d3c91a34-5791-43da-beb9-3f71247dc547,ae9d1550ae8167dac22f8ae714b670f6743fe2d159c1649860785b716744bedd,http://127.0.0.1:8000/proxy/beacon/t/d3c91a34-5791-43da-beb9-3f71247dc547\n",
+  "deception_used": false,
+  "decision_action": "allow",
+  "reason_detail": {
+    "next_action": null,
+    "decision_action": "allow",
+    "risk_level": "low",
+    "behavior_level": "low",
+    "behavior_score": 35,
+    "action_raw": "allow",
+    "error": null,
+    "effective_status": 200,
+    "risk_score": 10.601167297363281,
+    "tone_reason": null
+  },
+  "status_code_effective": 200,
+  "status_code_outer": 200,
+  "risk_score": 10.601167297363281,
+  "risk_level": "low",
+  "deception_reason": null
+}  source=console
+INFO[0001] DEBUG normal_users keys=timings,decision_action,status_code_effective,status_code_outer,headers,risk_score,risk_level,deception_reason,reason_codes,reason_detail,status_code_inner,status_code,body,deception_used eff=200 http=200  source=console
+INFO[0001] DEBUG normal_users json={                                                                                                                                         
+  "headers": {                                                                                                                                                               
+    "X-Beacon-Url": "http://127.0.0.1:8000/proxy/beacon/t/01fae8d9-ce52-4b3e-a873-b87a871a4d94",                                                                             
+    "content-length": "48",
+    "X-Export-Id": "b245adf4-7c65-49ba-a28d-8d5451f407dc",
+    "X-Trace-Sig": "b41bbba963c93d36f8b0081fba6780c495b9c963338540aba616770be0684666",
+    "X-Risk-Level": "low",
+    "date": "Fri, 02 Jan 2026 06:20:44 GMT",
+    "server": "uvicorn",
+    "content-type": "text/csv; charset=utf-8",
+    "X-Trace-Id": "01fae8d9-ce52-4b3e-a873-b87a871a4d94"
+  },
+  "risk_score": 10.601167297363281,
+  "risk_level": "low",
+  "deception_reason": null,
+  "reason_codes": [
+    "decision_allow"
+  ],
+  "reason_detail": {
+    "error": null,
+    "decision_action": "allow",
+    "effective_status": 200,
+    "tone_reason": null,
+    "next_action": null,
+    "risk_level": "low",
+    "risk_score": 10.601167297363281,
+    "behavior_level": "low",
+    "behavior_score": 35,
+    "action_raw": "allow"
+  },
+  "status_code_inner": 200,
+  "status_code": 200,
+  "body": "# trace_id=01fae8d9-ce52-4b3e-a873-b87a871a4d94 trace_sig=b41bbba963c93d36f8b0081fba6780c495b9c963338540aba616770be0684666 export_id=b245adf4-7c65-49ba-a28d-8d5451f407dc tenant_id=org-3 beacon=http://127.0.0.1:8000/proxy/beacon/t/01fae8d9-ce52-4b3e-a873-b87a871a4d94\nid,name,_trace_id,_trace_sig,_beacon\n1,User1,01fae8d9-ce52-4b3e-a873-b87a871a4d94,b41bbba963c93d36f8b0081fba6780c495b9c963338540aba616770be0684666,http://127.0.0.1:8000/proxy/beacon/t/01fae8d9-ce52-4b3e-a873-b87a871a4d94\n2,User2,01fae8d9-ce52-4b3e-a873-b87a871a4d94,b41bbba963c93d36f8b0081fba6780c495b9c963338540aba616770be0684666,http://127.0.0.1:8000/proxy/beacon/t/01fae8d9-ce52-4b3e-a873-b87a871a4d94\n3,User3,01fae8d9-ce52-4b3e-a873-b87a871a4d94,b41bbba963c93d36f8b0081fba6780c495b9c963338540aba616770be0684666,http://127.0.0.1:8000/proxy/beacon/t/01fae8d9-ce52-4b3e-a873-b87a871a4d94\n4,User4,01fae8d9-ce52-4b3e-a873-b87a871a4d94,b41bbba963c93d36f8b0081fba6780c495b9c963338540aba616770be0684666,http://127.0.0.1:8000/proxy/beacon/t/01fae8d9-ce52-4b3e-a873-b87a871a4d94\n5,User5,01fae8d9-ce52-4b3e-a873-b87a871a4d94,b41bbba963c93d36f8b0081fba6780c495b9c963338540aba616770be0684666,http://127.0.0.1:8000/proxy/beacon/t/01fae8d9-ce52-4b3e-a873-b87a871a4d94\n",
+  "deception_used": false,
+  "timings": {
+    "total_ms": 318.97,
+    "upstream_ms": 301.03
+  },
+  "decision_action": "allow",
+  "status_code_effective": 200,
+  "status_code_outer": 200
+}  source=console
+INFO[0001] DEBUG normal_users keys=decision_action,reason_detail,status_code_inner,body,risk_score,risk_level,deception_used,deception_reason,reason_codes,status_code_effective,status_code_outer,status_code,headers,timings eff=200 http=200  source=console
+INFO[0001] DEBUG normal_users json={                                                                                                                                         
+  "status_code": 200,                                                                                                                                                        
+  "headers": {                                                                                                                                                               
+    "server": "uvicorn",
+    "content-length": "48",
+    "X-Export-Id": "b0b5368e-38e7-451a-85ca-da94ece671df",
+    "X-Beacon-Url": "http://127.0.0.1:8000/proxy/beacon/t/5e8eeb96-1ea0-43b7-8869-493607e57297",
+    "X-Risk-Level": "low",
+    "date": "Fri, 02 Jan 2026 06:20:44 GMT",
+    "content-type": "text/csv; charset=utf-8",
+    "X-Trace-Id": "5e8eeb96-1ea0-43b7-8869-493607e57297",
+    "X-Trace-Sig": "eb470ea64ded1d562027eb9130f38397086888ac661fc2295ec60ab5c89e8327"
+  },
+  "timings": {
+    "total_ms": 153.53,
+    "upstream_ms": 138.58
+  },
+  "decision_action": "allow",
+  "reason_detail": {
+    "error": null,
+    "decision_action": "allow",
+    "effective_status": 200,
+    "risk_score": 10.601167297363281,
+    "behavior_level": "low",
+    "tone_reason": null,
+    "action_raw": "allow",
+    "next_action": null,
+    "risk_level": "low",
+    "behavior_score": 35
+  },
+  "status_code_inner": 200,
+  "body": "# trace_id=5e8eeb96-1ea0-43b7-8869-493607e57297 trace_sig=eb470ea64ded1d562027eb9130f38397086888ac661fc2295ec60ab5c89e8327 export_id=b0b5368e-38e7-451a-85ca-da94ece671df tenant_id=org-1 beacon=http://127.0.0.1:8000/proxy/beacon/t/5e8eeb96-1ea0-43b7-8869-493607e57297\nid,name,_trace_id,_trace_sig,_beacon\n1,User1,5e8eeb96-1ea0-43b7-8869-493607e57297,eb470ea64ded1d562027eb9130f38397086888ac661fc2295ec60ab5c89e8327,http://127.0.0.1:8000/proxy/beacon/t/5e8eeb96-1ea0-43b7-8869-493607e57297\n2,User2,5e8eeb96-1ea0-43b7-8869-493607e57297,eb470ea64ded1d562027eb9130f38397086888ac661fc2295ec60ab5c89e8327,http://127.0.0.1:8000/proxy/beacon/t/5e8eeb96-1ea0-43b7-8869-493607e57297\n3,User3,5e8eeb96-1ea0-43b7-8869-493607e57297,eb470ea64ded1d562027eb9130f38397086888ac661fc2295ec60ab5c89e8327,http://127.0.0.1:8000/proxy/beacon/t/5e8eeb96-1ea0-43b7-8869-493607e57297\n4,User4,5e8eeb96-1ea0-43b7-8869-493607e57297,eb470ea64ded1d562027eb9130f38397086888ac661fc2295ec60ab5c89e8327,http://127.0.0.1:8000/proxy/beacon/t/5e8eeb96-1ea0-43b7-8869-493607e57297\n5,User5,5e8eeb96-1ea0-43b7-8869-493607e57297,eb470ea64ded1d562027eb9130f38397086888ac661fc2295ec60ab5c89e8327,http://127.0.0.1:8000/proxy/beacon/t/5e8eeb96-1ea0-43b7-8869-493607e57297\n",
+  "risk_score": 10.601167297363281,
+  "risk_level": "low",
+  "deception_used": false,
+  "deception_reason": null,
+  "reason_codes": [
+    "decision_allow"
+  ],
+  "status_code_effective": 200,
+  "status_code_outer": 200
+}  source=console
+INFO[0001] DEBUG normal_users keys=body,deception_reason,timings,decision_action,reason_codes,status_code_effective,status_code_inner,status_code,headers,risk_score,risk_level,deception_used,reason_detail,status_code_outer eff=200 http=200  source=console
+INFO[0001] DEBUG normal_users json={                                                                                                                                         
+  "reason_codes": [                                                                                                                                                          
+    "decision_allow"                                                                                                                                                         
+  ],
+  "status_code_effective": 200,
+  "status_code_inner": 200,
+  "status_code": 200,
+  "headers": {
+    "date": "Fri, 02 Jan 2026 06:20:44 GMT",
+    "server": "uvicorn",
+    "content-type": "text/csv; charset=utf-8",
+    "X-Export-Id": "0c4132c8-5530-4cb8-981f-05992ece880c",
+    "X-Risk-Level": "low",
+    "content-length": "48",
+    "X-Trace-Id": "257ca4a2-35d8-4252-9aa8-8308a4b7a70b",
+    "X-Trace-Sig": "43989b6297e08a360b634d675559e6628e890cf99e19d00153edaaad3213d078",
+    "X-Beacon-Url": "http://127.0.0.1:8000/proxy/beacon/t/257ca4a2-35d8-4252-9aa8-8308a4b7a70b"
+  },
+  "risk_score": 10.601167297363281,
+  "risk_level": "low",
+  "deception_used": false,
+  "reason_detail": {
+    "action_raw": "allow",
+    "error": null,
+    "decision_action": "allow",
+    "risk_level": "low",
+    "risk_score": 10.601167297363281,
+    "behavior_score": 35,
+    "tone_reason": null,
+    "next_action": null,
+    "effective_status": 200,
+    "behavior_level": "low"
+  },
+  "status_code_outer": 200,
+  "body": "# trace_id=257ca4a2-35d8-4252-9aa8-8308a4b7a70b trace_sig=43989b6297e08a360b634d675559e6628e890cf99e19d00153edaaad3213d078 export_id=0c4132c8-5530-4cb8-981f-05992ece880c tenant_id=org-2 beacon=http://127.0.0.1:8000/proxy/beacon/t/257ca4a2-35d8-4252-9aa8-8308a4b7a70b\nid,name,_trace_id,_trace_sig,_beacon\n1,User1,257ca4a2-35d8-4252-9aa8-8308a4b7a70b,43989b6297e08a360b634d675559e6628e890cf99e19d00153edaaad3213d078,http://127.0.0.1:8000/proxy/beacon/t/257ca4a2-35d8-4252-9aa8-8308a4b7a70b\n2,User2,257ca4a2-35d8-4252-9aa8-8308a4b7a70b,43989b6297e08a360b634d675559e6628e890cf99e19d00153edaaad3213d078,http://127.0.0.1:8000/proxy/beacon/t/257ca4a2-35d8-4252-9aa8-8308a4b7a70b\n3,User3,257ca4a2-35d8-4252-9aa8-8308a4b7a70b,43989b6297e08a360b634d675559e6628e890cf99e19d00153edaaad3213d078,http://127.0.0.1:8000/proxy/beacon/t/257ca4a2-35d8-4252-9aa8-8308a4b7a70b\n4,User4,257ca4a2-35d8-4252-9aa8-8308a4b7a70b,43989b6297e08a360b634d675559e6628e890cf99e19d00153edaaad3213d078,http://127.0.0.1:8000/proxy/beacon/t/257ca4a2-35d8-4252-9aa8-8308a4b7a70b\n5,User5,257ca4a2-35d8-4252-9aa8-8308a4b7a70b,43989b6297e08a360b634d675559e6628e890cf99e19d00153edaaad3213d078,http://127.0.0.1:8000/proxy/beacon/t/257ca4a2-35d8-4252-9aa8-8308a4b7a70b\n",
+  "deception_reason": null,
+  "timings": {
+    "upstream_ms": 229.35,
+    "total_ms": 242.58
+  },
+  "decision_action": "allow"
+}  source=console
+INFO[0001] DEBUG normal_users keys=status_code_outer,status_code_inner,status_code,headers,body,risk_score,risk_level,deception_used,decision_action,reason_codes,deception_reason,timings,reason_detail,status_code_effective eff=200 http=200  source=console
+INFO[0001] DEBUG normal_users json={                                                                                                                                         
+  "status_code": 200,                                                                                                                                                        
+  "headers": {                                                                                                                                                               
+    "content-type": "text/csv; charset=utf-8",
+    "X-Trace-Id": "0f724672-7582-422c-9232-1668faf0fede",
+    "X-Beacon-Url": "http://127.0.0.1:8000/proxy/beacon/t/0f724672-7582-422c-9232-1668faf0fede",
+    "content-length": "48",
+    "X-Export-Id": "cfa1b217-9c5e-4829-bccf-0b05b3c68bc5",
+    "X-Trace-Sig": "3ec8bd6d098f2c03658da865b78bd39eb219d71728afe228017dab6f39fca04f",
+    "X-Risk-Level": "low",
+    "date": "Fri, 02 Jan 2026 06:20:45 GMT",
+    "server": "uvicorn"
+  },
+  "body": "# trace_id=0f724672-7582-422c-9232-1668faf0fede trace_sig=3ec8bd6d098f2c03658da865b78bd39eb219d71728afe228017dab6f39fca04f export_id=cfa1b217-9c5e-4829-bccf-0b05b3c68bc5 tenant_id=org-3 beacon=http://127.0.0.1:8000/proxy/beacon/t/0f724672-7582-422c-9232-1668faf0fede\nid,name,_trace_id,_trace_sig,_beacon\n1,User1,0f724672-7582-422c-9232-1668faf0fede,3ec8bd6d098f2c03658da865b78bd39eb219d71728afe228017dab6f39fca04f,http://127.0.0.1:8000/proxy/beacon/t/0f724672-7582-422c-9232-1668faf0fede\n2,User2,0f724672-7582-422c-9232-1668faf0fede,3ec8bd6d098f2c03658da865b78bd39eb219d71728afe228017dab6f39fca04f,http://127.0.0.1:8000/proxy/beacon/t/0f724672-7582-422c-9232-1668faf0fede\n3,User3,0f724672-7582-422c-9232-1668faf0fede,3ec8bd6d098f2c03658da865b78bd39eb219d71728afe228017dab6f39fca04f,http://127.0.0.1:8000/proxy/beacon/t/0f724672-7582-422c-9232-1668faf0fede\n4,User4,0f724672-7582-422c-9232-1668faf0fede,3ec8bd6d098f2c03658da865b78bd39eb219d71728afe228017dab6f39fca04f,http://127.0.0.1:8000/proxy/beacon/t/0f724672-7582-422c-9232-1668faf0fede\n5,User5,0f724672-7582-422c-9232-1668faf0fede,3ec8bd6d098f2c03658da865b78bd39eb219d71728afe228017dab6f39fca04f,http://127.0.0.1:8000/proxy/beacon/t/0f724672-7582-422c-9232-1668faf0fede\n",
+  "risk_score": 10.601167297363281,
+  "risk_level": "low",
+  "deception_used": false,
+  "decision_action": "allow",
+  "reason_codes": [
+    "decision_allow"
+  ],
+  "deception_reason": null,
+  "timings": {
+    "upstream_ms": 180.53,
+    "total_ms": 198.72
+  },
+  "reason_detail": {
+    "risk_score": 10.601167297363281,
+    "action_raw": "allow",
+    "next_action": null,
+    "decision_action": "allow",
+    "effective_status": 200,
+    "behavior_level": "low",
+    "behavior_score": 35,
+    "tone_reason": null,
+    "error": null,
+    "risk_level": "low"
+  },
+  "status_code_effective": 200,
+  "status_code_outer": 200,
+  "status_code_inner": 200
+}  source=console
+INFO[0001] DEBUG normal_users keys=headers,body,deception_reason,timings,status_code_effective,status_code_outer,status_code,risk_score,risk_level,deception_used,decision_action,reason_codes,reason_detail,status_code_inner eff=200 http=200  source=console
+INFO[0001] DEBUG normal_users json={                                                                                                                                         
+  "timings": {                                                                                                                                                               
+    "upstream_ms": 178.96,                                                                                                                                                   
+    "total_ms": 194.06
+  },
+  "status_code_effective": 200,
+  "status_code_outer": 200,
+  "status_code": 200,
+  "risk_score": 10.601167297363281,
+  "risk_level": "low",
+  "deception_used": false,
+  "decision_action": "allow",
+  "reason_codes": [
+    "decision_allow"
+  ],
+  "reason_detail": {
+    "tone_reason": null,
+    "action_raw": "allow",
+    "next_action": null,
+    "decision_action": "allow",
+    "effective_status": 200,
+    "risk_score": 10.601167297363281,
+    "error": null,
+    "risk_level": "low",
+    "behavior_level": "low",
+    "behavior_score": 35
+  },
+  "status_code_inner": 200,
+  "headers": {
+    "date": "Fri, 02 Jan 2026 06:20:45 GMT",
+    "content-length": "48",
+    "X-Export-Id": "bffc1f21-5173-4a1e-87cb-ec6b0f07a877",
+    "X-Trace-Id": "a77a3fa9-54e0-45de-b5ad-206974675611",
+    "server": "uvicorn",
+    "content-type": "text/csv; charset=utf-8",
+    "X-Trace-Sig": "8892755861532e24b968951972d02dea8c1bcc286e510973b18f6da6ffc3e990",
+    "X-Beacon-Url": "http://127.0.0.1:8000/proxy/beacon/t/a77a3fa9-54e0-45de-b5ad-206974675611",
+    "X-Risk-Level": "low"
+  },
+  "body": "# trace_id=a77a3fa9-54e0-45de-b5ad-206974675611 trace_sig=8892755861532e24b968951972d02dea8c1bcc286e510973b18f6da6ffc3e990 export_id=bffc1f21-5173-4a1e-87cb-ec6b0f07a877 tenant_id=org-1 beacon=http://127.0.0.1:8000/proxy/beacon/t/a77a3fa9-54e0-45de-b5ad-206974675611\nid,name,_trace_id,_trace_sig,_beacon\n1,User1,a77a3fa9-54e0-45de-b5ad-206974675611,8892755861532e24b968951972d02dea8c1bcc286e510973b18f6da6ffc3e990,http://127.0.0.1:8000/proxy/beacon/t/a77a3fa9-54e0-45de-b5ad-206974675611\n2,User2,a77a3fa9-54e0-45de-b5ad-206974675611,8892755861532e24b968951972d02dea8c1bcc286e510973b18f6da6ffc3e990,http://127.0.0.1:8000/proxy/beacon/t/a77a3fa9-54e0-45de-b5ad-206974675611\n3,User3,a77a3fa9-54e0-45de-b5ad-206974675611,8892755861532e24b968951972d02dea8c1bcc286e510973b18f6da6ffc3e990,http://127.0.0.1:8000/proxy/beacon/t/a77a3fa9-54e0-45de-b5ad-206974675611\n4,User4,a77a3fa9-54e0-45de-b5ad-206974675611,8892755861532e24b968951972d02dea8c1bcc286e510973b18f6da6ffc3e990,http://127.0.0.1:8000/proxy/beacon/t/a77a3fa9-54e0-45de-b5ad-206974675611\n5,User5,a77a3fa9-54e0-45de-b5ad-206974675611,8892755861532e24b968951972d02dea8c1bcc286e510973b18f6da6ffc3e990,http://127.0.0.1:8000/proxy/beacon/t/a77a3fa9-54e0-45de-b5ad-206974675611\n",
+  "deception_reason": null
+}  source=console
+INFO[0001] DEBUG normal_users keys=reason_detail,status_code_outer,status_code,headers,risk_score,decision_action,status_code_effective,status_code_inner,body,risk_level,deception_used,deception_reason,timings,reason_codes eff=200 http=200  source=console
+INFO[0001] DEBUG normal_users json={                                                                                                                                         
+  "status_code_inner": 200,                                                                                                                                                  
+  "body": "# trace_id=4475dbbd-02d9-487e-bfee-df0cfcf22c5c trace_sig=95748765cea96f06cdef1eb3bccc32b323c6d2e1aefe512ab14c609f56f49c3a export_id=647f1dfb-92f0-4fe3-baac-e89f4fef0ca3 tenant_id=org-1 beacon=http://127.0.0.1:8000/proxy/beacon/t/4475dbbd-02d9-487e-bfee-df0cfcf22c5c\nid,name,_trace_id,_trace_sig,_beacon\n1,User1,4475dbbd-02d9-487e-bfee-df0cfcf22c5c,95748765cea96f06cdef1eb3bccc32b323c6d2e1aefe512ab14c609f56f49c3a,http://127.0.0.1:8000/proxy/beacon/t/4475dbbd-02d9-487e-bfee-df0cfcf22c5c\n2,User2,4475dbbd-02d9-487e-bfee-df0cfcf22c5c,95748765cea96f06cdef1eb3bccc32b323c6d2e1aefe512ab14c609f56f49c3a,http://127.0.0.1:8000/proxy/beacon/t/4475dbbd-02d9-487e-bfee-df0cfcf22c5c\n3,User3,4475dbbd-02d9-487e-bfee-df0cfcf22c5c,95748765cea96f06cdef1eb3bccc32b323c6d2e1aefe512ab14c609f56f49c3a,http://127.0.0.1:8000/proxy/beacon/t/4475dbbd-02d9-487e-bfee-df0cfcf22c5c\n4,User4,4475dbbd-02d9-487e-bfee-df0cfcf22c5c,95748765cea96f06cdef1eb3bccc32b323c6d2e1aefe512ab14c609f56f49c3a,http://127.0.0.1:8000/proxy/beacon/t/4475dbbd-02d9-487e-bfee-df0cfcf22c5c\n5,User5,4475dbbd-02d9-487e-bfee-df0cfcf22c5c,95748765cea96f06cdef1eb3bccc32b323c6d2e1aefe512ab14c609f56f49c3a,http://127.0.0.1:8000/proxy/beacon/t/4475dbbd-02d9-487e-bfee-df0cfcf22c5c\n",
+  "risk_level": "low",
+  "deception_used": false,
+  "deception_reason": null,
+  "timings": {
+    "upstream_ms": 96.53,
+    "total_ms": 121.52
+  },
+  "reason_codes": [
+    "decision_allow"
+  ],
+  "reason_detail": {
+    "error": null,
+    "next_action": null,
+    "decision_action": "allow",
+    "effective_status": 200,
+    "behavior_level": "low",
+    "action_raw": "allow",
+    "risk_level": "low",
+    "risk_score": 10.601167297363281,
+    "behavior_score": 35,
+    "tone_reason": null
+  },
+  "status_code_outer": 200,
+  "status_code": 200,
+  "headers": {
+    "content-type": "text/csv; charset=utf-8",
+    "X-Trace-Id": "4475dbbd-02d9-487e-bfee-df0cfcf22c5c",
+    "server": "uvicorn",
+    "content-length": "48",
+    "X-Export-Id": "647f1dfb-92f0-4fe3-baac-e89f4fef0ca3",
+    "X-Trace-Sig": "95748765cea96f06cdef1eb3bccc32b323c6d2e1aefe512ab14c609f56f49c3a",
+    "X-Beacon-Url": "http://127.0.0.1:8000/proxy/beacon/t/4475dbbd-02d9-487e-bfee-df0cfcf22c5c",
+    "X-Risk-Level": "low",
+    "date": "Fri, 02 Jan 2026 06:20:45 GMT"
+  },
+  "risk_score": 10.601167297363281,
+  "decision_action": "allow",
+  "status_code_effective": 200
+}  source=console
+INFO[0002] DEBUG normal_users keys=headers,risk_score,decision_action,status_code_effective,status_code_outer,status_code_inner,body,risk_level,deception_used,deception_reason,timings,reason_codes,reason_detail,status_code eff=200 http=200  source=console
+INFO[0002] DEBUG normal_users json={                                                                                                                                         
+  "decision_action": "allow",                                                                                                                                                
+  "status_code_effective": 200,                                                                                                                                              
+  "status_code_outer": 200,
+  "status_code_inner": 200,
+  "body": "# trace_id=86dd705c-97b6-4701-9cd4-11d7ff87b9bc trace_sig=b8a5993e770030eefa50a7d731d92a864454100766582b8aad470f89b9505907 export_id=566ab747-7f29-426e-90e1-fb38c0865ae6 tenant_id=org-3 beacon=http://127.0.0.1:8000/proxy/beacon/t/86dd705c-97b6-4701-9cd4-11d7ff87b9bc\nid,name,_trace_id,_trace_sig,_beacon\n1,User1,86dd705c-97b6-4701-9cd4-11d7ff87b9bc,b8a5993e770030eefa50a7d731d92a864454100766582b8aad470f89b9505907,http://127.0.0.1:8000/proxy/beacon/t/86dd705c-97b6-4701-9cd4-11d7ff87b9bc\n2,User2,86dd705c-97b6-4701-9cd4-11d7ff87b9bc,b8a5993e770030eefa50a7d731d92a864454100766582b8aad470f89b9505907,http://127.0.0.1:8000/proxy/beacon/t/86dd705c-97b6-4701-9cd4-11d7ff87b9bc\n3,User3,86dd705c-97b6-4701-9cd4-11d7ff87b9bc,b8a5993e770030eefa50a7d731d92a864454100766582b8aad470f89b9505907,http://127.0.0.1:8000/proxy/beacon/t/86dd705c-97b6-4701-9cd4-11d7ff87b9bc\n4,User4,86dd705c-97b6-4701-9cd4-11d7ff87b9bc,b8a5993e770030eefa50a7d731d92a864454100766582b8aad470f89b9505907,http://127.0.0.1:8000/proxy/beacon/t/86dd705c-97b6-4701-9cd4-11d7ff87b9bc\n5,User5,86dd705c-97b6-4701-9cd4-11d7ff87b9bc,b8a5993e770030eefa50a7d731d92a864454100766582b8aad470f89b9505907,http://127.0.0.1:8000/proxy/beacon/t/86dd705c-97b6-4701-9cd4-11d7ff87b9bc\n",
+  "risk_level": "low",
+  "deception_used": false,
+  "deception_reason": null,
+  "timings": {
+    "upstream_ms": 117.15,
+    "total_ms": 134.76
+  },
+  "reason_codes": [
+    "decision_allow"
+  ],
+  "reason_detail": {
+    "risk_score": 10.601167297363281,
+    "behavior_score": 35,
+    "action_raw": "allow",
+    "next_action": null,
+    "decision_action": "allow",
+    "effective_status": 200,
+    "risk_level": "low",
+    "behavior_level": "low",
+    "tone_reason": null,
+    "error": null
+  },
+  "status_code": 200,
+  "headers": {
+    "date": "Fri, 02 Jan 2026 06:20:45 GMT",
+    "content-length": "48",
+    "content-type": "text/csv; charset=utf-8",
+    "X-Trace-Id": "86dd705c-97b6-4701-9cd4-11d7ff87b9bc",
+    "server": "uvicorn",
+    "X-Export-Id": "566ab747-7f29-426e-90e1-fb38c0865ae6",
+    "X-Trace-Sig": "b8a5993e770030eefa50a7d731d92a864454100766582b8aad470f89b9505907",
+    "X-Beacon-Url": "http://127.0.0.1:8000/proxy/beacon/t/86dd705c-97b6-4701-9cd4-11d7ff87b9bc",
+    "X-Risk-Level": "low"
+  },
+  "risk_score": 10.601167297363281
+}  source=console
+INFO[0002] DEBUG normal_users keys=decision_action,reason_codes,status_code_outer,status_code_inner,status_code,headers,body,risk_level,timings,reason_detail,status_code_effective,risk_score,deception_used,deception_reason eff=200 http=200  source=console
+INFO[0002] DEBUG normal_users json={                                                                                                                                         
+  "risk_score": 10.601167297363281,                                                                                                                                          
+  "deception_used": false,                                                                                                                                                   
+  "deception_reason": null,
+  "decision_action": "allow",
+  "reason_codes": [
+    "decision_allow"
+  ],
+  "status_code_outer": 200,
+  "status_code_inner": 200,
+  "status_code": 200,
+  "headers": {
+    "content-type": "text/csv; charset=utf-8",
+    "X-Trace-Id": "4501dda7-7f7c-452a-bc04-5b0559fec10f",
+    "X-Trace-Sig": "f1279c215e01f33a4b9029445d0dccb7364034da2bf4b1000b6391585a5af76b",
+    "X-Beacon-Url": "http://127.0.0.1:8000/proxy/beacon/t/4501dda7-7f7c-452a-bc04-5b0559fec10f",
+    "content-length": "48",
+    "X-Export-Id": "d930f798-2156-406f-9b60-23b56e7a9b87",
+    "X-Risk-Level": "low",
+    "date": "Fri, 02 Jan 2026 06:20:45 GMT",
+    "server": "uvicorn"
+  },
+  "body": "# trace_id=4501dda7-7f7c-452a-bc04-5b0559fec10f trace_sig=f1279c215e01f33a4b9029445d0dccb7364034da2bf4b1000b6391585a5af76b export_id=d930f798-2156-406f-9b60-23b56e7a9b87 tenant_id=org-2 beacon=http://127.0.0.1:8000/proxy/beacon/t/4501dda7-7f7c-452a-bc04-5b0559fec10f\nid,name,_trace_id,_trace_sig,_beacon\n1,User1,4501dda7-7f7c-452a-bc04-5b0559fec10f,f1279c215e01f33a4b9029445d0dccb7364034da2bf4b1000b6391585a5af76b,http://127.0.0.1:8000/proxy/beacon/t/4501dda7-7f7c-452a-bc04-5b0559fec10f\n2,User2,4501dda7-7f7c-452a-bc04-5b0559fec10f,f1279c215e01f33a4b9029445d0dccb7364034da2bf4b1000b6391585a5af76b,http://127.0.0.1:8000/proxy/beacon/t/4501dda7-7f7c-452a-bc04-5b0559fec10f\n3,User3,4501dda7-7f7c-452a-bc04-5b0559fec10f,f1279c215e01f33a4b9029445d0dccb7364034da2bf4b1000b6391585a5af76b,http://127.0.0.1:8000/proxy/beacon/t/4501dda7-7f7c-452a-bc04-5b0559fec10f\n4,User4,4501dda7-7f7c-452a-bc04-5b0559fec10f,f1279c215e01f33a4b9029445d0dccb7364034da2bf4b1000b6391585a5af76b,http://127.0.0.1:8000/proxy/beacon/t/4501dda7-7f7c-452a-bc04-5b0559fec10f\n5,User5,4501dda7-7f7c-452a-bc04-5b0559fec10f,f1279c215e01f33a4b9029445d0dccb7364034da2bf4b1000b6391585a5af76b,http://127.0.0.1:8000/proxy/beacon/t/4501dda7-7f7c-452a-bc04-5b0559fec10f\n",
+  "risk_level": "low",
+  "timings": {
+    "upstream_ms": 78.62,
+    "total_ms": 108.86
+  },
+  "reason_detail": {
+    "behavior_score": 35,
+    "action_raw": "allow",
+    "next_action": null,
+    "risk_level": "low",
+    "behavior_level": "low",
+    "tone_reason": null,
+    "error": null,
+    "decision_action": "allow",
+    "effective_status": 200,
+    "risk_score": 10.601167297363281
+  },
+  "status_code_effective": 200
+}  source=console
+INFO[0002] DEBUG normal_users keys=deception_reason,status_code_effective,status_code_outer,status_code_inner,status_code,headers,risk_level,timings,decision_action,reason_codes,reason_detail,body,risk_score,deception_used eff=200 http=200  source=console
+INFO[0002] DEBUG normal_users json={                                                                                                                                         
+  "reason_detail": {                                                                                                                                                         
+    "error": null,                                                                                                                                                           
+    "decision_action": "allow",
+    "effective_status": 200,
+    "behavior_score": 35,
+    "action_raw": "allow",
+    "next_action": null,
+    "risk_level": "low",
+    "risk_score": 10.601167297363281,
+    "behavior_level": "low",
+    "tone_reason": null
+  },
+  "body": "# trace_id=e0116631-50a4-483b-ad66-213f8af2f1fd trace_sig=fa936fae931c5c999dcd7e85cf30c9000e80eafed9395d38d48ad0c28c51fb08 export_id=3a1d88f9-da38-4a68-b3d0-d7da985dedcc tenant_id=org-2 beacon=http://127.0.0.1:8000/proxy/beacon/t/e0116631-50a4-483b-ad66-213f8af2f1fd\nid,name,_trace_id,_trace_sig,_beacon\n1,User1,e0116631-50a4-483b-ad66-213f8af2f1fd,fa936fae931c5c999dcd7e85cf30c9000e80eafed9395d38d48ad0c28c51fb08,http://127.0.0.1:8000/proxy/beacon/t/e0116631-50a4-483b-ad66-213f8af2f1fd\n2,User2,e0116631-50a4-483b-ad66-213f8af2f1fd,fa936fae931c5c999dcd7e85cf30c9000e80eafed9395d38d48ad0c28c51fb08,http://127.0.0.1:8000/proxy/beacon/t/e0116631-50a4-483b-ad66-213f8af2f1fd\n3,User3,e0116631-50a4-483b-ad66-213f8af2f1fd,fa936fae931c5c999dcd7e85cf30c9000e80eafed9395d38d48ad0c28c51fb08,http://127.0.0.1:8000/proxy/beacon/t/e0116631-50a4-483b-ad66-213f8af2f1fd\n4,User4,e0116631-50a4-483b-ad66-213f8af2f1fd,fa936fae931c5c999dcd7e85cf30c9000e80eafed9395d38d48ad0c28c51fb08,http://127.0.0.1:8000/proxy/beacon/t/e0116631-50a4-483b-ad66-213f8af2f1fd\n5,User5,e0116631-50a4-483b-ad66-213f8af2f1fd,fa936fae931c5c999dcd7e85cf30c9000e80eafed9395d38d48ad0c28c51fb08,http://127.0.0.1:8000/proxy/beacon/t/e0116631-50a4-483b-ad66-213f8af2f1fd\n",
+  "risk_score": 10.601167297363281,
+  "deception_used": false,
+  "deception_reason": null,
+  "status_code_effective": 200,
+  "status_code_outer": 200,
+  "status_code_inner": 200,
+  "status_code": 200,
+  "headers": {
+    "content-type": "text/csv; charset=utf-8",
+    "X-Trace-Sig": "fa936fae931c5c999dcd7e85cf30c9000e80eafed9395d38d48ad0c28c51fb08",
+    "X-Beacon-Url": "http://127.0.0.1:8000/proxy/beacon/t/e0116631-50a4-483b-ad66-213f8af2f1fd",
+    "X-Risk-Level": "low",
+    "X-Export-Id": "3a1d88f9-da38-4a68-b3d0-d7da985dedcc",
+    "X-Trace-Id": "e0116631-50a4-483b-ad66-213f8af2f1fd",
+    "date": "Fri, 02 Jan 2026 06:20:45 GMT",
+    "server": "uvicorn",
+    "content-length": "48"
+  },
+  "risk_level": "low",
+  "timings": {
+    "total_ms": 116.38,
+    "upstream_ms": 105.14
+  },
+  "decision_action": "allow",
+  "reason_codes": [
+    "decision_allow"
+  ]
+}  source=console
+
+
+  █ THRESHOLDS
+
+    http_req_duration{scenario:huge_with_stepup}
+    ✓ 'p(95)<3000' p(95)=0s
+
+    http_req_duration{scenario:huge_without_stepup}
+    ✓ 'p(95)<3000' p(95)=0s
+
+    http_req_duration{scenario:normal_users}
+    ✓ 'p(95)<1500' p(95)=931.15ms
+
+
+  █ TOTAL RESULTS
+
+    checks_total.......: 480     15.652131/s
+    checks_succeeded...: 100.00% 480 out of 480
+    checks_failed......: 0.00%   0 out of 480
+
+    ✓ normal: allowed (effective 200)
+    ✓ normal: csv-ish
+
+    HTTP
+    http_req_duration....................: avg=437.04ms min=28.8ms  med=388.4ms  max=1.55s p(90)=649.66ms p(95)=931.15ms
+      { expected_response:true }.........: avg=437.04ms min=28.8ms  med=388.4ms  max=1.55s p(90)=649.66ms p(95)=931.15ms
+      { scenario:huge_with_stepup }......: avg=0s       min=0s      med=0s       max=0s    p(90)=0s       p(95)=0s
+      { scenario:huge_without_stepup }...: avg=0s       min=0s      med=0s       max=0s    p(90)=0s       p(95)=0s
+      { scenario:normal_users }..........: avg=437.04ms min=28.8ms  med=388.4ms  max=1.55s p(90)=649.66ms p(95)=931.15ms
+    http_req_failed......................: 0.00%  0 out of 445
+    http_reqs............................: 445    14.51083/s
+
+    EXECUTION
+    iteration_duration...................: avg=1.01s    min=456.5ms med=921.98ms max=3.69s p(90)=1.35s    p(95)=1.85s
+    iterations...........................: 240    7.826066/s
+    vus..................................: 8      min=8        max=8
+    vus_max..............................: 8      min=8        max=8
+
+    NETWORK
+    data_received........................: 690 kB 23 kB/s
+    data_sent............................: 192 kB 6.3 kB/s
+
+
+
+                                                                                                                                                                             
+running (0m30.7s), 0/8 VUs, 240 complete and 0 interrupted iterations                                                                                                        
+normal_users ✓ [======================================] 8 VUs  30s    
+
+Run 4:
+(base) PS C:\Cybersecurity\cyber-sidecar> $env:SIDECAR_BASE="http://127.0.0.1:8085"
+>> $env:SIDECAR_FORCE_ACTION="honeypot"
+>> $env:SCENARIOS="normal_users"
+>> k6 run .\k6.v5.js
+>> Remove-Item Env:\SIDECAR_FORCE_ACTION
+>>
+
+         /\      Grafana   /‾‾/  
+    /\  /  \     |\  __   /  /   
+   /  \/    \    | |/ /  /   ‾‾\ 
+  /          \   |   (  |  (‾)  |
+ / __________ \  |_|\_\  \_____/ 
+
+     execution: local
+        script: .\k6.v5.js
+        output: -
+
+     scenarios: (100.00%) 1 scenario, 8 max VUs, 1m0s max duration (incl. graceful stop):
+              * normal_users: 8 looping VUs for 30s (exec: normalUsers, gracefulStop: 30s)
+
+INFO[0000] DEBUG normal_users keys=headers,body,risk_score,decision_action,reason_codes,status_code_effective,status_code_outer,status_code,risk_level,deception_used,deception_reason,timings,reason_detail,status_code_inner eff=200 http=200  source=console
+INFO[0000] DEBUG normal_users keys=status_code_outer,headers,body,risk_level,deception_used,reason_codes,reason_detail,status_code_effective,status_code_inner,status_code,risk_score,deception_reason,timings,decision_action eff=200 http=200  source=console                                                                                           
+INFO[0000] DEBUG normal_users json={                                                                                                                                         
+  "reason_codes": [                                                                                                                                                          
+    "decision_allow"                                                                                                                                                         
+  ],
+  "reason_detail": {
+    "effective_status": 200,
+    "risk_level": "low",
+    "risk_score": 10.601167297363281,
+    "behavior_level": "low",
+    "tone_reason": null,
+    "error": null,
+    "behavior_score": 35,
+    "action_raw": "allow",
+    "next_action": null,
+    "decision_action": "allow"
+  },
+  "status_code_effective": 200,
+  "status_code_inner": 200,
+  "status_code": 200,
+  "risk_score": 10.601167297363281,
+  "deception_reason": null,
+  "timings": {
+    "upstream_ms": 176.13,
+    "total_ms": 187.49
+  },
+  "decision_action": "allow",
+  "status_code_outer": 200,
+  "headers": {
+    "date": "Fri, 02 Jan 2026 06:22:42 GMT",
+    "server": "uvicorn",
+    "content-type": "text/csv; charset=utf-8",
+    "X-Export-Id": "637f2e7e-7602-412e-b08e-ef3ec6ce1e1c",
+    "X-Trace-Id": "0e6d4fb6-7114-45b8-8fad-6d903b3e4d8e",
+    "content-length": "48",
+    "X-Trace-Sig": "eecdd68ce3ba52092403745be13c69939b24d51731c33c7fc542781791aa680d",
+    "X-Beacon-Url": "http://127.0.0.1:8000/proxy/beacon/t/0e6d4fb6-7114-45b8-8fad-6d903b3e4d8e",
+    "X-Risk-Level": "low"
+  },
+  "body": "# trace_id=0e6d4fb6-7114-45b8-8fad-6d903b3e4d8e trace_sig=eecdd68ce3ba52092403745be13c69939b24d51731c33c7fc542781791aa680d export_id=637f2e7e-7602-412e-b08e-ef3ec6ce1e1c tenant_id=org-3 beacon=http://127.0.0.1:8000/proxy/beacon/t/0e6d4fb6-7114-45b8-8fad-6d903b3e4d8e\nid,name,_trace_id,_trace_sig,_beacon\n1,User1,0e6d4fb6-7114-45b8-8fad-6d903b3e4d8e,eecdd68ce3ba52092403745be13c69939b24d51731c33c7fc542781791aa680d,http://127.0.0.1:8000/proxy/beacon/t/0e6d4fb6-7114-45b8-8fad-6d903b3e4d8e\n2,User2,0e6d4fb6-7114-45b8-8fad-6d903b3e4d8e,eecdd68ce3ba52092403745be13c69939b24d51731c33c7fc542781791aa680d,http://127.0.0.1:8000/proxy/beacon/t/0e6d4fb6-7114-45b8-8fad-6d903b3e4d8e\n3,User3,0e6d4fb6-7114-45b8-8fad-6d903b3e4d8e,eecdd68ce3ba52092403745be13c69939b24d51731c33c7fc542781791aa680d,http://127.0.0.1:8000/proxy/beacon/t/0e6d4fb6-7114-45b8-8fad-6d903b3e4d8e\n4,User4,0e6d4fb6-7114-45b8-8fad-6d903b3e4d8e,eecdd68ce3ba52092403745be13c69939b24d51731c33c7fc542781791aa680d,http://127.0.0.1:8000/proxy/beacon/t/0e6d4fb6-7114-45b8-8fad-6d903b3e4d8e\n5,User5,0e6d4fb6-7114-45b8-8fad-6d903b3e4d8e,eecdd68ce3ba52092403745be13c69939b24d51731c33c7fc542781791aa680d,http://127.0.0.1:8000/proxy/beacon/t/0e6d4fb6-7114-45b8-8fad-6d903b3e4d8e\n",
+  "risk_level": "low",
+  "deception_used": false
+}  source=console
+INFO[0000] DEBUG normal_users json={                                                                                                                                         
+  "decision_action": "allow",                                                                                                                                                
+  "reason_codes": [                                                                                                                                                          
+    "decision_allow"
+  ],
+  "status_code_effective": 200,
+  "status_code_outer": 200,
+  "status_code": 200,
+  "risk_level": "low",
+  "deception_used": false,
+  "deception_reason": null,
+  "timings": {
+    "upstream_ms": 247.4,
+    "total_ms": 287.37
+  },
+  "reason_detail": {
+    "tone_reason": null,
+    "action_raw": "allow",
+    "decision_action": "allow",
+    "risk_score": 10.601167297363281,
+    "behavior_level": "low",
+    "behavior_score": 35,
+    "error": null,
+    "next_action": null,
+    "effective_status": 200,
+    "risk_level": "low"
+  },
+  "status_code_inner": 200,
+  "headers": {
+    "date": "Fri, 02 Jan 2026 06:22:42 GMT",
+    "server": "uvicorn",
+    "content-length": "48",
+    "X-Export-Id": "f3a85753-e295-433f-949b-9c60c6401048",
+    "X-Trace-Id": "20552057-1bbe-49ac-8e67-5563e5cd1e8a",
+    "X-Beacon-Url": "http://127.0.0.1:8000/proxy/beacon/t/20552057-1bbe-49ac-8e67-5563e5cd1e8a",
+    "X-Risk-Level": "low",
+    "content-type": "text/csv; charset=utf-8",
+    "X-Trace-Sig": "70ce368619635ba244d6ec3d36021df894934ac3cf1e7dde54c52f30ca40275e"
+  },
+  "body": "# trace_id=20552057-1bbe-49ac-8e67-5563e5cd1e8a trace_sig=70ce368619635ba244d6ec3d36021df894934ac3cf1e7dde54c52f30ca40275e export_id=f3a85753-e295-433f-949b-9c60c6401048 tenant_id=org-3 beacon=http://127.0.0.1:8000/proxy/beacon/t/20552057-1bbe-49ac-8e67-5563e5cd1e8a\nid,name,_trace_id,_trace_sig,_beacon\n1,User1,20552057-1bbe-49ac-8e67-5563e5cd1e8a,70ce368619635ba244d6ec3d36021df894934ac3cf1e7dde54c52f30ca40275e,http://127.0.0.1:8000/proxy/beacon/t/20552057-1bbe-49ac-8e67-5563e5cd1e8a\n2,User2,20552057-1bbe-49ac-8e67-5563e5cd1e8a,70ce368619635ba244d6ec3d36021df894934ac3cf1e7dde54c52f30ca40275e,http://127.0.0.1:8000/proxy/beacon/t/20552057-1bbe-49ac-8e67-5563e5cd1e8a\n3,User3,20552057-1bbe-49ac-8e67-5563e5cd1e8a,70ce368619635ba244d6ec3d36021df894934ac3cf1e7dde54c52f30ca40275e,http://127.0.0.1:8000/proxy/beacon/t/20552057-1bbe-49ac-8e67-5563e5cd1e8a\n4,User4,20552057-1bbe-49ac-8e67-5563e5cd1e8a,70ce368619635ba244d6ec3d36021df894934ac3cf1e7dde54c52f30ca40275e,http://127.0.0.1:8000/proxy/beacon/t/20552057-1bbe-49ac-8e67-5563e5cd1e8a\n5,User5,20552057-1bbe-49ac-8e67-5563e5cd1e8a,70ce368619635ba244d6ec3d36021df894934ac3cf1e7dde54c52f30ca40275e,http://127.0.0.1:8000/proxy/beacon/t/20552057-1bbe-49ac-8e67-5563e5cd1e8a\n",
+  "risk_score": 10.601167297363281
+}  source=console
+INFO[0000] DEBUG normal_users keys=status_code,deception_used,deception_reason,timings,decision_action,reason_codes,reason_detail,status_code_inner,headers,body,risk_score,risk_level,status_code_effective,status_code_outer eff=200 http=200  source=console
+INFO[0000] DEBUG normal_users json={                                                                                                                                         
+  "timings": {                                                                                                                                                               
+    "upstream_ms": 352.16,                                                                                                                                                   
+    "total_ms": 373.74
+  },
+  "decision_action": "allow",
+  "reason_codes": [
+    "decision_allow"
+  ],
+  "reason_detail": {
+    "decision_action": "allow",
+    "risk_level": "low",
+    "risk_score": 10.601167297363281,
+    "behavior_level": "low",
+    "tone_reason": null,
+    "next_action": null,
+    "effective_status": 200,
+    "behavior_score": 35,
+    "action_raw": "allow",
+    "error": null
+  },
+  "status_code_inner": 200,
+  "headers": {
+    "X-Trace-Id": "f1cba107-24bf-4f05-87c7-c00d16920e27",
+    "X-Trace-Sig": "c75febe4c35d3371cf7213778e8acbcbaca5f42438a3c2ef2b937f43db889af4",
+    "X-Risk-Level": "low",
+    "server": "uvicorn",
+    "content-length": "48",
+    "X-Export-Id": "d111ed66-1c13-41e4-8282-ef07e0f44029",
+    "X-Beacon-Url": "http://127.0.0.1:8000/proxy/beacon/t/f1cba107-24bf-4f05-87c7-c00d16920e27",
+    "date": "Fri, 02 Jan 2026 06:22:42 GMT",
+    "content-type": "text/csv; charset=utf-8"
+  },
+  "body": "# trace_id=f1cba107-24bf-4f05-87c7-c00d16920e27 trace_sig=c75febe4c35d3371cf7213778e8acbcbaca5f42438a3c2ef2b937f43db889af4 export_id=d111ed66-1c13-41e4-8282-ef07e0f44029 tenant_id=org-1 beacon=http://127.0.0.1:8000/proxy/beacon/t/f1cba107-24bf-4f05-87c7-c00d16920e27\nid,name,_trace_id,_trace_sig,_beacon\n1,User1,f1cba107-24bf-4f05-87c7-c00d16920e27,c75febe4c35d3371cf7213778e8acbcbaca5f42438a3c2ef2b937f43db889af4,http://127.0.0.1:8000/proxy/beacon/t/f1cba107-24bf-4f05-87c7-c00d16920e27\n2,User2,f1cba107-24bf-4f05-87c7-c00d16920e27,c75febe4c35d3371cf7213778e8acbcbaca5f42438a3c2ef2b937f43db889af4,http://127.0.0.1:8000/proxy/beacon/t/f1cba107-24bf-4f05-87c7-c00d16920e27\n3,User3,f1cba107-24bf-4f05-87c7-c00d16920e27,c75febe4c35d3371cf7213778e8acbcbaca5f42438a3c2ef2b937f43db889af4,http://127.0.0.1:8000/proxy/beacon/t/f1cba107-24bf-4f05-87c7-c00d16920e27\n4,User4,f1cba107-24bf-4f05-87c7-c00d16920e27,c75febe4c35d3371cf7213778e8acbcbaca5f42438a3c2ef2b937f43db889af4,http://127.0.0.1:8000/proxy/beacon/t/f1cba107-24bf-4f05-87c7-c00d16920e27\n5,User5,f1cba107-24bf-4f05-87c7-c00d16920e27,c75febe4c35d3371cf7213778e8acbcbaca5f42438a3c2ef2b937f43db889af4,http://127.0.0.1:8000/proxy/beacon/t/f1cba107-24bf-4f05-87c7-c00d16920e27\n",
+  "risk_score": 10.601167297363281,
+  "risk_level": "low",
+  "status_code_effective": 200,
+  "status_code_outer": 200,
+  "status_code": 200,
+  "deception_used": false,
+  "deception_reason": null
+}  source=console
+INFO[0000] DEBUG normal_users keys=deception_reason,timings,reason_codes,status_code_effective,status_code,body,deception_used,decision_action,reason_detail,status_code_outer,status_code_inner,headers,risk_score,risk_level eff=200 http=200  source=console
+INFO[0000] DEBUG normal_users json={                                                                                                                                         
+  "headers": {                                                                                                                                                               
+    "content-type": "text/csv; charset=utf-8",                                                                                                                               
+    "date": "Fri, 02 Jan 2026 06:22:42 GMT",
+    "server": "uvicorn",
+    "X-Export-Id": "d95d09d3-012d-4c76-9a4e-929c38ff5afd",
+    "X-Trace-Id": "28c74dbb-b208-4da3-9e4f-dc1d618033cc",
+    "X-Trace-Sig": "af419f382246af554c837f0384d379ee9ffecb22969b9979feae4c23cd6d30cd",
+    "X-Beacon-Url": "http://127.0.0.1:8000/proxy/beacon/t/28c74dbb-b208-4da3-9e4f-dc1d618033cc",
+    "X-Risk-Level": "low",
+    "content-length": "48"
+  },
+  "risk_score": 10.601167297363281,
+  "risk_level": "low",
+  "deception_reason": null,
+  "timings": {
+    "upstream_ms": 490.66,
+    "total_ms": 501.98
+  },
+  "reason_codes": [
+    "decision_allow"
+  ],
+  "status_code_effective": 200,
+  "status_code": 200,
+  "body": "# trace_id=28c74dbb-b208-4da3-9e4f-dc1d618033cc trace_sig=af419f382246af554c837f0384d379ee9ffecb22969b9979feae4c23cd6d30cd export_id=d95d09d3-012d-4c76-9a4e-929c38ff5afd tenant_id=org-3 beacon=http://127.0.0.1:8000/proxy/beacon/t/28c74dbb-b208-4da3-9e4f-dc1d618033cc\nid,name,_trace_id,_trace_sig,_beacon\n1,User1,28c74dbb-b208-4da3-9e4f-dc1d618033cc,af419f382246af554c837f0384d379ee9ffecb22969b9979feae4c23cd6d30cd,http://127.0.0.1:8000/proxy/beacon/t/28c74dbb-b208-4da3-9e4f-dc1d618033cc\n2,User2,28c74dbb-b208-4da3-9e4f-dc1d618033cc,af419f382246af554c837f0384d379ee9ffecb22969b9979feae4c23cd6d30cd,http://127.0.0.1:8000/proxy/beacon/t/28c74dbb-b208-4da3-9e4f-dc1d618033cc\n3,User3,28c74dbb-b208-4da3-9e4f-dc1d618033cc,af419f382246af554c837f0384d379ee9ffecb22969b9979feae4c23cd6d30cd,http://127.0.0.1:8000/proxy/beacon/t/28c74dbb-b208-4da3-9e4f-dc1d618033cc\n4,User4,28c74dbb-b208-4da3-9e4f-dc1d618033cc,af419f382246af554c837f0384d379ee9ffecb22969b9979feae4c23cd6d30cd,http://127.0.0.1:8000/proxy/beacon/t/28c74dbb-b208-4da3-9e4f-dc1d618033cc\n5,User5,28c74dbb-b208-4da3-9e4f-dc1d618033cc,af419f382246af554c837f0384d379ee9ffecb22969b9979feae4c23cd6d30cd,http://127.0.0.1:8000/proxy/beacon/t/28c74dbb-b208-4da3-9e4f-dc1d618033cc\n",
+  "deception_used": false,
+  "decision_action": "allow",
+  "reason_detail": {
+    "behavior_score": 35,
+    "tone_reason": null,
+    "action_raw": "allow",
+    "decision_action": "allow",
+    "risk_level": "low",
+    "risk_score": 10.601167297363281,
+    "behavior_level": "low",
+    "error": null,
+    "next_action": null,
+    "effective_status": 200
+  },
+  "status_code_outer": 200,
+  "status_code_inner": 200
+}  source=console
+INFO[0001] DEBUG normal_users keys=deception_reason,timings,decision_action,deception_used,reason_codes,reason_detail,status_code_effective,status_code_outer,status_code_inner,status_code,headers,body,risk_score,risk_level eff=200 http=200  source=console
+INFO[0001] DEBUG normal_users json={                                                                                                                                         
+  "deception_used": false,                                                                                                                                                   
+  "reason_codes": [                                                                                                                                                          
+    "decision_allow"
+  ],
+  "reason_detail": {
+    "risk_score": 10.601167297363281,
+    "behavior_level": "low",
+    "behavior_score": 35,
+    "tone_reason": null,
+    "effective_status": 200,
+    "risk_level": "low",
+    "action_raw": "allow",
+    "error": null,
+    "next_action": null,
+    "decision_action": "allow"
+  },
+  "status_code_effective": 200,
+  "status_code_outer": 200,
+  "status_code_inner": 200,
+  "status_code": 200,
+  "headers": {
+    "date": "Fri, 02 Jan 2026 06:22:42 GMT",
+    "content-type": "text/csv; charset=utf-8",
+    "X-Export-Id": "7de7a4a9-cee0-40bc-ae32-9001b8fff030",
+    "X-Trace-Id": "297718fb-c003-4777-8439-c05718662931",
+    "server": "uvicorn",
+    "content-length": "48",
+    "X-Trace-Sig": "1cfa2db78e4c48ab8418a2428595ff6d499744d45a70f9667bf3f7a596015f44",
+    "X-Beacon-Url": "http://127.0.0.1:8000/proxy/beacon/t/297718fb-c003-4777-8439-c05718662931",
+    "X-Risk-Level": "low"
+  },
+  "body": "# trace_id=297718fb-c003-4777-8439-c05718662931 trace_sig=1cfa2db78e4c48ab8418a2428595ff6d499744d45a70f9667bf3f7a596015f44 export_id=7de7a4a9-cee0-40bc-ae32-9001b8fff030 tenant_id=org-1 beacon=http://127.0.0.1:8000/proxy/beacon/t/297718fb-c003-4777-8439-c05718662931\nid,name,_trace_id,_trace_sig,_beacon\n1,User1,297718fb-c003-4777-8439-c05718662931,1cfa2db78e4c48ab8418a2428595ff6d499744d45a70f9667bf3f7a596015f44,http://127.0.0.1:8000/proxy/beacon/t/297718fb-c003-4777-8439-c05718662931\n2,User2,297718fb-c003-4777-8439-c05718662931,1cfa2db78e4c48ab8418a2428595ff6d499744d45a70f9667bf3f7a596015f44,http://127.0.0.1:8000/proxy/beacon/t/297718fb-c003-4777-8439-c05718662931\n3,User3,297718fb-c003-4777-8439-c05718662931,1cfa2db78e4c48ab8418a2428595ff6d499744d45a70f9667bf3f7a596015f44,http://127.0.0.1:8000/proxy/beacon/t/297718fb-c003-4777-8439-c05718662931\n4,User4,297718fb-c003-4777-8439-c05718662931,1cfa2db78e4c48ab8418a2428595ff6d499744d45a70f9667bf3f7a596015f44,http://127.0.0.1:8000/proxy/beacon/t/297718fb-c003-4777-8439-c05718662931\n5,User5,297718fb-c003-4777-8439-c05718662931,1cfa2db78e4c48ab8418a2428595ff6d499744d45a70f9667bf3f7a596015f44,http://127.0.0.1:8000/proxy/beacon/t/297718fb-c003-4777-8439-c05718662931\n",
+  "risk_score": 10.601167297363281,
+  "risk_level": "low",
+  "deception_reason": null,
+  "timings": {
+    "upstream_ms": 567.63,
+    "total_ms": 603.7
+  },
+  "decision_action": "allow"
+}  source=console
+INFO[0001] DEBUG normal_users keys=timings,decision_action,reason_codes,reason_detail,status_code,headers,risk_level,status_code_effective,status_code_outer,status_code_inner,body,risk_score,deception_used,deception_reason eff=200 http=200  source=console                                                                                           
+INFO[0001] DEBUG normal_users json={                                                                                                                                         
+  "body": "# trace_id=78c7d04f-a937-4835-b0e3-beb718d4010c trace_sig=082e80f2c3c6a1c14338dc41edc0da0988f7c555d5786f4fa5fe5c4a90ee4e71 export_id=bdfbd1a1-4d50-49e3-8e52-5ede9c3c65a1 tenant_id=org-2 beacon=http://127.0.0.1:8000/proxy/beacon/t/78c7d04f-a937-4835-b0e3-beb718d4010c\nid,name,_trace_id,_trace_sig,_beacon\n1,User1,78c7d04f-a937-4835-b0e3-beb718d4010c,082e80f2c3c6a1c14338dc41edc0da0988f7c555d5786f4fa5fe5c4a90ee4e71,http://127.0.0.1:8000/proxy/beacon/t/78c7d04f-a937-4835-b0e3-beb718d4010c\n2,User2,78c7d04f-a937-4835-b0e3-beb718d4010c,082e80f2c3c6a1c14338dc41edc0da0988f7c555d5786f4fa5fe5c4a90ee4e71,http://127.0.0.1:8000/proxy/beacon/t/78c7d04f-a937-4835-b0e3-beb718d4010c\n3,User3,78c7d04f-a937-4835-b0e3-beb718d4010c,082e80f2c3c6a1c14338dc41edc0da0988f7c555d5786f4fa5fe5c4a90ee4e71,http://127.0.0.1:8000/proxy/beacon/t/78c7d04f-a937-4835-b0e3-beb718d4010c\n4,User4,78c7d04f-a937-4835-b0e3-beb718d4010c,082e80f2c3c6a1c14338dc41edc0da0988f7c555d5786f4fa5fe5c4a90ee4e71,http://127.0.0.1:8000/proxy/beacon/t/78c7d04f-a937-4835-b0e3-beb718d4010c\n5,User5,78c7d04f-a937-4835-b0e3-beb718d4010c,082e80f2c3c6a1c14338dc41edc0da0988f7c555d5786f4fa5fe5c4a90ee4e71,http://127.0.0.1:8000/proxy/beacon/t/78c7d04f-a937-4835-b0e3-beb718d4010c\n",
+  "risk_score": 10.601167297363281,
+  "deception_used": false,
+  "deception_reason": null,
+  "timings": {
+    "upstream_ms": 1130.95,
+    "total_ms": 1145.88
+  },
+  "decision_action": "allow",
+  "reason_codes": [
+    "decision_allow"
+  ],
+  "reason_detail": {
+    "error": null,
+    "decision_action": "allow",
+    "risk_level": "low",
+    "risk_score": 10.601167297363281,
+    "tone_reason": null,
+    "action_raw": "allow",
+    "next_action": null,
+    "effective_status": 200,
+    "behavior_level": "low",
+    "behavior_score": 35
+  },
+  "status_code": 200,
+  "headers": {
+    "date": "Fri, 02 Jan 2026 06:22:42 GMT",
+    "X-Trace-Id": "78c7d04f-a937-4835-b0e3-beb718d4010c",
+    "X-Trace-Sig": "082e80f2c3c6a1c14338dc41edc0da0988f7c555d5786f4fa5fe5c4a90ee4e71",
+    "X-Beacon-Url": "http://127.0.0.1:8000/proxy/beacon/t/78c7d04f-a937-4835-b0e3-beb718d4010c",
+    "X-Risk-Level": "low",
+    "server": "uvicorn",
+    "content-length": "48",
+    "content-type": "text/csv; charset=utf-8",
+    "X-Export-Id": "bdfbd1a1-4d50-49e3-8e52-5ede9c3c65a1"
+  },
+  "risk_level": "low",
+  "status_code_effective": 200,
+  "status_code_outer": 200,
+  "status_code_inner": 200
+}  source=console
+INFO[0001] DEBUG normal_users keys=timings,decision_action,reason_codes,status_code_outer,status_code_inner,headers,body,risk_score,risk_level,reason_detail,status_code_effective,status_code,deception_used,deception_reason eff=200 http=200  source=console
+INFO[0001] DEBUG normal_users json={
+  "risk_level": "low",
+  "reason_detail": {
+    "action_raw": "allow",
+    "error": null,
+    "next_action": null,
+    "decision_action": "allow",
+    "risk_score": 10.601167297363281,
+    "behavior_level": "low",
+    "tone_reason": null,
+    "effective_status": 200,
+    "risk_level": "low",
+    "behavior_score": 35
+  },
+  "status_code_effective": 200,
+  "status_code": 200,
+  "deception_used": false,
+  "deception_reason": null,
+  "timings": {
+    "upstream_ms": 819.05,
+    "total_ms": 869.47
+  },
+  "decision_action": "allow",
+  "reason_codes": [
+    "decision_allow"
+  ],
+  "status_code_outer": 200,
+  "status_code_inner": 200,
+  "headers": {
+    "X-Risk-Level": "low",
+    "content-length": "48",
+    "content-type": "text/csv; charset=utf-8",
+    "X-Export-Id": "a0a6dd27-d9db-4370-bb05-7d9dd5478075",
+    "X-Trace-Sig": "6a1de4f38f27e64ba4aedfa3da2cd5398a43f3aae33791cbb98acbaed00a8579",
+    "X-Beacon-Url": "http://127.0.0.1:8000/proxy/beacon/t/e5a127f3-72f2-4365-bdbf-7b4ed04235fc",
+    "date": "Fri, 02 Jan 2026 06:22:43 GMT",
+    "server": "uvicorn",
+    "X-Trace-Id": "e5a127f3-72f2-4365-bdbf-7b4ed04235fc"
+  },
+  "body": "# trace_id=e5a127f3-72f2-4365-bdbf-7b4ed04235fc trace_sig=6a1de4f38f27e64ba4aedfa3da2cd5398a43f3aae33791cbb98acbaed00a8579 export_id=a0a6dd27-d9db-4370-bb05-7d9dd5478075 tenant_id=org-1 beacon=http://127.0.0.1:8000/proxy/beacon/t/e5a127f3-72f2-4365-bdbf-7b4ed04235fc\nid,name,_trace_id,_trace_sig,_beacon\n1,User1,e5a127f3-72f2-4365-bdbf-7b4ed04235fc,6a1de4f38f27e64ba4aedfa3da2cd5398a43f3aae33791cbb98acbaed00a8579,http://127.0.0.1:8000/proxy/beacon/t/e5a127f3-72f2-4365-bdbf-7b4ed04235fc\n2,User2,e5a127f3-72f2-4365-bdbf-7b4ed04235fc,6a1de4f38f27e64ba4aedfa3da2cd5398a43f3aae33791cbb98acbaed00a8579,http://127.0.0.1:8000/proxy/beacon/t/e5a127f3-72f2-4365-bdbf-7b4ed04235fc\n3,User3,e5a127f3-72f2-4365-bdbf-7b4ed04235fc,6a1de4f38f27e64ba4aedfa3da2cd5398a43f3aae33791cbb98acbaed00a8579,http://127.0.0.1:8000/proxy/beacon/t/e5a127f3-72f2-4365-bdbf-7b4ed04235fc\n4,User4,e5a127f3-72f2-4365-bdbf-7b4ed04235fc,6a1de4f38f27e64ba4aedfa3da2cd5398a43f3aae33791cbb98acbaed00a8579,http://127.0.0.1:8000/proxy/beacon/t/e5a127f3-72f2-4365-bdbf-7b4ed04235fc\n5,User5,e5a127f3-72f2-4365-bdbf-7b4ed04235fc,6a1de4f38f27e64ba4aedfa3da2cd5398a43f3aae33791cbb98acbaed00a8579,http://127.0.0.1:8000/proxy/beacon/t/e5a127f3-72f2-4365-bdbf-7b4ed04235fc\n",
+  "risk_score": 10.601167297363281
+}  source=console
+INFO[0001] DEBUG normal_users keys=body,deception_used,deception_reason,timings,decision_action,reason_codes,reason_detail,headers,risk_score,risk_level,status_code_effective,status_code_outer,status_code_inner,status_code eff=200 http=200  source=console
+INFO[0001] DEBUG normal_users json={                                                                                                                                         
+  "status_code_inner": 200,                                                                                                                                                  
+  "status_code": 200,                                                                                                                                                        
+  "body": "# trace_id=2ab29084-a99a-42be-bed0-0bf2d4f7ffb8 trace_sig=d56caea88ed7ea490e44d696dc7928d9c273616179645d2bb10e90e07429dbc5 export_id=02f13706-15fd-4cd2-aa3b-2afd92128d45 tenant_id=org-3 beacon=http://127.0.0.1:8000/proxy/beacon/t/2ab29084-a99a-42be-bed0-0bf2d4f7ffb8\nid,name,_trace_id,_trace_sig,_beacon\n1,User1,2ab29084-a99a-42be-bed0-0bf2d4f7ffb8,d56caea88ed7ea490e44d696dc7928d9c273616179645d2bb10e90e07429dbc5,http://127.0.0.1:8000/proxy/beacon/t/2ab29084-a99a-42be-bed0-0bf2d4f7ffb8\n2,User2,2ab29084-a99a-42be-bed0-0bf2d4f7ffb8,d56caea88ed7ea490e44d696dc7928d9c273616179645d2bb10e90e07429dbc5,http://127.0.0.1:8000/proxy/beacon/t/2ab29084-a99a-42be-bed0-0bf2d4f7ffb8\n3,User3,2ab29084-a99a-42be-bed0-0bf2d4f7ffb8,d56caea88ed7ea490e44d696dc7928d9c273616179645d2bb10e90e07429dbc5,http://127.0.0.1:8000/proxy/beacon/t/2ab29084-a99a-42be-bed0-0bf2d4f7ffb8\n4,User4,2ab29084-a99a-42be-bed0-0bf2d4f7ffb8,d56caea88ed7ea490e44d696dc7928d9c273616179645d2bb10e90e07429dbc5,http://127.0.0.1:8000/proxy/beacon/t/2ab29084-a99a-42be-bed0-0bf2d4f7ffb8\n5,User5,2ab29084-a99a-42be-bed0-0bf2d4f7ffb8,d56caea88ed7ea490e44d696dc7928d9c273616179645d2bb10e90e07429dbc5,http://127.0.0.1:8000/proxy/beacon/t/2ab29084-a99a-42be-bed0-0bf2d4f7ffb8\n",
+  "deception_used": false,
+  "deception_reason": null,
+  "timings": {
+    "upstream_ms": 340.3,
+    "total_ms": 390.17
+  },
+  "decision_action": "allow",
+  "reason_codes": [
+    "decision_allow"
+  ],
+  "reason_detail": {
+    "behavior_score": 35,
+    "tone_reason": null,
+    "action_raw": "allow",
+    "effective_status": 200,
+    "risk_score": 10.601167297363281,
+    "behavior_level": "low",
+    "error": null,
+    "next_action": null,
+    "decision_action": "allow",
+    "risk_level": "low"
+  },
+  "headers": {
+    "X-Trace-Sig": "d56caea88ed7ea490e44d696dc7928d9c273616179645d2bb10e90e07429dbc5",
+    "date": "Fri, 02 Jan 2026 06:22:43 GMT",
+    "server": "uvicorn",
+    "X-Export-Id": "02f13706-15fd-4cd2-aa3b-2afd92128d45",
+    "X-Beacon-Url": "http://127.0.0.1:8000/proxy/beacon/t/2ab29084-a99a-42be-bed0-0bf2d4f7ffb8",
+    "X-Risk-Level": "low",
+    "content-length": "48",
+    "content-type": "text/csv; charset=utf-8",
+    "X-Trace-Id": "2ab29084-a99a-42be-bed0-0bf2d4f7ffb8"
+  },
+  "risk_score": 10.601167297363281,
+  "risk_level": "low",
+  "status_code_effective": 200,
+  "status_code_outer": 200
+}  source=console
+INFO[0002] DEBUG normal_users keys=status_code,body,risk_score,risk_level,status_code_effective,status_code_inner,headers,deception_used,deception_reason,timings,decision_action,reason_codes,reason_detail,status_code_outer eff=200 http=200  source=console
+INFO[0002] DEBUG normal_users json={                                                                                                                                         
+  "deception_reason": null,                                                                                                                                                  
+  "timings": {                                                                                                                                                               
+    "upstream_ms": 103.33,
+    "total_ms": 119.97
+  },
+  "decision_action": "allow",
+  "reason_codes": [
+    "decision_allow"
+  ],
+  "reason_detail": {
+    "behavior_level": "low",
+    "behavior_score": 35,
+    "tone_reason": null,
+    "action_raw": "allow",
+    "error": null,
+    "next_action": null,
+    "risk_level": "low",
+    "risk_score": 10.601167297363281,
+    "decision_action": "allow",
+    "effective_status": 200
+  },
+  "status_code_outer": 200,
+  "status_code": 200,
+  "body": "# trace_id=dc434703-8562-48e5-9c6f-88b48b636084 trace_sig=fdbc5db17cbea20b3d17b8bb559976a8a0fe30e68498f69143083cf7b0373819 export_id=a1cfdd6e-89c9-4732-ba83-d081038bd154 tenant_id=org-2 beacon=http://127.0.0.1:8000/proxy/beacon/t/dc434703-8562-48e5-9c6f-88b48b636084\nid,name,_trace_id,_trace_sig,_beacon\n1,User1,dc434703-8562-48e5-9c6f-88b48b636084,fdbc5db17cbea20b3d17b8bb559976a8a0fe30e68498f69143083cf7b0373819,http://127.0.0.1:8000/proxy/beacon/t/dc434703-8562-48e5-9c6f-88b48b636084\n2,User2,dc434703-8562-48e5-9c6f-88b48b636084,fdbc5db17cbea20b3d17b8bb559976a8a0fe30e68498f69143083cf7b0373819,http://127.0.0.1:8000/proxy/beacon/t/dc434703-8562-48e5-9c6f-88b48b636084\n3,User3,dc434703-8562-48e5-9c6f-88b48b636084,fdbc5db17cbea20b3d17b8bb559976a8a0fe30e68498f69143083cf7b0373819,http://127.0.0.1:8000/proxy/beacon/t/dc434703-8562-48e5-9c6f-88b48b636084\n4,User4,dc434703-8562-48e5-9c6f-88b48b636084,fdbc5db17cbea20b3d17b8bb559976a8a0fe30e68498f69143083cf7b0373819,http://127.0.0.1:8000/proxy/beacon/t/dc434703-8562-48e5-9c6f-88b48b636084\n5,User5,dc434703-8562-48e5-9c6f-88b48b636084,fdbc5db17cbea20b3d17b8bb559976a8a0fe30e68498f69143083cf7b0373819,http://127.0.0.1:8000/proxy/beacon/t/dc434703-8562-48e5-9c6f-88b48b636084\n",
+  "risk_score": 10.601167297363281,
+  "risk_level": "low",
+  "status_code_effective": 200,
+  "status_code_inner": 200,
+  "headers": {
+    "server": "uvicorn",
+    "content-type": "text/csv; charset=utf-8",
+    "X-Trace-Id": "dc434703-8562-48e5-9c6f-88b48b636084",
+    "X-Trace-Sig": "fdbc5db17cbea20b3d17b8bb559976a8a0fe30e68498f69143083cf7b0373819",
+    "X-Beacon-Url": "http://127.0.0.1:8000/proxy/beacon/t/dc434703-8562-48e5-9c6f-88b48b636084",
+    "date": "Fri, 02 Jan 2026 06:22:44 GMT",
+    "content-length": "48",
+    "X-Export-Id": "a1cfdd6e-89c9-4732-ba83-d081038bd154",
+    "X-Risk-Level": "low"
+  },
+  "deception_used": false
+}  source=console
+INFO[0002] DEBUG normal_users keys=headers,body,risk_score,risk_level,deception_used,deception_reason,timings,decision_action,reason_codes,reason_detail,status_code_effective,status_code_outer,status_code_inner,status_code eff=200 http=200  source=console
+INFO[0002] DEBUG normal_users json={                                                                                                                                         
+  "body": "# trace_id=d0f3aa96-10ad-4762-b15d-7f1fe147989f trace_sig=87e2ac4b39dcd42fc1652ea483aefddb3fa0965d293c3ed70b8adae28cec6ac4 export_id=ef9204fd-b87e-49b8-a826-f18180a00d68 tenant_id=org-2 beacon=http://127.0.0.1:8000/proxy/beacon/t/d0f3aa96-10ad-4762-b15d-7f1fe147989f\nid,name,_trace_id,_trace_sig,_beacon\n1,User1,d0f3aa96-10ad-4762-b15d-7f1fe147989f,87e2ac4b39dcd42fc1652ea483aefddb3fa0965d293c3ed70b8adae28cec6ac4,http://127.0.0.1:8000/proxy/beacon/t/d0f3aa96-10ad-4762-b15d-7f1fe147989f\n2,User2,d0f3aa96-10ad-4762-b15d-7f1fe147989f,87e2ac4b39dcd42fc1652ea483aefddb3fa0965d293c3ed70b8adae28cec6ac4,http://127.0.0.1:8000/proxy/beacon/t/d0f3aa96-10ad-4762-b15d-7f1fe147989f\n3,User3,d0f3aa96-10ad-4762-b15d-7f1fe147989f,87e2ac4b39dcd42fc1652ea483aefddb3fa0965d293c3ed70b8adae28cec6ac4,http://127.0.0.1:8000/proxy/beacon/t/d0f3aa96-10ad-4762-b15d-7f1fe147989f\n4,User4,d0f3aa96-10ad-4762-b15d-7f1fe147989f,87e2ac4b39dcd42fc1652ea483aefddb3fa0965d293c3ed70b8adae28cec6ac4,http://127.0.0.1:8000/proxy/beacon/t/d0f3aa96-10ad-4762-b15d-7f1fe147989f\n5,User5,d0f3aa96-10ad-4762-b15d-7f1fe147989f,87e2ac4b39dcd42fc1652ea483aefddb3fa0965d293c3ed70b8adae28cec6ac4,http://127.0.0.1:8000/proxy/beacon/t/d0f3aa96-10ad-4762-b15d-7f1fe147989f\n",
+  "risk_score": 10.601167297363281,
+  "risk_level": "low",
+  "deception_used": false,
+  "deception_reason": null,
+  "timings": {
+    "total_ms": 145.44,
+    "upstream_ms": 120.56
+  },
+  "decision_action": "allow",
+  "reason_codes": [
+    "decision_allow"
+  ],
+  "reason_detail": {
+    "decision_action": "allow",
+    "risk_level": "low",
+    "behavior_level": "low",
+    "behavior_score": 35,
+    "tone_reason": null,
+    "effective_status": 200,
+    "risk_score": 10.601167297363281,
+    "action_raw": "allow",
+    "error": null,
+    "next_action": null
+  },
+  "status_code_effective": 200,
+  "status_code_outer": 200,
+  "status_code_inner": 200,
+  "status_code": 200,
+  "headers": {
+    "date": "Fri, 02 Jan 2026 06:22:44 GMT",
+    "content-type": "text/csv; charset=utf-8",
+    "X-Export-Id": "ef9204fd-b87e-49b8-a826-f18180a00d68",
+    "X-Trace-Id": "d0f3aa96-10ad-4762-b15d-7f1fe147989f",
+    "X-Trace-Sig": "87e2ac4b39dcd42fc1652ea483aefddb3fa0965d293c3ed70b8adae28cec6ac4",
+    "server": "uvicorn",
+    "content-length": "48",
+    "X-Beacon-Url": "http://127.0.0.1:8000/proxy/beacon/t/d0f3aa96-10ad-4762-b15d-7f1fe147989f",
+    "X-Risk-Level": "low"
+  }
+}  source=console
+INFO[0002] DEBUG normal_users keys=status_code,headers,body,risk_score,risk_level,deception_used,timings,decision_action,deception_reason,reason_codes,reason_detail,status_code_effective,status_code_outer,status_code_inner eff=200 http=200  source=console
+INFO[0002] DEBUG normal_users json={                                                                                                                                         
+  "headers": {                                                                                                                                                               
+    "date": "Fri, 02 Jan 2026 06:22:44 GMT",                                                                                                                                 
+    "X-Export-Id": "2a12e9ad-bf65-4e5d-9185-fb5d86821d77",
+    "X-Trace-Id": "687656a9-6fda-4bef-890d-6f0faba86dc8",
+    "X-Trace-Sig": "617a3744f905edffe15def6e83a02852bb96c1716adb3e3c5127c41190416af8",
+    "server": "uvicorn",
+    "content-length": "48",
+    "content-type": "text/csv; charset=utf-8",
+    "X-Beacon-Url": "http://127.0.0.1:8000/proxy/beacon/t/687656a9-6fda-4bef-890d-6f0faba86dc8",
+    "X-Risk-Level": "low"
+  },
+  "body": "# trace_id=687656a9-6fda-4bef-890d-6f0faba86dc8 trace_sig=617a3744f905edffe15def6e83a02852bb96c1716adb3e3c5127c41190416af8 export_id=2a12e9ad-bf65-4e5d-9185-fb5d86821d77 tenant_id=org-3 beacon=http://127.0.0.1:8000/proxy/beacon/t/687656a9-6fda-4bef-890d-6f0faba86dc8\nid,name,_trace_id,_trace_sig,_beacon\n1,User1,687656a9-6fda-4bef-890d-6f0faba86dc8,617a3744f905edffe15def6e83a02852bb96c1716adb3e3c5127c41190416af8,http://127.0.0.1:8000/proxy/beacon/t/687656a9-6fda-4bef-890d-6f0faba86dc8\n2,User2,687656a9-6fda-4bef-890d-6f0faba86dc8,617a3744f905edffe15def6e83a02852bb96c1716adb3e3c5127c41190416af8,http://127.0.0.1:8000/proxy/beacon/t/687656a9-6fda-4bef-890d-6f0faba86dc8\n3,User3,687656a9-6fda-4bef-890d-6f0faba86dc8,617a3744f905edffe15def6e83a02852bb96c1716adb3e3c5127c41190416af8,http://127.0.0.1:8000/proxy/beacon/t/687656a9-6fda-4bef-890d-6f0faba86dc8\n4,User4,687656a9-6fda-4bef-890d-6f0faba86dc8,617a3744f905edffe15def6e83a02852bb96c1716adb3e3c5127c41190416af8,http://127.0.0.1:8000/proxy/beacon/t/687656a9-6fda-4bef-890d-6f0faba86dc8\n5,User5,687656a9-6fda-4bef-890d-6f0faba86dc8,617a3744f905edffe15def6e83a02852bb96c1716adb3e3c5127c41190416af8,http://127.0.0.1:8000/proxy/beacon/t/687656a9-6fda-4bef-890d-6f0faba86dc8\n",
+  "risk_score": 10.601167297363281,
+  "risk_level": "low",
+  "deception_used": false,
+  "timings": {
+    "upstream_ms": 225.51,
+    "total_ms": 249.49
+  },
+  "decision_action": "allow",
+  "deception_reason": null,
+  "reason_codes": [
+    "decision_allow"
+  ],
+  "reason_detail": {
+    "next_action": null,
+    "risk_level": "low",
+    "behavior_score": 35,
+    "tone_reason": null,
+    "action_raw": "allow",
+    "decision_action": "allow",
+    "effective_status": 200,
+    "risk_score": 10.601167297363281,
+    "behavior_level": "low",
+    "error": null
+  },
+  "status_code_effective": 200,
+  "status_code_outer": 200,
+  "status_code_inner": 200,
+  "status_code": 200
+}  source=console
+INFO[0002] DEBUG normal_users keys=timings,reason_detail,status_code_outer,risk_score,risk_level,deception_reason,decision_action,reason_codes,status_code_effective,status_code_inner,status_code,headers,body,deception_used eff=200 http=200  source=console
+INFO[0002] DEBUG normal_users json={                                                                                                                                         
+  "risk_score": 10.601167297363281,                                                                                                                                          
+  "risk_level": "low",                                                                                                                                                       
+  "deception_reason": null,
+  "decision_action": "allow",
+  "reason_codes": [
+    "decision_allow"
+  ],
+  "status_code_effective": 200,
+  "status_code_inner": 200,
+  "status_code": 200,
+  "headers": {
+    "date": "Fri, 02 Jan 2026 06:22:44 GMT",
+    "X-Export-Id": "fa8e55f3-d07d-4462-8821-1bcf2303c404",
+    "X-Trace-Id": "d10a1cf3-1bc2-4a3f-a0c1-5b83b8d12df1",
+    "X-Beacon-Url": "http://127.0.0.1:8000/proxy/beacon/t/d10a1cf3-1bc2-4a3f-a0c1-5b83b8d12df1",
+    "server": "uvicorn",
+    "content-length": "48",
+    "content-type": "text/csv; charset=utf-8",
+    "X-Trace-Sig": "2478793f3a8b95d56b2478cccbf590ba67a8afe8e78c10da7e55e8c94e7d213b",
+    "X-Risk-Level": "low"
+  },
+  "body": "# trace_id=d10a1cf3-1bc2-4a3f-a0c1-5b83b8d12df1 trace_sig=2478793f3a8b95d56b2478cccbf590ba67a8afe8e78c10da7e55e8c94e7d213b export_id=fa8e55f3-d07d-4462-8821-1bcf2303c404 tenant_id=org-1 beacon=http://127.0.0.1:8000/proxy/beacon/t/d10a1cf3-1bc2-4a3f-a0c1-5b83b8d12df1\nid,name,_trace_id,_trace_sig,_beacon\n1,User1,d10a1cf3-1bc2-4a3f-a0c1-5b83b8d12df1,2478793f3a8b95d56b2478cccbf590ba67a8afe8e78c10da7e55e8c94e7d213b,http://127.0.0.1:8000/proxy/beacon/t/d10a1cf3-1bc2-4a3f-a0c1-5b83b8d12df1\n2,User2,d10a1cf3-1bc2-4a3f-a0c1-5b83b8d12df1,2478793f3a8b95d56b2478cccbf590ba67a8afe8e78c10da7e55e8c94e7d213b,http://127.0.0.1:8000/proxy/beacon/t/d10a1cf3-1bc2-4a3f-a0c1-5b83b8d12df1\n3,User3,d10a1cf3-1bc2-4a3f-a0c1-5b83b8d12df1,2478793f3a8b95d56b2478cccbf590ba67a8afe8e78c10da7e55e8c94e7d213b,http://127.0.0.1:8000/proxy/beacon/t/d10a1cf3-1bc2-4a3f-a0c1-5b83b8d12df1\n4,User4,d10a1cf3-1bc2-4a3f-a0c1-5b83b8d12df1,2478793f3a8b95d56b2478cccbf590ba67a8afe8e78c10da7e55e8c94e7d213b,http://127.0.0.1:8000/proxy/beacon/t/d10a1cf3-1bc2-4a3f-a0c1-5b83b8d12df1\n5,User5,d10a1cf3-1bc2-4a3f-a0c1-5b83b8d12df1,2478793f3a8b95d56b2478cccbf590ba67a8afe8e78c10da7e55e8c94e7d213b,http://127.0.0.1:8000/proxy/beacon/t/d10a1cf3-1bc2-4a3f-a0c1-5b83b8d12df1\n",
+  "deception_used": false,
+  "timings": {
+    "upstream_ms": 106.49,
+    "total_ms": 130.62
+  },
+  "reason_detail": {
+    "error": null,
+    "next_action": null,
+    "decision_action": "allow",
+    "effective_status": 200,
+    "behavior_level": "low",
+    "action_raw": "allow",
+    "risk_level": "low",
+    "risk_score": 10.601167297363281,
+    "behavior_score": 35,
+    "tone_reason": null
+  },
+  "status_code_outer": 200
+}  source=console
+INFO[0002] DEBUG normal_users keys=status_code,body,risk_score,risk_level,decision_action,reason_detail,status_code_effective,status_code_outer,headers,deception_used,deception_reason,timings,reason_codes,status_code_inner eff=200 http=200  source=console
+INFO[0002] DEBUG normal_users json={                                                                                                                                         
+  "decision_action": "allow",                                                                                                                                                
+  "reason_detail": {                                                                                                                                                         
+    "decision_action": "allow",
+    "effective_status": 200,
+    "risk_level": "low",
+    "behavior_level": "low",
+    "error": null,
+    "next_action": null,
+    "risk_score": 10.601167297363281,
+    "behavior_score": 35,
+    "tone_reason": null,
+    "action_raw": "allow"
+  },
+  "status_code_effective": 200,
+  "status_code_outer": 200,
+  "headers": {
+    "content-length": "48",
+    "content-type": "text/csv; charset=utf-8",
+    "X-Export-Id": "80537377-ad69-474d-af30-88f7def625ac",
+    "X-Trace-Id": "3410b926-1975-4289-a24f-2871354dfaf3",
+    "X-Trace-Sig": "494f5e052f1e99ad3da07efb3e9ebfa323fe8d6a45dd12a4b3721217f16dd8a1",
+    "X-Risk-Level": "low",
+    "date": "Fri, 02 Jan 2026 06:22:44 GMT",
+    "server": "uvicorn",
+    "X-Beacon-Url": "http://127.0.0.1:8000/proxy/beacon/t/3410b926-1975-4289-a24f-2871354dfaf3"
+  },
+  "deception_used": false,
+  "deception_reason": null,
+  "timings": {
+    "upstream_ms": 116.8,
+    "total_ms": 136.1
+  },
+  "reason_codes": [
+    "decision_allow"
+  ],
+  "status_code_inner": 200,
+  "status_code": 200,
+  "body": "# trace_id=3410b926-1975-4289-a24f-2871354dfaf3 trace_sig=494f5e052f1e99ad3da07efb3e9ebfa323fe8d6a45dd12a4b3721217f16dd8a1 export_id=80537377-ad69-474d-af30-88f7def625ac tenant_id=org-1 beacon=http://127.0.0.1:8000/proxy/beacon/t/3410b926-1975-4289-a24f-2871354dfaf3\nid,name,_trace_id,_trace_sig,_beacon\n1,User1,3410b926-1975-4289-a24f-2871354dfaf3,494f5e052f1e99ad3da07efb3e9ebfa323fe8d6a45dd12a4b3721217f16dd8a1,http://127.0.0.1:8000/proxy/beacon/t/3410b926-1975-4289-a24f-2871354dfaf3\n2,User2,3410b926-1975-4289-a24f-2871354dfaf3,494f5e052f1e99ad3da07efb3e9ebfa323fe8d6a45dd12a4b3721217f16dd8a1,http://127.0.0.1:8000/proxy/beacon/t/3410b926-1975-4289-a24f-2871354dfaf3\n3,User3,3410b926-1975-4289-a24f-2871354dfaf3,494f5e052f1e99ad3da07efb3e9ebfa323fe8d6a45dd12a4b3721217f16dd8a1,http://127.0.0.1:8000/proxy/beacon/t/3410b926-1975-4289-a24f-2871354dfaf3\n4,User4,3410b926-1975-4289-a24f-2871354dfaf3,494f5e052f1e99ad3da07efb3e9ebfa323fe8d6a45dd12a4b3721217f16dd8a1,http://127.0.0.1:8000/proxy/beacon/t/3410b926-1975-4289-a24f-2871354dfaf3\n5,User5,3410b926-1975-4289-a24f-2871354dfaf3,494f5e052f1e99ad3da07efb3e9ebfa323fe8d6a45dd12a4b3721217f16dd8a1,http://127.0.0.1:8000/proxy/beacon/t/3410b926-1975-4289-a24f-2871354dfaf3\n",
+  "risk_score": 10.601167297363281,
+  "risk_level": "low"
+}  source=console
+INFO[0002] DEBUG normal_users keys=status_code,headers,risk_score,risk_level,deception_used,deception_reason,timings,decision_action,body,reason_codes,reason_detail,status_code_effective,status_code_outer,status_code_inner eff=200 http=200  source=console
+INFO[0002] DEBUG normal_users json={                                                                                                                                         
+  "status_code": 200,                                                                                                                                                        
+  "headers": {                                                                                                                                                               
+    "server": "uvicorn",
+    "content-length": "48",
+    "content-type": "text/csv; charset=utf-8",
+    "X-Export-Id": "3fffaaa8-a1c7-4181-8668-c58c9dbfef73",
+    "X-Trace-Id": "9262d58c-6088-469c-89a7-6e96b9524cf0",
+    "X-Risk-Level": "low",
+    "date": "Fri, 02 Jan 2026 06:22:44 GMT",
+    "X-Trace-Sig": "ded653641d338fb5766cb61ad0356121eaf2a35d89e494d96d62e5d315e22ded",
+    "X-Beacon-Url": "http://127.0.0.1:8000/proxy/beacon/t/9262d58c-6088-469c-89a7-6e96b9524cf0"
+  },
+  "risk_score": 10.601167297363281,
+  "risk_level": "low",
+  "deception_used": false,
+  "deception_reason": null,
+  "timings": {
+    "upstream_ms": 221.13,
+    "total_ms": 238.78
+  },
+  "decision_action": "allow",
+  "body": "# trace_id=9262d58c-6088-469c-89a7-6e96b9524cf0 trace_sig=ded653641d338fb5766cb61ad0356121eaf2a35d89e494d96d62e5d315e22ded export_id=3fffaaa8-a1c7-4181-8668-c58c9dbfef73 tenant_id=org-1 beacon=http://127.0.0.1:8000/proxy/beacon/t/9262d58c-6088-469c-89a7-6e96b9524cf0\nid,name,_trace_id,_trace_sig,_beacon\n1,User1,9262d58c-6088-469c-89a7-6e96b9524cf0,ded653641d338fb5766cb61ad0356121eaf2a35d89e494d96d62e5d315e22ded,http://127.0.0.1:8000/proxy/beacon/t/9262d58c-6088-469c-89a7-6e96b9524cf0\n2,User2,9262d58c-6088-469c-89a7-6e96b9524cf0,ded653641d338fb5766cb61ad0356121eaf2a35d89e494d96d62e5d315e22ded,http://127.0.0.1:8000/proxy/beacon/t/9262d58c-6088-469c-89a7-6e96b9524cf0\n3,User3,9262d58c-6088-469c-89a7-6e96b9524cf0,ded653641d338fb5766cb61ad0356121eaf2a35d89e494d96d62e5d315e22ded,http://127.0.0.1:8000/proxy/beacon/t/9262d58c-6088-469c-89a7-6e96b9524cf0\n4,User4,9262d58c-6088-469c-89a7-6e96b9524cf0,ded653641d338fb5766cb61ad0356121eaf2a35d89e494d96d62e5d315e22ded,http://127.0.0.1:8000/proxy/beacon/t/9262d58c-6088-469c-89a7-6e96b9524cf0\n5,User5,9262d58c-6088-469c-89a7-6e96b9524cf0,ded653641d338fb5766cb61ad0356121eaf2a35d89e494d96d62e5d315e22ded,http://127.0.0.1:8000/proxy/beacon/t/9262d58c-6088-469c-89a7-6e96b9524cf0\n",
+  "reason_codes": [
+    "decision_allow"
+  ],
+  "reason_detail": {
+    "error": null,
+    "decision_action": "allow",
+    "effective_status": 200,
+    "risk_level": "low",
+    "risk_score": 10.601167297363281,
+    "tone_reason": null,
+    "action_raw": "allow",
+    "next_action": null,
+    "behavior_level": "low",
+    "behavior_score": 35
+  },
+  "status_code_effective": 200,
+  "status_code_outer": 200,
+  "status_code_inner": 200
+}  source=console
+INFO[0003] DEBUG normal_users keys=status_code_inner,headers,risk_score,risk_level,deception_reason,timings,decision_action,reason_codes,status_code_effective,status_code,body,deception_used,reason_detail,status_code_outer eff=200 http=200  source=console
+INFO[0003] DEBUG normal_users json={                                                                                                                                         
+  "headers": {                                                                                                                                                               
+    "server": "uvicorn",                                                                                                                                                     
+    "content-type": "text/csv; charset=utf-8",
+    "X-Trace-Id": "205bd479-7e71-4c19-8654-6f2cbfc951b0",
+    "X-Trace-Sig": "1e65f332e41ba368631307c537f5debc5f60c1b86b1fc84fe56cc586c77ba016",
+    "date": "Fri, 02 Jan 2026 06:22:44 GMT",
+    "content-length": "48",
+    "X-Export-Id": "cbf478ed-7a72-4c4b-9626-ad5a4632bbec",
+    "X-Beacon-Url": "http://127.0.0.1:8000/proxy/beacon/t/205bd479-7e71-4c19-8654-6f2cbfc951b0",
+    "X-Risk-Level": "low"
+  },
+  "risk_score": 10.601167297363281,
+  "risk_level": "low",
+  "deception_reason": null,
+  "timings": {
+    "upstream_ms": 139.94,
+    "total_ms": 159.7
+  },
+  "decision_action": "allow",
+  "reason_codes": [
+    "decision_allow"
+  ],
+  "status_code_effective": 200,
+  "status_code": 200,
+  "body": "# trace_id=205bd479-7e71-4c19-8654-6f2cbfc951b0 trace_sig=1e65f332e41ba368631307c537f5debc5f60c1b86b1fc84fe56cc586c77ba016 export_id=cbf478ed-7a72-4c4b-9626-ad5a4632bbec tenant_id=org-1 beacon=http://127.0.0.1:8000/proxy/beacon/t/205bd479-7e71-4c19-8654-6f2cbfc951b0\nid,name,_trace_id,_trace_sig,_beacon\n1,User1,205bd479-7e71-4c19-8654-6f2cbfc951b0,1e65f332e41ba368631307c537f5debc5f60c1b86b1fc84fe56cc586c77ba016,http://127.0.0.1:8000/proxy/beacon/t/205bd479-7e71-4c19-8654-6f2cbfc951b0\n2,User2,205bd479-7e71-4c19-8654-6f2cbfc951b0,1e65f332e41ba368631307c537f5debc5f60c1b86b1fc84fe56cc586c77ba016,http://127.0.0.1:8000/proxy/beacon/t/205bd479-7e71-4c19-8654-6f2cbfc951b0\n3,User3,205bd479-7e71-4c19-8654-6f2cbfc951b0,1e65f332e41ba368631307c537f5debc5f60c1b86b1fc84fe56cc586c77ba016,http://127.0.0.1:8000/proxy/beacon/t/205bd479-7e71-4c19-8654-6f2cbfc951b0\n4,User4,205bd479-7e71-4c19-8654-6f2cbfc951b0,1e65f332e41ba368631307c537f5debc5f60c1b86b1fc84fe56cc586c77ba016,http://127.0.0.1:8000/proxy/beacon/t/205bd479-7e71-4c19-8654-6f2cbfc951b0\n5,User5,205bd479-7e71-4c19-8654-6f2cbfc951b0,1e65f332e41ba368631307c537f5debc5f60c1b86b1fc84fe56cc586c77ba016,http://127.0.0.1:8000/proxy/beacon/t/205bd479-7e71-4c19-8654-6f2cbfc951b0\n",
+  "deception_used": false,
+  "reason_detail": {
+    "next_action": null,
+    "risk_score": 10.601167297363281,
+    "tone_reason": null,
+    "action_raw": "allow",
+    "error": null,
+    "decision_action": "allow",
+    "effective_status": 200,
+    "risk_level": "low",
+    "behavior_level": "low",
+    "behavior_score": 35
+  },
+  "status_code_outer": 200,
+  "status_code_inner": 200
+}  source=console
+INFO[0003] DEBUG normal_users keys=status_code_effective,risk_score,risk_level,deception_reason,reason_codes,reason_detail,status_code_outer,status_code_inner,status_code,headers,body,deception_used,timings,decision_action eff=200 http=200  source=console
+INFO[0003] DEBUG normal_users json={                                                                                                                                         
+  "risk_score": 10.601167297363281,                                                                                                                                          
+  "risk_level": "low",                                                                                                                                                       
+  "deception_reason": null,
+  "reason_codes": [
+    "decision_allow"
+  ],
+  "reason_detail": {
+    "error": null,
+    "effective_status": 200,
+    "risk_score": 10.601167297363281,
+    "behavior_level": "low",
+    "behavior_score": 35,
+    "action_raw": "allow",
+    "next_action": null,
+    "decision_action": "allow",
+    "risk_level": "low",
+    "tone_reason": null
+  },
+  "status_code_outer": 200,
+  "status_code_inner": 200,
+  "status_code": 200,
+  "headers": {
+    "X-Risk-Level": "low",
+    "date": "Fri, 02 Jan 2026 06:22:45 GMT",
+    "server": "uvicorn",
+    "content-length": "48",
+    "content-type": "text/csv; charset=utf-8",
+    "X-Export-Id": "ac6e5a76-6b91-4e81-ba43-f37f97b764ab",
+    "X-Trace-Id": "fbe7b2aa-3fdc-483b-b09e-afd9292a8eb7",
+    "X-Trace-Sig": "be410c76ad11172d31660c5b8aecd52e8798f9ea43ac531ada30f4ab15f65f12",
+    "X-Beacon-Url": "http://127.0.0.1:8000/proxy/beacon/t/fbe7b2aa-3fdc-483b-b09e-afd9292a8eb7"
+  },
+  "body": "# trace_id=fbe7b2aa-3fdc-483b-b09e-afd9292a8eb7 trace_sig=be410c76ad11172d31660c5b8aecd52e8798f9ea43ac531ada30f4ab15f65f12 export_id=ac6e5a76-6b91-4e81-ba43-f37f97b764ab tenant_id=org-3 beacon=http://127.0.0.1:8000/proxy/beacon/t/fbe7b2aa-3fdc-483b-b09e-afd9292a8eb7\nid,name,_trace_id,_trace_sig,_beacon\n1,User1,fbe7b2aa-3fdc-483b-b09e-afd9292a8eb7,be410c76ad11172d31660c5b8aecd52e8798f9ea43ac531ada30f4ab15f65f12,http://127.0.0.1:8000/proxy/beacon/t/fbe7b2aa-3fdc-483b-b09e-afd9292a8eb7\n2,User2,fbe7b2aa-3fdc-483b-b09e-afd9292a8eb7,be410c76ad11172d31660c5b8aecd52e8798f9ea43ac531ada30f4ab15f65f12,http://127.0.0.1:8000/proxy/beacon/t/fbe7b2aa-3fdc-483b-b09e-afd9292a8eb7\n3,User3,fbe7b2aa-3fdc-483b-b09e-afd9292a8eb7,be410c76ad11172d31660c5b8aecd52e8798f9ea43ac531ada30f4ab15f65f12,http://127.0.0.1:8000/proxy/beacon/t/fbe7b2aa-3fdc-483b-b09e-afd9292a8eb7\n4,User4,fbe7b2aa-3fdc-483b-b09e-afd9292a8eb7,be410c76ad11172d31660c5b8aecd52e8798f9ea43ac531ada30f4ab15f65f12,http://127.0.0.1:8000/proxy/beacon/t/fbe7b2aa-3fdc-483b-b09e-afd9292a8eb7\n5,User5,fbe7b2aa-3fdc-483b-b09e-afd9292a8eb7,be410c76ad11172d31660c5b8aecd52e8798f9ea43ac531ada30f4ab15f65f12,http://127.0.0.1:8000/proxy/beacon/t/fbe7b2aa-3fdc-483b-b09e-afd9292a8eb7\n",
+  "deception_used": false,
+  "timings": {
+    "upstream_ms": 84.46,
+    "total_ms": 95.92
+  },
+  "decision_action": "allow",
+  "status_code_effective": 200
+}  source=console
+
+
+  █ THRESHOLDS
+
+    http_req_duration{scenario:huge_with_stepup}
+    ✓ 'p(95)<3000' p(95)=0s
+
+    http_req_duration{scenario:huge_without_stepup}
+    ✓ 'p(95)<3000' p(95)=0s
+
+    http_req_duration{scenario:normal_users}
+    ✗ 'p(95)<1500' p(95)=1.71s
+
+
+  █ TOTAL RESULTS
+
+    checks_total.......: 332     10.789323/s
+    checks_succeeded...: 100.00% 332 out of 332
+    checks_failed......: 0.00%   0 out of 332
+
+    ✓ normal: allowed (effective 200)
+    ✓ normal: csv-ish
+
+    HTTP
+    http_req_duration....................: avg=671.88ms min=71.3ms   med=493.32ms max=4.91s p(90)=1.21s p(95)=1.71s
+      { expected_response:true }.........: avg=671.88ms min=71.3ms   med=493.32ms max=4.91s p(90)=1.21s p(95)=1.71s
+      { scenario:huge_with_stepup }......: avg=0s       min=0s       med=0s       max=0s    p(90)=0s    p(95)=0s
+      { scenario:huge_without_stepup }...: avg=0s       min=0s       med=0s       max=0s    p(90)=0s    p(95)=0s
+      { scenario:normal_users }..........: avg=671.88ms min=71.3ms   med=493.32ms max=4.91s p(90)=1.21s p(95)=1.71s
+    http_req_failed......................: 0.00%  0 out of 312
+    http_reqs............................: 312    10.139364/s
+
+    EXECUTION
+    iteration_duration...................: avg=1.46s    min=487.09ms med=1.16s    max=6.24s p(90)=2.64s p(95)=3.12s
+    iterations...........................: 166    5.394661/s
+    vus..................................: 8      min=8        max=8
+    vus_max..............................: 8      min=8        max=8
+
+    NETWORK
+    data_received........................: 480 kB 16 kB/s
+    data_sent............................: 134 kB 4.4 kB/s
+
+
+
+                                                                                                                                                                             
+running (0m30.8s), 0/8 VUs, 166 complete and 0 interrupted iterations                                                                                                        
+normal_users ✓ [======================================] 8 VUs  30s                                                                                                           
+ERRO[0031] thresholds on metrics 'http_req_duration{scenario:normal_users}' have been crossed 
+                                

@@ -1,0 +1,21 @@
+{
+  "identity": {
+    "fields": {
+      "tenant_id": ["X-Org-Id", "X-Tenant-Id"],
+      "user_id": ["X-User-Id"],
+      "session_id": ["X-Session-Id"],
+      "device_id": ["X-Device-Id"]
+    }
+  },
+  "switches": {
+    "trusted_upstream_only": false,
+    "dev_allow_reauth_header": true
+  },
+  "fail_modes": {
+    "reauth_replay_cache": "closed"
+  },
+  "reauth": {
+    "proof_header": "X-Reauth-Proof",
+    "jwks_url": ""
+  }
+}

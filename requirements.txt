@@ -1,0 +1,17 @@
+fastapi
+uvicorn[standard]
+sqlalchemy
+# psycopg2-binary   Postgres
+# alembic   Postgres
+httpx
+pydantic
+python-dotenv
+geoip2
+redis>=5.0.0
+hiredis>=2.3.0
+pyodbc
+PyJWT>=2.8.0
+cryptography>=41.0.0
+scikit-learn==1.5.1
+joblib==1.4.2
+numpy<2

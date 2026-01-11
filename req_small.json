@@ -1,0 +1,6 @@
+﻿{
+  "target_url": "http://host.docker.internal:8099/export/small.csv",
+  "method": "GET",
+  "headers": {},
+  "body": null
+}

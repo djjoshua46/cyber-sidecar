@@ -1,0 +1,18 @@
+﻿# --- secrets / local config ---
+.env
+.secrets.env
+.local/
+*.env.local
+*.secrets.env.local
+
+# --- virtualenvs ---
+.venv/
+.venv-*/
+venv/
+__pycache__/
+*.pyc
+
+# deploy env files (never commit)
+deploy/.env
+deploy/.secrets.env
+deploy/.env.*

@@ -16,3 +16,12 @@ __pycache__/
 deploy/.env
 deploy/.secrets.env
 deploy/.env.*
+# Large / generated / private
+sidecar/GeoLite2-City.mmdb
+training/*.jsonl
+training/**/*.jsonl
+
+# deploy secrets
+deploy/.env
+deploy/.secrets.env
+deploy/.env.*

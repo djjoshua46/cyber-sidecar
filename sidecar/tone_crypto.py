@@ -1,6 +1,8 @@
 # sidecar/tone_crypto.py
-import os, hmac, hashlib, secrets
-from typing import Tuple
+import os
+import hmac
+import hashlib
+import secrets
 
 _TONE_SECRET = os.getenv("SIDECAR_TONE_SECRET", "")
 if not _TONE_SECRET:

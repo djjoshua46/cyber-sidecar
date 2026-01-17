@@ -6,7 +6,7 @@ import encoding from "k6/encoding";
 // import { randomItem } from "https://jslib.k6.io/k6-utils/1.4.0/index.js";
 
 // ---- CONFIG ----
-const BASE = __ENV.SIDECAR_BASE || "http://127.0.0.1:8000";
+const BASE = __ENV.SIDECAR_BASE || "http://127.0.0.1:8085";
 const PROXY_URL = `${BASE}/proxy/http`;
 
 // Scenarios selector: comma-separated names or "all"
@@ -82,8 +82,11 @@ function cleanEnvJson(s) {
   return s;
 }
 
-const DPOP_JWK_PUBLIC = JSON.parse(cleanEnvJson(__ENV.DPOP_JWK_PUBLIC || ""));
-const DPOP_JWK_PRIVATE = JSON.parse(cleanEnvJson(__ENV.DPOP_JWK_PRIVATE || ""));
+const DPOP_JWK_PUBLIC_STR = cleanEnvJson(__ENV.DPOP_JWK_PUBLIC || "");
+const DPOP_JWK_PRIVATE_STR = cleanEnvJson(__ENV.DPOP_JWK_PRIVATE || "");
+
+const DPOP_JWK_PUBLIC = DPOP_JWK_PUBLIC_STR ? JSON.parse(DPOP_JWK_PUBLIC_STR) : null;
+const DPOP_JWK_PRIVATE = DPOP_JWK_PRIVATE_STR ? JSON.parse(DPOP_JWK_PRIVATE_STR) : null;
 
 function utf8Bytes(s) {
   // safe for tokens/URLs/ASCII; also works for general UTF-8
@@ -505,17 +508,28 @@ export function missingToneProbe() {
     console.log(`DEBUG missingToneProbe json=${JSON.stringify(j)}`);
   }
 
-  const okHandshake = (eff === 401 || eff === 409) && j && j.next_action === "retry_with_tone" && !!j.tone;
+  const expectHandshake = (__ENV.SIDECAR_EXPECT_TONE_HANDSHAKE || "1") === "1";
 
-  // If server is force-setting reauth/reauth_biometric, accept that too (no tone issued)
-  const okForced = (eff === 401) && j && (j.next_action === "reauth" || j.next_action === "reauth_biometric");
+  const okHandshake =
+    (eff === 401 || eff === 409) &&
+    j &&
+    j.next_action === "retry_with_tone" &&
+    !!j.tone;
 
-  if (!okHandshake && !okForced) {
+  const okForced =
+    (eff === 401) &&
+    j &&
+    (j.next_action === "reauth" || j.next_action === "reauth_biometric");
+
+  // NEW: when tone enforcement is disabled, allow eff 200 to count as pass
+  const okNoEnforcement = (!expectHandshake) && (eff === 200);
+
+  if (!(okHandshake || okForced || okNoEnforcement)) {
     console.log(`missingToneProbe FAIL http=${res.status} eff=${eff} json=${JSON.stringify(j)}`);
   }
 
   check(res, {
-    "missing tone: effective handshake (409/401 retry_with_tone) OR forced step-up": () => okHandshake || okForced,
+    "missing tone: handshake OR forced step-up OR (if disabled) allow": () => okHandshake || okForced || okNoEnforcement,
     "missing tone: has next_action (retry_with_tone or reauth*)": () => {
       if (!j) return false;
       if (j.next_action === "retry_with_tone") return !!j.tone;

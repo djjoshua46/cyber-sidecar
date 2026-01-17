@@ -3,7 +3,7 @@ import hashlib
 import json
 import os
 import time
-from typing import Any, Dict, Optional, Sequence
+from typing import Any, Dict, Optional
 from urllib.request import Request, urlopen
 
 import jwt

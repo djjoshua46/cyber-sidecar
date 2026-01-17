@@ -13,10 +13,8 @@ from sqlalchemy import (
     func,
     ForeignKey,
 )
-from sqlalchemy.dialects.mssql import UNIQUEIDENTIFIER
 from sqlalchemy.sql import func, text
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import declarative_base, relationship
+from sqlalchemy.orm import relationship
 from .db import Base
 import sqlalchemy  as sa
 

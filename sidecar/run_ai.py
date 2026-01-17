@@ -1,7 +1,6 @@
 # run_ai.py
 from __future__ import annotations
 
-from datetime import datetime
 from sqlalchemy import desc
 
 from sidecar.db import SessionLocal

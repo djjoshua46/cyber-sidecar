@@ -1,7 +1,7 @@
 from datetime import datetime, timezone, timedelta
 from sqlalchemy.orm import Session
 
-from .risk_engine import USER_BASELINES, SESSION_HISTORY, DEVICE_HISTORY
+from .risk_engine import USER_BASELINES
 from .models import CommanderTrainingEvents  # after you add this model
 
 import joblib

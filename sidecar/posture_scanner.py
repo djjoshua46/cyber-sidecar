@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from datetime import datetime, timezone
-from typing import Optional, Iterable, List, Tuple, Any, Dict
+from typing import Optional, List, Any, Dict
 
 from sqlalchemy.orm import Session
 
@@ -135,7 +135,7 @@ _COMMON_PORTS: List[int] = [
     3306,  # MySQL
     5432,  # Postgres
     6379,  # Redis
-    8000,  # Sidecar (common)
+    8085,  # Sidecar (common)
     8099,  # Fake upstream (your harness)
     27017, # Mongo
 ]

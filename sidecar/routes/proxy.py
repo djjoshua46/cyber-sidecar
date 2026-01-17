@@ -1,13 +1,22 @@
 from __future__ import annotations
 
-import hashlib, asyncio, time, os, json, uuid, httpx, ipaddress, logging
+import hashlib
+import asyncio
+import time
+import os
+import json
+import httpx
+import ipaddress
+import logging
+import uuid
+import re
 from time import perf_counter
 import redis.asyncio as redis
 import json as _json
 
-from datetime import datetime, timezone
+from datetime import datetime
 from typing import Any, Dict, Optional
-from uuid import uuid4
+from uuid import uuid4, UUID
 from fastapi import APIRouter, Depends, Header, HTTPException, Request
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel
@@ -17,7 +26,6 @@ from sqlalchemy import desc, select
 from pathlib import Path
 from functools import lru_cache
 from ..risk_engine import (
-    create_risk_finding_for_export,
     evaluate_risk,
     decide_action,
 )
@@ -25,18 +33,15 @@ from ..risk_engine import (
 from ..config import TENANT_ID
 from ..deps import get_db
 from ..models import Event, Export, RiskFinding, EphemeralSessionKey
-from ..policy import get_policy_for_tenant
-from ..tone_engine import issue_tone_redis, validate_tone_redis, log_tone_rotation_sql
+from ..tone_engine import issue_tone_redis, validate_tone_redis
 from ..ml.features import build_policy_features
 from ..ml.infer import infer as ml_infer
-from ..ml.export_training import append_training_row
 from ..ml.cloud_intent import classify_cloud_intent
 from ..ml.cloud_baselines import update_cloud_baselines
 
 from ..geoip import lookup_geo_label
 from ..drift_engine import update_and_score_drift
 from ..deception_engine import maybe_apply_deception
-from ..replay_forensics import log_http_event
 from ..policy_runtime import get_effective_policy
 from ..services.watermark import apply_watermark_bytes, make_trace_sig, should_watermark
 from ..identity.dpop import verify_dpop
@@ -113,7 +118,8 @@ def _policy_train_emit(
 
 ):
     try:
-        import os, time
+        import os
+        import time
         if os.environ.get("SIDECAR_DEBUG_TRAINING", "0") == "1":
             print("[TRAINING] _policy_train_emit called", time.time(), "cwd=", os.getcwd())
             print("[TRAINING] args decision_action=", repr(decision_action), "type=", type(decision_action).__name__)
@@ -212,7 +218,8 @@ def _policy_train_emit(
         _policy_train_emit_row(row)
 
     except Exception as e:
-        import traceback, os
+        import traceback
+        import os
         if os.environ.get("SIDECAR_DEBUG_TRAINING", "0") == "1":
             print("TRAINING_EMIT_ERROR:", repr(e))
             traceback.print_exc()
@@ -221,6 +228,7 @@ def _policy_train_emit(
 
 async def _emit_and_return(
     *,
+    request: Request,
     status_code: int,
     content: dict,
     effective_tenant_id: str,
@@ -242,6 +250,14 @@ async def _emit_and_return(
     row_count: int = 0,
     byte_size: int = 0,
 ):
+    """
+    Single exit path for proxy_http:
+    - computes effective_sc (sidecar enforcement status) for training
+    - emits training row (best-effort)
+    - returns JSONResponse with consistent decision/reason fields
+    - ALWAYS attaches trace/export headers if present on request.state
+    """
+
     # --- unwrap inner status if present ---
     inner_sc = None
     next_action = None
@@ -250,67 +266,21 @@ async def _emit_and_return(
         next_action = content.get("next_action", None)
 
     # --- compute EFFECTIVE status for training ---
-    # IMPORTANT: effective status is SIDE-CAR enforcement, not upstream 404s.
-    # effective_sc = 200  # default "allowed by policy"
-    # a = (str(action or "")).strip().lower()
-
-    # # If the response is explicitly telling the client what happened, use that.
-    # na = (str(next_action or "")).strip().lower()
-    # # -------------------------
-    # # DEBUG OVERRIDE (TEMP)
-    # # -------------------------
-    # force = os.getenv("SIDECAR_FORCE_ACTION")
-    # if force:
-    #     f = force.lower()
-    #     if f == "honeypot":
-    #         effective_sc = 409
-    #         deception_used = True
-    #     elif f == "block":
-    #         effective_sc = 403
-    #     elif f == "reauth":
-    #         effective_sc = 401
-
-    # if na in ("deception", "honeypot"):
-    #     effective_sc = 409
-    #     deception_used = True
-    # elif na in ("block", "deny"):
-    #     # choose one of these depending on how you represent block
-    #     effective_sc = 403
-    # elif na in ("reauth_biometric", "reauth", "biometric"):
-    #     effective_sc = 401
-    # else:
-    #     # if action says enforcement, respect it
-    #     if a in ("honeypot", "deception"):
-    #         effective_sc = 409
-    #         deception_used = True
-    #     elif a in ("block",):
-    #         effective_sc = 403
-    #     elif a in ("reauth_biometric", "biometric"):
-    #         effective_sc = 401
-    #     else:
-    #         # otherwise: treat as allowed-by-policy even if upstream is 404
-    #         effective_sc = 200
-
-    # --- compute EFFECTIVE status for training ---
     # effective status is SIDE-CAR enforcement, not upstream 404s.
-    effective_sc = 200  # default "allowed by policy"
+    effective_sc = 200
     a = (str(action or "")).strip().lower()
     na = (str(next_action or "")).strip().lower()
 
     # --- FORCE ACTION (debug/testing) ---
-    # This must be evaluated at request time (not import time),
-    # so changing the env var immediately affects behavior.
+    # Evaluate at request time so env var changes take effect immediately.
     force = os.getenv("SIDECAR_FORCE_ACTION", "").strip().lower()
-
     if force in ("honeypot", "deception"):
         na = "deception"
         a = "honeypot"
         deception_used = True
-        # Make the inner response reflect the enforcement too
         if isinstance(content, dict):
             content["next_action"] = "deception"
             content["status_code"] = 409
-
     elif force in ("block",):
         na = "block"
         a = "block"
@@ -318,7 +288,6 @@ async def _emit_and_return(
         if isinstance(content, dict):
             content["next_action"] = "block"
             content["status_code"] = 403
-
     elif force in ("reauth", "biometric", "reauth_biometric"):
         na = "reauth_biometric"
         a = "reauth_biometric"
@@ -347,33 +316,6 @@ async def _emit_and_return(
         else:
             effective_sc = 200
 
-    # --- FORCE OVERRIDE (debug/testing) ---
-    # Allows k6 / local tests to force a label regardless of upstream response.
-    forced = (os.getenv("SIDECAR_FORCE_ACTION") or "").strip().lower()
-    if forced:
-        if forced in ("honeypot", "deception"):
-            action = "honeypot"
-            deception_used = True
-            effective_sc = 409
-            if isinstance(content, dict):
-                # Make inner semantics consistent for training/debug
-                content.setdefault("status_code", 409)
-                content["next_action"] = "deception"
-        elif forced in ("block",):
-            action = "block"
-            deception_used = False
-            effective_sc = 403
-            if isinstance(content, dict):
-                content.setdefault("status_code", 403)
-                content["next_action"] = "block"
-        elif forced in ("reauth", "reauth_biometric", "biometric"):
-            action = "reauth_biometric"
-            deception_used = False
-            effective_sc = 401
-            if isinstance(content, dict):
-                content.setdefault("status_code", 401)
-                content["next_action"] = "reauth_biometric"
-
     # -----------------------------
     # decision + reasons (ALWAYS)
     # -----------------------------
@@ -398,25 +340,21 @@ async def _emit_and_return(
             na_l = str(content.get("next_action") or "").strip().lower()
             tone_reason = content.get("tone_reason")
 
-        # Stable “decision_action” classes for ML
         decision_action = "allow"
         if deception_used or effective_sc == 409 or action_l in ("honeypot", "deception"):
             decision_action = "honeypot"
-        elif effective_sc in (401,):
+        elif effective_sc == 401:
             decision_action = "reauth"
         elif effective_sc >= 400:
             decision_action = "block"
 
-        # Reason codes (multi-label)
         reason_codes = []
 
-        # Identity / tone gates
         if err_l == "identity_required":
             reason_codes.append("identity_required")
         if err_l in ("tone_required", "tone_invalid"):
             reason_codes.append(err_l)
 
-        # Policy action signals
         if na_l in ("block", "deny"):
             reason_codes.append("policy_block")
         if na_l in ("deception", "honeypot"):
@@ -424,7 +362,6 @@ async def _emit_and_return(
         if na_l in ("retry_with_tone", "reauth", "reauth_biometric", "biometric"):
             reason_codes.append("policy_reauth")
 
-        # Fall back to the coarse decision if nothing else triggered
         if not reason_codes:
             reason_codes.append(f"decision_{decision_action}")
 
@@ -446,9 +383,7 @@ async def _emit_and_return(
             "tone_reason": tone_reason,
             "action_raw": action_l or None,
         }
-
         return decision_action, reason_codes, reason_detail
-
 
     decision_action, reason_codes, reason_detail = _derive_decision_and_reasons(
         effective_sc=int(effective_sc or 0),
@@ -461,47 +396,44 @@ async def _emit_and_return(
     )
 
     # -----------------------------
-    # pre-decision-ish feature signals (top-level scalars)
-    # -----------------------------
-    err_l = ""
-    na_l = ""
-    if isinstance(content, dict):
-        err_l = str(content.get("error") or "").strip().lower()
-        na_l = str(content.get("next_action") or "").strip().lower()
-
-    # Tone signals (derived from gate outcome; still useful + not label leakage fields)
-    tone_present = 1
-    tone_state = "ok"
-    if err_l == "tone_required":
-        tone_present = 0
-        tone_state = "missing"
-    elif err_l == "tone_invalid":
-        tone_present = 1
-        tone_state = "invalid"
-
-    # Identity level (based on which ids are present)
-    identity_level = 0
-    if x_user_id: identity_level = max(identity_level, 1)
-    if x_session_id: identity_level = max(identity_level, 2)
-    if x_device_id: identity_level = max(identity_level, 3)
-
-    # Path class (small stable taxonomy)
-    lowered = (target_url or "").lower()
-    if "/export/small" in lowered:
-        path_class = "export_small"
-    elif "/export/medium" in lowered:
-        path_class = "export_medium"
-    elif "/auth/tone/refresh" in lowered:
-        path_class = "auth_refresh"
-    elif "/proxy/" in lowered:
-        path_class = "proxy_http"
-    else:
-        path_class = "other"
-
-    # -----------------------------
     # emit training row (never break request)
     # -----------------------------
     try:
+        err_l = ""
+        na_l = ""
+        if isinstance(content, dict):
+            err_l = str(content.get("error") or "").strip().lower()
+            na_l = str(content.get("next_action") or "").strip().lower()
+
+        tone_present = 1
+        tone_state = "ok"
+        if err_l == "tone_required":
+            tone_present = 0
+            tone_state = "missing"
+        elif err_l == "tone_invalid":
+            tone_present = 1
+            tone_state = "invalid"
+
+        identity_level = 0
+        if x_user_id:
+            identity_level = max(identity_level, 1)
+        if x_session_id:
+            identity_level = max(identity_level, 2)
+        if x_device_id:
+            identity_level = max(identity_level, 3)
+
+        lowered = (target_url or "").lower()
+        if "/export/small" in lowered:
+            path_class = "export_small"
+        elif "/export/medium" in lowered:
+            path_class = "export_medium"
+        elif "/auth/tone/refresh" in lowered:
+            path_class = "auth_refresh"
+        elif "/proxy/" in lowered:
+            path_class = "proxy_http"
+        else:
+            path_class = "other"
+
         _policy_train_emit(
             effective_tenant_id=str(effective_tenant_id or ""),
             x_user_id=str(x_user_id or ""),
@@ -528,8 +460,6 @@ async def _emit_and_return(
             risk_score=float(risk_score or 0.0),
             risk_level=str(risk_level or "low"),
             path_class=str(path_class),
-
-            # NEW: supervised reasoning fields
             decision_action=decision_action,
             reason_codes=reason_codes,
             reason_detail=reason_detail,
@@ -545,32 +475,54 @@ async def _emit_and_return(
         content["reason_codes"] = reason_codes
         content["reason_detail"] = reason_detail
     else:
-        # if your response body isn't a dict, still return something stable
         content = {
             "decision_action": decision_action,
             "reason_codes": reason_codes,
             "reason_detail": reason_detail,
         }
 
-    try:
-        # stamp effective status in the live response too (helps k6/debug)
-        if isinstance(content, dict):
-            content.setdefault("status_code_effective", int(effective_sc or 0))
-            content.setdefault("status_code_outer", int(status_code or 0))
-            if inner_sc is not None:
-                content.setdefault("status_code_inner", int(inner_sc))
+    # stamp effective status in the live response too (helps k6/debug)
+    if isinstance(content, dict):
+        content.setdefault("status_code_effective", int(effective_sc or 0))
+        content.setdefault("status_code_outer", int(status_code or 0))
+        if inner_sc is not None:
+            content.setdefault("status_code_inner", int(inner_sc))
 
-        return JSONResponse(status_code=int(status_code or 200), content=content)
+    # -----------------------------
+    # BUILD RESPONSE + ADD TRACE HEADERS (THIS is the “which return”)
+    # -----------------------------
+    try:
+        resp = JSONResponse(status_code=int(status_code or 200), content=content)
+
+        # Attach correlation headers if present
+        trace_id = getattr(getattr(request, "state", object()), "trace_id", "") or ""
+        export_id = getattr(getattr(request, "state", object()), "export_id", "") or ""
+        trace_sig = getattr(getattr(request, "state", object()), "trace_sig", "") or ""
+
+        if trace_id:
+            resp.headers["X-Trace-Id"] = str(trace_id)
+        if export_id:
+            resp.headers["X-Export-Id"] = str(export_id)
+        if trace_sig:
+            resp.headers["X-Trace-Sig"] = str(trace_sig)
+
+        return resp
 
     except Exception as e:
         logger.exception("_emit_and_return: failed to build response")
-        return JSONResponse(
+        resp = JSONResponse(
             status_code=500,
-            content={
-                "error": "emit_and_return_failed",
-                "detail": str(e),
-            },
+            content={"error": "emit_and_return_failed", "detail": str(e)},
         )
+        # even on failure, try to attach trace_id if we have it
+        try:
+            trace_id = getattr(getattr(request, "state", object()), "trace_id", "") or ""
+            if trace_id:
+                resp.headers["X-Trace-Id"] = str(trace_id)
+        except Exception:
+            pass
+        return resp
+
 
 class ProxyRequest(BaseModel):
     # Matches your PowerShell body:
@@ -807,7 +759,120 @@ def _ip_prefix(ip: str) -> str:
         return str(net)
     except Exception:
         return ip or ""
+
+_TRACE_HEADER = "X-Trace-Id"
+_EXPORT_HEADER = "X-Export-Id"
+_TRACE_SIG_HEADER = "X-Trace-Sig"
+_BEACON_HEADER = "X-Beacon-Url"
+
+def _coerce_trace_id(v: str | None) -> str:
+    """
+    Accept caller-provided trace id if it's a UUID, else generate a new one.
+    Always returns a canonical UUID string.
+    """
+    if not v:
+        return str(uuid4())
+    try:
+        return str(UUID(v))
+    except Exception:
+        return str(uuid4())
     
+def _trace_id_from_headers(request: Request) -> str:
+    """
+    Priority:
+      1) X-Trace-Id (explicit)
+      2) traceparent (W3C) -> use trace-id portion
+      3) generate uuid4
+    """
+    # 1) Explicit
+    x = (request.headers.get("x-trace-id") or "").strip()
+    if x:
+        return x[:128]
+
+    # 2) W3C traceparent: "00-<trace-id>-<parent-id>-<flags>"
+    tp = (request.headers.get("traceparent") or "").strip()
+    if tp:
+        try:
+            parts = tp.split("-")
+            if len(parts) >= 4 and len(parts[1]) >= 16:
+                return parts[1][:128]
+        except Exception:
+            pass
+
+    # 3) New
+    return str(uuid4())
+
+
+def _coerce_uuid_or_400(value: str | None, header_name: str) -> str | None:
+    """
+    If value is None/empty -> return None (caller can generate).
+    If value is present but invalid UUID -> raise 400 (DO NOT silently randomize).
+    """
+    if value is None:
+        return None
+    s = str(value).strip()
+    if not s:
+        return None
+    try:
+        return str(UUID(s))
+    except Exception:
+        raise HTTPException(
+            status_code=400,
+            detail={
+                "error": "invalid_header",
+                "header": header_name,
+                "expected": "uuid",
+                "got": s,
+            },
+        )
+
+def _mint_trace_and_export_ids(
+    x_trace_id: str | None,
+    request: Request,
+    upstream_headers: dict,
+) -> tuple[str, str]:
+    """
+    - If client supplies valid IDs -> use them (stable correlation)
+    - If client supplies invalid IDs -> 400 (no random surprises)
+    - Else -> generate
+    """
+    incoming_trace = _get_incoming_trace_id(request, upstream_headers)  # your existing helper
+    incoming_export = _get_incoming_export_id(request, upstream_headers)
+
+    # Allow explicit X-Trace-Id header to win if present
+    trace_candidate = _coerce_uuid_or_400(x_trace_id, "X-Trace-Id") or _coerce_uuid_or_400(incoming_trace, "X-Trace-Id")
+    export_candidate = _coerce_uuid_or_400(incoming_export, "X-Export-Id")
+
+    trace_id = trace_candidate or str(uuid.uuid4())
+    export_id = export_candidate or str(uuid.uuid4())
+    return trace_id, export_id
+
+def _normalize_trace_id(v: Optional[str]) -> Optional[str]:
+    v = (v or "").strip()
+    if not v:
+        return None
+    # keep it len-safe (avoid log poisoning)
+    if len(v) > 128:
+        v = v[:128]
+    return v
+
+def _get_incoming_trace_id(request: Request, upstream_headers: dict) -> Optional[str]:
+    # Prefer explicit proxy header first, then any upstream header pass-through.
+    h = request.headers
+    return _normalize_trace_id(
+        h.get("x-trace-id")
+        or upstream_headers.get("X-Trace-Id")
+        or upstream_headers.get("x-trace-id")
+    )
+
+def _get_incoming_export_id(request: Request, upstream_headers: dict) -> Optional[str]:
+    h = request.headers
+    return _normalize_trace_id(
+        h.get("x-export-id")
+        or upstream_headers.get("X-Export-Id")
+        or upstream_headers.get("x-export-id")
+    )
+
 TRUST_XFF = os.getenv("SIDECAR_TRUST_XFF", "1") == "1"
 TRUSTED_PROXY_CIDRS = [
     c.strip() for c in os.getenv("SIDECAR_TRUSTED_PROXY_CIDRS", "127.0.0.1/32").split(",") if c.strip()
@@ -1215,71 +1280,159 @@ def _get_latest_ai_decision(db, session_id: str) -> dict | None:
     except Exception:
         return None
     
+
 def _log_event(
     db: Session,
-    *,
-    tenant_id: str,
-    user_id: Optional[str],
-    device_id: Optional[str],
-    session_id: Optional[str],
-    source: str,
     event_type: str,
-    resource: Optional[str],
-    ip: Optional[str],
-    geo: Optional[str],
-    client_ip: Optional[str] = None,
-    user_agent: Optional[str],
-    details: Optional[dict] = None,
-) -> Event:
+    details: Optional[Dict[str, Any]] = None,
+    export_id: Optional[str] = None,
+    trace_id: Optional[str] = None,
+    tenant_id: Optional[str] = None,
+    **extra: Any,
+) -> None:
     """
-    Create an Event row using the SAME attribute names as sidecar.models.Event.
-    We know from the /events route that Event expects snake_case attributes:
-      tenant_id, user_id, device_id, session_id, source, event_type,
-      resource, ip, geo, details.
-    We'll put client_ip and user_agent into the details JSON so we don't
-    rely on their exact column/attribute names.
-    """
+    Enterprise rule:
+    - trace_id is ALWAYS present in Details JSON (when available)
+    - export_id is ALWAYS present in Details JSON (when available)
 
-    # Merge any extra details + client_ip / user_agent into a single JSON blob
-    details_payload: dict = {}
+    Also: tolerate new log fields (tenant_id, etc.) without breaking the API path.
+    """
+    details_payload: Dict[str, Any] = {}
     if isinstance(details, dict):
         details_payload.update(details)
 
-    if client_ip is not None:
-        details_payload.setdefault("client_ip", client_ip)
-    if user_agent is not None:
-        details_payload.setdefault("user_agent", user_agent)
-    if client_ip is None and ip is not None:
-        client_ip = ip
+    # Add tenant_id (and any extra fields) into details JSON, but don't overwrite if caller already set them
+    if tenant_id is not None and "tenant_id" not in details_payload:
+        details_payload["tenant_id"] = tenant_id
 
-    details_str = _safe_json(details_payload or None)
-    # Build the ORM object with snake_case field names
-    evt = Event(
-        tenant_id=tenant_id,
-        user_id=user_id,
-        device_id=device_id,
-        session_id=session_id,
-        source=source,
-        event_type=event_type,
-        resource=resource,
-        ip=ip,
-        geo=geo,
-        details=details_str or None,
-    )
+    for k, v in (extra or {}).items():
+        if v is None:
+            continue
+        if k not in details_payload:
+            details_payload[k] = v
 
-    # If the ORM model has explicit columns for these, populate them.
-    # Your SQL table DOES (ClientIp, UserAgent), so this will stop them being NULL.
-    try:
-        if hasattr(evt, "client_ip"):
-            setattr(evt, "client_ip", client_ip)
-        if hasattr(evt, "user_agent"):
-            setattr(evt, "user_agent", user_agent)
-    except Exception:
-        pass
+    # Inject correlation identifiers into the JSON payload
+    if trace_id and "trace_id" not in details_payload:
+        details_payload["trace_id"] = trace_id
+    if export_id and "export_id" not in details_payload:
+        details_payload["export_id"] = export_id
 
-    db.add(evt)
+    # Build kwargs safely based on actual ORM columns (works across schema variants)
+    ev_kwargs: Dict[str, Any] = {}
 
-    return evt
+    # Source column is REQUIRED in your DB (NOT NULL)
+    source_val = None
+    if isinstance(details_payload, dict):
+        source_val = details_payload.get("source") or details_payload.get("Source")
+    if not source_val:
+        source_val = "proxy"  # safe default
+
+    for k in ("Source", "source"):
+        if hasattr(Event, k):
+            ev_kwargs[k] = source_val
+            break
+
+    # Common candidates across schemas
+    # Event type column can be: EventType, event_type, type, name
+    for k in ("EventType", "event_type", "type", "name"):
+        if hasattr(Event, k):
+            ev_kwargs[k] = event_type
+            break
+
+    # Timestamp column can be: TimestampUtc, timestamp_utc, created_at, ts_utc
+    for k in ("TimestampUtc", "timestamp_utc", "created_at", "ts_utc", "timestamp"):
+        if hasattr(Event, k):
+            ev_kwargs[k] = datetime.utcnow()
+            break
+
+    # Details column can be: Details, details, payload, json, data
+    details_json = json.dumps(details_payload) if details_payload else None
+    for k in ("Details", "details", "payload", "json", "data"):
+        if hasattr(Event, k):
+            ev_kwargs[k] = details_json
+            break
+
+    # Optional correlation columns (already doing safe style)
+    if export_id:
+        for k in ("export_id", "ExportId"):
+            if hasattr(Event, k):
+                ev_kwargs[k] = export_id
+                break
+    if trace_id:
+        for k in ("trace_id", "TraceId"):
+            if hasattr(Event, k):
+                ev_kwargs[k] = trace_id
+                break
+
+    # Optional tenant/org column
+    if tenant_id:
+        for k in ("tenant_id", "TenantId", "org_id", "OrgId"):
+            if hasattr(Event, k):
+                ev_kwargs[k] = tenant_id
+                break
+
+    # Tenant/User/Device/Session columns (your schema has these)
+    if isinstance(details_payload, dict):
+        # user_id
+        user_val = details_payload.get("user_id") or details_payload.get("UserId") or details_payload.get("user")
+        if user_val:
+            for k in ("UserId", "user_id"):
+                if hasattr(Event, k):
+                    ev_kwargs[k] = user_val
+                    break
+
+        # device_id
+        device_val = details_payload.get("device_id") or details_payload.get("DeviceId") or details_payload.get("device")
+        if device_val:
+            for k in ("DeviceId", "device_id"):
+                if hasattr(Event, k):
+                    ev_kwargs[k] = device_val
+                    break
+
+        # session_id
+        sess_val = details_payload.get("session_id") or details_payload.get("SessionId") or details_payload.get("session")
+        if sess_val:
+            for k in ("SessionId", "session_id"):
+                if hasattr(Event, k):
+                    ev_kwargs[k] = sess_val
+                    break
+
+        # resource/url
+        res_val = details_payload.get("resource") or details_payload.get("Resource") or details_payload.get("target_url")
+        if res_val:
+            for k in ("Resource", "resource"):
+                if hasattr(Event, k):
+                    ev_kwargs[k] = res_val
+                    break
+
+        # ip
+        ip_val = details_payload.get("ip") or details_payload.get("Ip")
+        if ip_val:
+            for k in ("Ip", "ip"):
+                if hasattr(Event, k):
+                    ev_kwargs[k] = ip_val
+                    break
+
+        # client_ip
+        cip_val = details_payload.get("client_ip") or details_payload.get("ClientIp")
+        if cip_val:
+            for k in ("ClientIp", "client_ip"):
+                if hasattr(Event, k):
+                    ev_kwargs[k] = cip_val
+                    break
+
+        # user_agent
+        ua_val = details_payload.get("user_agent") or details_payload.get("UserAgent")
+        if ua_val:
+            for k in ("UserAgent", "user_agent"):
+                if hasattr(Event, k):
+                    ev_kwargs[k] = ua_val
+                    break
+
+    ev = Event(**ev_kwargs)
+    db.add(ev)
+
+    db.commit()
 
 
 def _compute_basic_risk_score(
@@ -1351,6 +1504,16 @@ def _risk_level_from_policy(
 
     return level, block
 
+def _attach_trace_headers(resp: Response, trace_id: str, export_id: str, trace_sig: str = "", beacon_url: str = "") -> Response:
+    if trace_id:
+        resp.headers["X-Trace-Id"] = trace_id
+    if export_id:
+        resp.headers["X-Export-Id"] = export_id
+    if trace_sig:
+        resp.headers["X-Trace-Sig"] = trace_sig
+    if beacon_url:
+        resp.headers["X-Beacon-Url"] = beacon_url
+    return resp
 
 @router.post("/http")
 async def proxy_http(
@@ -1364,6 +1527,8 @@ async def proxy_http(
     x_reauth_result: Optional[str] = Header(None, alias="X-Reauth-Result"),
     x_org_id: Optional[str] = Header(None, alias="X-Org-Id"),
     x_client_ip: Optional[str] = Header(None, alias="X-Client-Ip"),
+    x_trace_id: Optional[str] = Header(None, alias="X-Trace-Id"),
+    x_export_id: Optional[str] = Header(None, alias="X-Export-Id"),
 ) -> JSONResponse:
     """
     Single-path proxy with strict preflight (NO upstream yet):
@@ -1436,12 +1601,15 @@ async def proxy_http(
     upstream_headers = payload.headers or {}
     body_bytes: Optional[bytes] = payload.body.encode("utf-8") if payload.body is not None else None
 
-    # Mint IDs early so ALL outcomes (including honeypot) can carry trace correlation.
-    export_id = str(uuid4())
-    trace_id = str(uuid4())
+    # Mint IDs early, but honor client-provided correlation IDs if present.
+    trace_id, export_id = _mint_trace_and_export_ids(x_trace_id, request, upstream_headers)
+
+    # Store once so every later path can use it
+    request.state.trace_id = trace_id
+    request.state.export_id = export_id
 
     # Beacon URL can be minted early too.
-    base = os.getenv("SIDECAR_PUBLIC_BASE", "http://127.0.0.1:8000").rstrip("/")
+    base = os.getenv("SIDECAR_PUBLIC_BASE", "http://127.0.0.1:8085").rstrip("/")
     beacon_url = f"{base}/proxy/beacon/t/{trace_id}"
 
     # -------------------------
@@ -1521,17 +1689,38 @@ async def proxy_http(
     test_mode = os.getenv("SIDECAR_TEST_MODE", "0").lower() in ("1", "true", "yes")
     bypass_strict_gates = bool(test_mode)
 
-    # Always take redis from the FastAPI app state (set in app.py lifespan)
+    # Always take redis from the FastAPI app state first (set in sidecar/app.py lifespan)
     redis_client = getattr(request.app.state, "redis", None)
 
-    # -------------------------
+    # If app.state.redis is missing, fall back to the shared infra getter (health uses this path).
+    # This avoids false "redis_unavailable" when app.state isn't populated for any reason.
+    if redis_client is None:
+        try:
+            from sidecar.infra.redis_client import get_redis_async  # <-- absolute import
+            redis_client = await get_redis_async()
+
+            # Optional: also populate app.state so subsequent code paths are consistent.
+            try:
+                request.app.state.redis = redis_client
+            except Exception:
+                pass
+        except Exception as e:
+            try:
+                print("[proxy_http] Redis fallback failed:", repr(e))
+            except Exception:
+                pass
+            redis_client = None
+            
     # Redis availability gate (predictable)
-    # -------------------------
     if redis_required and (not test_mode) and (redis_client is None):
         return await _emit_and_return(
+            request=request,
             status_code=503,
             content=_final({"error": "redis_unavailable", "next_action": "retry"}),
             effective_tenant_id=effective_tenant_id,
+            decision_action="block",
+            reason_codes=["decision_block"],
+            reason_detail={"error": "redis_unavailable", "next_action": "retry"},
             x_user_id=str(user_id or ""),
             x_session_id=str(session_id or ""),
             x_device_id=str(device_id or ""),
@@ -1660,6 +1849,7 @@ async def proxy_http(
             maybe_commit(db)
 
         return await _emit_and_return(
+            request=request,
             status_code=401,
             content=_final({
                 "error": "identity_required",
@@ -1705,11 +1895,12 @@ async def proxy_http(
             )
             maybe_commit(db)
 
-        except Exception as e:
+        except Exception:
             # Enterprise behavior: Redis/tone infra failing is NOT a 500.
             # If we require Redis (normal mode), fail predictably with 503.
             if redis_required and (not test_mode):
                 return await _emit_and_return(
+                    request=request,
                     status_code=503,
                     content=_final({"error": "redis_unavailable", "next_action": "retry"}),
                     effective_tenant_id=effective_tenant_id,
@@ -1735,6 +1926,7 @@ async def proxy_http(
 
         # Normal “tone_required” response (409) when we successfully issued a tone
         return await _emit_and_return(
+            request=request,
             status_code=409,
             content=_final({
                 "message": "tone_required",
@@ -1793,6 +1985,7 @@ async def proxy_http(
         maybe_commit(db)
 
         return await _emit_and_return(
+            request=request,
             status_code=409,
             content=_final({
                 "message": "tone_invalid",
@@ -1827,6 +2020,7 @@ async def proxy_http(
         dpop_jwt = request.headers.get("DPoP")
         if not dpop_jwt:
             return await _emit_and_return(
+                request=request,
                 status_code=401,
                 content=_final({
                     "error": "dpop_required",
@@ -1863,6 +2057,7 @@ async def proxy_http(
             )
         except ValueError as e:
             return await _emit_and_return(
+                request=request,
                 status_code=401,
                 content=_final({
                     "error": "dpop_invalid",
@@ -2024,6 +2219,7 @@ async def proxy_http(
         export_id=export_id,
         tenant_id=effective_tenant_id,
     )
+    request.state.trace_sig = trace_sig
     common_headers = {
         "X-Export-Id": export_id or "",
         "X-Trace-Id": trace_id or "",
@@ -2060,6 +2256,7 @@ async def proxy_http(
     # 7) Hard block (NO upstream)
     if action == "block":
         return await _emit_and_return(
+            request=request,
             status_code=403,
             content=_final({
                 "error": "blocked_by_preflight_policy",
@@ -2114,6 +2311,7 @@ async def proxy_http(
         })
 
         return await _emit_and_return(
+            request=request,
             status_code=200,  # wrapper 200
             content=_final({
                 "status_code": 409,  # inner indicates deception handoff
@@ -2150,6 +2348,7 @@ async def proxy_http(
     if action == "biometric" and behavior_risk.get("level") in ("medium", "high"):
         if not reauth_ok:
             return await _emit_and_return(
+                request=request,
                 status_code=401,
                 content=_final({
                     "error": "step_up_required",
@@ -2298,6 +2497,7 @@ async def proxy_http(
         down_headers["content-type"] = "application/json"
 
         return await _emit_and_return(
+            request=request,
             status_code=503,
             content=_final({
                 "status_code": 503,
@@ -2677,6 +2877,7 @@ async def proxy_http(
     envelope_headers.update({"X-Risk-Level": risk_level or "low"})
 
     return await _emit_and_return(
+        request=request,
         status_code=200,
         content=_final({
             "status_code": int(status_code),
@@ -4626,7 +4827,6 @@ def replay_session_timeline(
         ],
     }
 
-from starlette.responses import Response
 
 @router.get("/beacon/t/{trace_id}")
 async def beacon_hit(trace_id: str, request: Request, db: Session = Depends(get_db)):

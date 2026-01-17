@@ -146,7 +146,7 @@ def assert_condition(ok: bool, msg: str) -> None:
 
 async def run():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--sidecar", default="http://127.0.0.1:8000", help="Sidecar base URL")
+    parser.add_argument("--sidecar", default="http://127.0.0.1:8085", help="Sidecar base URL")
     parser.add_argument("--upstream-host", default="127.0.0.1")
     parser.add_argument("--upstream-port", type=int, default=8099)
     args = parser.parse_args()

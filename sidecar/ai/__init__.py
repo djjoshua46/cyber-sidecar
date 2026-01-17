@@ -1,3 +1,4 @@
+# ai/__init__.py
 from .features import build_context, compute_features
 from .policy_agent import PolicyAgent
 from .anomaly_model import AnomalyModel

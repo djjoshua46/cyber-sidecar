@@ -1,5 +1,4 @@
 import random
-from datetime import datetime, timezone
 from typing import List, Dict
 
 import pandas as pd

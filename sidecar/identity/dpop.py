@@ -1,11 +1,9 @@
 import base64
 import hashlib
 import time
-import json
 from typing import Optional, Dict, Any
 
 import jwt  # PyJWT
-from jwt import PyJWKClient
 
 def b64url(data: bytes) -> str:
     return base64.urlsafe_b64encode(data).rstrip(b"=").decode("ascii")

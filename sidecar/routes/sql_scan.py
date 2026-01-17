@@ -1,6 +1,7 @@
 from __future__ import annotations
 
-import hashlib, time
+import hashlib
+import time
 from typing import Dict, Optional, Any
 
 from fastapi import APIRouter, Depends, Request
@@ -10,7 +11,6 @@ from ..deps import get_db, get_request_context
 from ..sql_scanner import run_full_sql_scan, log_sql_scan_history
 from ..replay_forensics import log_http_event
 from ..models import SqlSecurityScanHistory
-from .. import sql_scanner
 
 router = APIRouter()
 

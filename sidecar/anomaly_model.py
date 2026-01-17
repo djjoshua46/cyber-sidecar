@@ -1,5 +1,5 @@
 from collections import defaultdict, deque
-from typing import Any, Deque, Dict, Tuple
+from typing import Any, Deque, Dict
 
 class AnomalyModel:
     """

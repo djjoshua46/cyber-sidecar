@@ -1,8 +1,8 @@
-from locust import HttpUser, task, between, events
+from locust import HttpUser, task, between
 import os
 import uuid
 
-SIDECAR_HOST = os.getenv("SIDECAR_HOST", "http://127.0.0.1:8000")
+SIDECAR_HOST = os.getenv("SIDECAR_HOST", "http://127.0.0.1:8085")
 UPSTREAM = os.getenv("UPSTREAM", "http://127.0.0.1:8099")
 
 # MODE:

@@ -1,5 +1,4 @@
 # sidecar/ml/anomaly_model.py
-import math
 
 class AnomalyModel:
     def score(self, feats: dict) -> float:

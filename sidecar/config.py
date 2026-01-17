@@ -2,7 +2,7 @@ import os
 
 # Change this to match your SQL Server instance / driver / login.
 DEFAULT_DB_URL = (
-    "mssql+pyodbc://CyberSidecarLogin:05$jAF18"
+    "mssql+pyodbc://CyberSidecarLogin:05$$jAF18"
     "@localhost/CyberSidecar"
     "?driver=ODBC+Driver+17+for+SQL+Server"
 )

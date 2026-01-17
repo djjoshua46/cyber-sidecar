@@ -1,7 +1,6 @@
 from __future__ import annotations
 from http.server import BaseHTTPRequestHandler, HTTPServer
 from urllib.parse import urlparse
-import time
 
 
 def make_csv(rows: int) -> bytes:

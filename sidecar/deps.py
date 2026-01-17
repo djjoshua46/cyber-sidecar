@@ -1,14 +1,15 @@
 from __future__ import annotations
-import hashlib, logging
-from dataclasses import dataclass, field
+import hashlib
+import logging
+from dataclasses import dataclass
 
 from fastapi import Depends, Request, HTTPException, status
 from collections.abc import Generator
 from sqlalchemy.orm import Session
 
-from .db import SessionLocal, get_db
+from .db import SessionLocal
 from .geoip import lookup_ip
-from .tone_engine import validate_tone, compute_tone_risk, validate_ephemeral_tone
+from .tone_engine import validate_tone, compute_tone_risk
 from .models import Event
 
 from typing import Optional

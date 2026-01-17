@@ -1,7 +1,9 @@
 # sidecar/ml/train_policy_model.py
 from __future__ import annotations
-import glob, json, os, math
-from typing import Any, Dict, List
+import glob
+import json
+import os
+import math
 
 TRAIN_DIR = os.getenv("SIDECAR_TRAIN_DIR", os.path.join(os.getcwd(), "training"))
 MODEL_PATH = os.getenv("SIDECAR_POLICY_MODEL_PATH", os.path.join(os.getcwd(), "policy_model.joblib"))

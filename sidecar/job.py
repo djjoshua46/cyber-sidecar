@@ -1,7 +1,6 @@
 import time
 from typing import Callable, Dict, Any
 
-from .features import compute_features
 from .policy_agent import PolicyAgent
 from .anomaly_model import AnomalyModel
 from .responders import ResponderHub

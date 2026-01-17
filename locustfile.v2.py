@@ -24,10 +24,9 @@ Env vars:
   ORGS=1..N
 """
 import os
-import json
 import random
 from dataclasses import dataclass
-from typing import Optional, Dict, Any
+from typing import Dict, Any
 
 from locust import HttpUser, task, between
 

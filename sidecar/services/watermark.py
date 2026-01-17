@@ -1,8 +1,9 @@
 # sidecar/watermark.py
 from __future__ import annotations
 
-import os, hmac, hashlib
-from typing import Optional, Tuple
+import os
+import hmac
+import hashlib
 
 TRACE_HMAC_SECRET = os.getenv("SIDECAR_TRACE_HMAC_SECRET", "dev-secret-change-me").encode("utf-8")
 

@@ -1,6 +1,5 @@
 from __future__ import annotations
-from typing import Dict, Any, Optional
-import time
+from typing import Dict, Any
 
 def _key(*parts: str) -> str:
     return "sc:" + ":".join(p.replace(":", "_") for p in parts if p)

@@ -3,10 +3,7 @@ services:
     image: redis:7-alpine
     container_name: cyber_sidecar_redis
     restart: unless-stopped
-    # ports:
-    #   - "6379:6379"
 
-  # Upstream "customer backend" simulator (runs inside Docker)
   fake_backend:
     build:
       context: ..
@@ -24,32 +21,27 @@ services:
     restart: unless-stopped
 
     env_file:
-      - .env
-      - .secrets.env
+      - ./.env
+      - ./.secrets.env
 
     environment:
       SIDECAR_TEST_MODE: "1"
-      # SIDECAR_FORCE_ACTION: ${SIDECAR_FORCE_ACTION:-}
-      SIDECAR_DEFAULT_TENANT: default
-      # IMPORTANT: enforce “only trusted upstream can set X-Forwarded-For”
-      # Local Docker host -> container usually shows up as 172.18.0.1 in logs
+      # SIDECAR_DEFAULT_TENANT: default
+
       SIDECAR_ENFORCE_TRUSTED_UPSTREAM: "1"
       SIDECAR_TRUST_XFF: "1"
-      # SIDECAR_TRUSTED_PROXY_CIDRS: "172.18.0.1/32,127.0.0.1/32"
       SIDECAR_TRUSTED_PROXY_CIDRS: "0.0.0.0/0,::/0"
 
-      # Where Sidecar reads JWKS to verify signed reauth assertions (JWT)
       SIDECAR_REAUTH_JWKS_PATH: "/app/deploy/reauth_jwks.json"
-
-      # Where Sidecar loads per-tenant header mappings + upstream allowlists
       SIDECAR_TENANT_CONFIG_DIR: "/app/tenants"
-
       SIDECAR_CUSTOMER_PROFILE: "/etc/sidecar/customer_profile.json"
 
       SIDECAR_POLICY_MODEL_PATH: /var/lib/sidecar/models/policy_model.joblib
 
       REDIS_URL: redis://redis:6379/0
       SIDECAR_REQUIRE_REDIS: "1"
+      SIDECAR_PUBLIC_BASE: "http://127.0.0.1:8085"
+
     ports:
       - "8085:8080"
 
@@ -58,12 +50,41 @@ services:
       - fake_backend
 
     volumes:
-      - ..\training:/app/training
-      # Mount JWKS read-only (file lives in deploy/)
-      - .\reauth_jwks.json:/app/deploy/reauth_jwks.json:ro
-      - .\tenants:/app/tenants:ro
-      - .\sidecar\config\customer_profile.json:/etc/sidecar/customer_profile.json:ro
+      - ../training:/app/training
+      - ../reauth_jwks.json:/app/deploy/reauth_jwks.json:ro
+      - ../tenants:/app/tenants:ro
+      - ../sidecar/config/customer_profile.json:/etc/sidecar/customer_profile.json:ro
       - sidecar_models:/var/lib/sidecar/models
+
+  runner:
+    build:
+      context: ..
+      dockerfile: deploy/runner/Dockerfile.runner
+    container_name: cyber_sidecar_runner
+
+    depends_on:
+      fake_backend:
+        condition: service_started
+      redis:
+        condition: service_started
+      sidecar:
+        condition: service_started
+
+    restart: "no"
+
+    # runner gets repo bind-mounted at /repo, and uses the script from the repo
+    entrypoint: ["/bin/bash", "/repo/deploy/runner/run_task.sh"]
+
+    environment:
+      RUFF_CACHE_DIR: /tmp/ruff_cache
+      PYTEST_CACHE_DIR: /tmp/pytest_cache
+
+    volumes:
+      # keep RW so lint_fix can write
+      - ..:/repo:rw
+      - ../artifacts:/artifacts
+
+    working_dir: /repo
 
 volumes:
   sidecar_models: {}
